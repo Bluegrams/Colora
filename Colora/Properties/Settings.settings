@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Colora.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="LatestColors" Type="Colora.FixedColorCollection" Scope="User">
+    <Setting Name="LatestColors" Provider="Bluegrams.Application.SettingsProviders.VariableSettingsProvider" Roaming="true" Type="Colora.FixedColorCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

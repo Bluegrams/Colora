@@ -18,18 +18,24 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Portable|Any CPU = Portable|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A380D559-CEA5-46AE-AC87-A4A871DEB68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A380D559-CEA5-46AE-AC87-A4A871DEB68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A380D559-CEA5-46AE-AC87-A4A871DEB68D}.Portable|Any CPU.ActiveCfg = Portable|Any CPU
+		{A380D559-CEA5-46AE-AC87-A4A871DEB68D}.Portable|Any CPU.Build.0 = Portable|Any CPU
 		{A380D559-CEA5-46AE-AC87-A4A871DEB68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A380D559-CEA5-46AE-AC87-A4A871DEB68D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3C6ED40-4E05-49A6-ACB3-F27ECAF5E3EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3C6ED40-4E05-49A6-ACB3-F27ECAF5E3EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3C6ED40-4E05-49A6-ACB3-F27ECAF5E3EA}.Portable|Any CPU.ActiveCfg = Release|Any CPU
+		{F3C6ED40-4E05-49A6-ACB3-F27ECAF5E3EA}.Portable|Any CPU.Build.0 = Release|Any CPU
 		{F3C6ED40-4E05-49A6-ACB3-F27ECAF5E3EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3C6ED40-4E05-49A6-ACB3-F27ECAF5E3EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCEE2A5D-B24F-46B7-AF36-E04094F77817}.Debug|Any CPU.ActiveCfg = Debug
+		{BCEE2A5D-B24F-46B7-AF36-E04094F77817}.Portable|Any CPU.ActiveCfg = Release
 		{BCEE2A5D-B24F-46B7-AF36-E04094F77817}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

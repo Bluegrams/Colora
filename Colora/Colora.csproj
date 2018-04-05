@@ -39,12 +39,22 @@
   <PropertyGroup>
     <ApplicationIcon>colora.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Portable|AnyCPU'">
+    <OutputPath>bin\Portable\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MiniAppManager.Shared, Version=0.2.0.18075, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.2.0.18075\lib\net451\MiniAppManager.Shared.dll</HintPath>
+    <Reference Include="MiniAppManager.Shared, Version=0.3.0.18095, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.3.0.18095\lib\net451\MiniAppManager.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="MiniAppManager.WPF, Version=0.2.0.18075, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.2.0.18075\lib\net451\MiniAppManager.WPF.dll</HintPath>
+    <Reference Include="MiniAppManager.WPF, Version=0.3.0.18095, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.3.0.18095\lib\net451\MiniAppManager.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -34,7 +34,16 @@ namespace Colora
         {
             var baseUri = BaseUriHelper.GetBaseUri(this);
             BitmapSource img = new BitmapImage(new Uri(baseUri, @"/img/colorasmall.png"));
-            manager = new MiniAppManager(this, Colors.Gray, img, new Link("https://colora.sourceforge.io"), new Link("LICENSE.rtf", "BSD-2-Clause"));
+#if PORTABLE
+            manager = new MiniAppManager(this, true);
+#else
+            manager = new MiniAppManager(this, false);
+            manager.PortableModeArgEnabled = true;
+#endif
+            manager.ProductColor = Colors.Gray;
+            manager.ProductImage = img;
+            manager.ProductWebsite = new Link("https://colora.sourceforge.io");
+            manager.ProductLicense = new Link("LICENSE.rtf", "BSD-3-Clause");
             manager.SupportedCultures = new CultureInfo[] { new CultureInfo("en"), new CultureInfo("de") };
             manager.Initialize();
             manager.CheckForUpdates("https://colora.sourceforge.io/update.xml");
