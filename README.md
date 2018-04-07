@@ -2,7 +2,7 @@
 
 [![On SourceForge](https://img.shields.io/badge/sourceforge-download-orange.svg)](https://colora.sourceforge.io)
 
-Colora is a small but powerful color converter and screen color picker for Windows (requires .NET Framework v.4.5.2).
+Colora is a small but powerful color converter and screen color picker for Windows (requires .NET Framework v.4.6 or higher).
 The main features include:
 
 * precisely pick colors from screen using the included screen picker with zoom
