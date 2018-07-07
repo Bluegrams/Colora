@@ -10,7 +10,7 @@ namespace Colora.Palettes
     public partial class PaletteWindow : Window
     {
         private Palette palette;
-        private bool isSaved = false;
+        private bool isSaved = false, openedFile = false;
 
         public static RoutedCommand EditColor => editColor;
         public static RoutedUICommand editColor = new RoutedUICommand();
@@ -32,7 +32,8 @@ namespace Colora.Palettes
 
         private void Colors_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            isSaved = false;
+            isSaved = openedFile;
+            openedFile = false;
         }
 
         public event EventHandler<ColorChangedEventArgs> ColorChanged;
@@ -65,6 +66,7 @@ namespace Colora.Palettes
         {
             Palette palette;
             isSaved = PaletteFile.OpenPalette(out palette);
+            openedFile = isSaved;
             this.palette = palette;
             this.DataContext = palette;            
         }
@@ -77,6 +79,7 @@ namespace Colora.Palettes
                 {
                     e.Cancel = true;
                 }
+                else this.Owner.Focus();
             }
         }
 

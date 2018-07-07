@@ -7,7 +7,7 @@
         xmlns:p="clr-namespace:Colora.Properties"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.PaletteWindow_Title}" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize" 
-        Closing="Window_Closing" Icon="../img/colorasmall.png">
+        Closing="Window_Closing" Icon="../img/colora.png">
     <Window.CommandBindings>
         <CommandBinding Command="Save" Executed="SaveCommand_Executed"/>
         <CommandBinding Command="Open" Executed="OpenCommand_Executed"/>

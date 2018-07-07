@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:p="clr-namespace:Colora.Properties"
         xmlns:local="clr-namespace:Colora"
-        mc:Ignorable="d"
+        x:Name="mainWindow"
         Title="Colora" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" FontSize="11.5" KeyDown="Window_KeyDown" 
-        Loaded="Window_Loaded" Closing="Window_Closing" Icon="img/colorasmall.png" SnapsToDevicePixels="True">
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="img/colora.png" SnapsToDevicePixels="True">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Control.Padding" Value="8,0"/>
@@ -18,59 +18,62 @@
         </Style>
     </Window.Resources>
     <Window.CommandBindings>
-        <CommandBinding Command="Select" Executed="SelectCommand_Executed"/>
-        <CommandBinding Command="Zoom" Executed="SizeCommand_Executed"/>
-        <CommandBinding Command="FirstPage" Executed="FirstPageCommand_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ColorDialog" Executed="SelectCommand_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MinimalSize" Executed="SizeCommand_Executed"/>
+        <CommandBinding Command="local:CustomCommands.TopMost" Executed="TopMostCommand_Executed"/>
         <CommandBinding Command="New" Executed="NewCommand_Executed"/>
-        <CommandBinding Command="Print" Executed="PaletteCommand_Executed"/>
+        <CommandBinding Command="local:CustomCommands.PaletteEditor" Executed="PaletteCommand_Executed"/>
         <CommandBinding Command="Help" Executed="HelpCommand_Executed"/>
     </Window.CommandBindings>
-    <Window.InputBindings>
-        <KeyBinding Key="D" Modifiers="Ctrl" Command="Select"/>
-        <KeyBinding Key="M" Modifiers="Ctrl" Command="Zoom"/>
-        <KeyBinding Key="T" Modifiers="Ctrl" Command="FirstPage"/>
-    </Window.InputBindings>
     <DockPanel KeyboardNavigation.TabNavigation="Local">
         <Menu DockPanel.Dock="Top" Background="#dddddd">
             <MenuItem Header="{x:Static p:Resources.MainWindow_menOptions}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}" Command="Select" InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+D}"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}" Click="MenuPickScreen_Click" InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+Alt+C}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}" Command="local:CustomCommands.ColorDialog" 
+                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+D}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}" Click="MenuPickScreen_Click" 
+                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+Alt+C}"/>
                 <Separator/>
                 <MenuItem x:Name="menNewPalette" Header="{x:Static p:Resources.MainWindow_menNewPalette}" Command="New" />
                 <MenuItem x:Name="menDeleteLatest" Header="{x:Static p:Resources.MainWindow_menDeleteLatest}" Click="menDeleteLatest_Click"/>
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MainWindow_menView}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}" Command="Zoom" InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+M}" IsChecked="{Binding ElementName=grpScreenPicker, Path=IsVisible, Mode=OneWay, Converter={StaticResource boolInverter}}"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menPaletteEditor}" Command="Print"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}" Command="local:CustomCommands.MinimalSize" 
+                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+M}" 
+                          IsChecked="{Binding ElementName=grpScreenPicker, Path=IsVisible, Mode=OneWay, Converter={StaticResource boolInverter}}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menPaletteEditor}" Command="local:CustomCommands.PaletteEditor"
+                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+P}"/>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menTopmost}" InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+T}" IsCheckable="True" IsChecked="{Binding ElementName=butTopmost, Path=IsChecked}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menTopmost}" Command="local:CustomCommands.TopMost"
+                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+T}" 
+                          IsChecked="{Binding ElementName=mainWindow, Path=Topmost}"/>
             </MenuItem>
             <MenuItem Header="   _?   ">
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menAbout}" Command="Help"/>
             </MenuItem>
         </Menu>
         <DockPanel Style="{StaticResource toolBar}" DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="Local">
-            <Button x:Name="butDialog" Command="Select" ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}"
-                    TabIndex="0">
+            <Button x:Name="butDialog" Command="local:CustomCommands.ColorDialog" TabIndex="0"
+                    ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}">
                 <Image Source="img/1color.png" Stretch="None"/>
             </Button>
             <Separator/>
-            <ToggleButton x:Name="butPick" Checked="butPick_Checked" Unchecked="butPick_Unchecked" ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menPickScreen}, Converter={StaticResource UScoreConverter}}"
-                          TabIndex="1">
+            <ToggleButton x:Name="butPick" Checked="butPick_Checked" Unchecked="butPick_Unchecked" TabIndex="1"
+                          ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menPickScreen}, Converter={StaticResource UScoreConverter}}">
                 <Image Source="img/1detect.png" Stretch="None"/>
             </ToggleButton>
-            <ToggleButton x:Name="butTopmost" DockPanel.Dock="Right" ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menTopmost}, Converter={StaticResource UScoreConverter}}" Click="butTopmost_Click"
-                          TabIndex="3">
+            <ToggleButton x:Name="butTopmost" DockPanel.Dock="Right" TabIndex="3"
+                          ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menTopmost}, Converter={StaticResource UScoreConverter}}"
+                          IsChecked="{Binding ElementName=mainWindow, Path=Topmost}">
                 <Image Source="img/1tack.png" Stretch="None"/>
             </ToggleButton>
             <Separator DockPanel.Dock="Right"/>
-            <ToggleButton DockPanel.Dock="Right" Command="Print" Padding="2" ToolTip="{x:Static p:Resources.PaletteWindow_Title}" TabIndex="2"
-                          IsChecked="{Binding ElementName=butAddPalette, Path=IsEnabled}">
+            <Button DockPanel.Dock="Right" Command="local:CustomCommands.PaletteEditor" 
+                    ToolTip="{x:Static p:Resources.PaletteWindow_Title}" TabIndex="2">
                 <Image Source="img/1list.png" Stretch="None"/>
-            </ToggleButton>
+            </Button>
         </DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Height="30" Background="#dddddd">
-            <Label x:Name="statInfo"></Label>
+            <Label x:Name="statInfo" Padding="0"/>
         </StatusBar>
         <StackPanel>
             <DockPanel>
@@ -86,7 +89,8 @@
                         <Label x:Name="lblScreenCoord">X: 0 | Y: 0</Label>
                         <DockPanel>
                             <Label Content="{Binding ElementName=sldZoom, Path=Value}" ContentStringFormat="{}{0}x"/>
-                            <Slider x:Name="sldZoom" Minimum="1" Maximum="5" Value="3" TickPlacement="BottomRight" IsSnapToTickEnabled="True" ValueChanged="sldZoom_ValueChanged"></Slider>
+                            <Slider x:Name="sldZoom" Minimum="1" Maximum="5" Value="3" TickPlacement="BottomRight" IsSnapToTickEnabled="True" 
+                                    ValueChanged="sldZoom_ValueChanged"/>
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
@@ -134,10 +138,10 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="butAddLast" Grid.Column="0" ContentStringFormat="&#9661; {0}" Content="{x:Static p:Resources.MainWindow_butAddLast}" Click="butAddLast_Click"
-                                    TabIndex="6"/>
-                            <Button x:Name="butAddPalette" Grid.Column="1" ContentStringFormat="{}{0} &#9655;" Content="{x:Static p:Resources.MainWindow_butAddPalette}" Click="butAddPalette_Click" IsEnabled="False"
-                                    TabIndex="7"/>
+                            <Button x:Name="butAddLast" Grid.Column="0" ContentStringFormat="&#9661; {0}" TabIndex="6"
+                                    Content="{x:Static p:Resources.MainWindow_butAddLast}" Click="butAddLast_Click"/>
+                            <Button x:Name="butAddPalette" Grid.Column="1" ContentStringFormat="{}{0} &#9655;" TabIndex="7"
+                                    Content="{x:Static p:Resources.MainWindow_butAddPalette}" Click="butAddPalette_Click" IsEnabled="False"/>
                         </Grid>
                     </Grid>
                 </GroupBox>

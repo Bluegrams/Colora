@@ -49,12 +49,15 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MiniAppManager.Shared, Version=0.3.0.18095, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.3.0.18095\lib\net451\MiniAppManager.Shared.dll</HintPath>
+    <Reference Include="MiniAppManager.Shared, Version=0.4.0.18188, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.0-beta\lib\net45\MiniAppManager.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="MiniAppManager.WPF, Version=0.3.0.18095, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.3.0.18095\lib\net451\MiniAppManager.WPF.dll</HintPath>
+    <Reference Include="MiniAppManager.WPF, Version=0.4.0.18188, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.0-beta\lib\net45\MiniAppManager.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -86,6 +89,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ColorConversion.cs" />
+    <Compile Include="CustomCommands.cs" />
     <Compile Include="FixedColorCollection.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -131,6 +135,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -153,7 +158,7 @@
     <Resource Include="img\1list.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\colorasmall.png" />
+    <Resource Include="img\colora.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="colora.ico" />

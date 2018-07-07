@@ -17,7 +17,7 @@
                 <Style TargetType="{x:Type ButtonBase}">
                     <Setter Property="Control.Height" Value="35"/>
                     <Setter Property="Control.Width" Value="40"/>
-                    <Setter Property="Control.Padding" Value="4"/>
+                    <Setter Property="Control.Padding" Value="0"/>
                     <Setter Property="Control.BorderThickness" Value="0"/>
                 </Style>
                 <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ButtonBase}}"/>

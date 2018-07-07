@@ -199,7 +199,7 @@ Error code:</value>
     <value>Pick from _Screen</value>
   </data>
   <data name="MainWindow_menTopmost" xml:space="preserve">
-    <value>Pin _Topmost</value>
+    <value>Pin on _Top</value>
   </data>
   <data name="MainWindow_menView" xml:space="preserve">
     <value>_View</value>

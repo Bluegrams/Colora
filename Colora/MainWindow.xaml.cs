@@ -7,10 +7,8 @@ using System.Windows.Media;
 using System.Windows.Input;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
-using Bluegrams.Application;
 using Bluegrams.Application.WPF;
 using Colora.Palettes;
-using System.Globalization;
 using System.Windows.Navigation;
 using System.Windows.Media.Imaging;
 
@@ -24,6 +22,12 @@ namespace Colora
         private PaletteWindow palWindow;
 
         public NotifyColor CurrentColor { get; set; }
+        private bool isMinimal;
+        public bool IsMinimal
+        {
+            get { return isMinimal; }
+            set { if (isMinimal != value) { isMinimal = value; isMinimalToggle(); } }
+        }
 
         [DllImport("User32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
@@ -32,23 +36,17 @@ namespace Colora
 
         public MainWindow()
         {
-            var baseUri = BaseUriHelper.GetBaseUri(this);
-            BitmapSource img = new BitmapImage(new Uri(baseUri, @"/img/colorasmall.png"));
 #if PORTABLE
             manager = new MiniAppManager(this, true);
 #else
             manager = new MiniAppManager(this, false);
-            manager.PortableModeArgEnabled = true;
 #endif
-            manager.ProductColor = Colors.Gray;
-            manager.ProductImage = img;
-            manager.ProductWebsite = new Link("https://colora.sourceforge.io");
-            manager.ProductLicense = new Link("LICENSE.rtf", "BSD-3-Clause");
-            manager.SupportedCultures = new CultureInfo[] { new CultureInfo("en"), new CultureInfo("de") };
+            manager.AddManagedProperty(nameof(IsMinimal));
+            if (!(bool)manager.Settings["Updated"])
+                Properties.Settings.Default.Upgrade();
             manager.Initialize();
-            manager.CheckForUpdates("https://colora.sourceforge.io/update.xml");
             InitializeComponent();
-            CurrentColor = new NotifyColor(Color.FromRgb(255, 0, 0));
+            CurrentColor = new NotifyColor(Color.FromRgb(255, 255, 255));
             this.DataContext = CurrentColor;
             msc = new MouseScreenCapture();
             msc.CaptureTick += new EventHandler(capture_Tick);
@@ -65,6 +63,12 @@ namespace Colora
             HwndSource src = HwndSource.FromHwnd(handle);
             src.AddHook(new HwndSourceHook(WndProc));
             MainWindow.RegisterHotKey(handle, this.GetHashCode(), 0x0003, (int)'C');
+            // Check for updates
+#if PORTABLE
+            manager.CheckForUpdates("https://colora.sourceforge.io/update_portable.xml");
+#else
+            manager.CheckForUpdates("https://colora.sourceforge.io/update.xml");
+#endif
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -91,7 +95,12 @@ namespace Colora
 
         private void SizeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (grpScreenPicker.IsVisible)
+            IsMinimal = !IsMinimal;
+        }
+
+        private void isMinimalToggle()
+        {
+            if (isMinimal)
             {
                 grpScreenPicker.Visibility = Visibility.Collapsed;
                 grpLatest.MaxWidth = 242;
@@ -118,15 +127,17 @@ namespace Colora
             }
         }
 
-        private void FirstPageCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void TopMostCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            butTopmost.IsChecked = !butTopmost.IsChecked;
+            this.Topmost = !this.Topmost;
         }
 
 
         private void HelpCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            manager.ShowAboutBox();
+            var baseUri = BaseUriHelper.GetBaseUri(this);
+            BitmapSource img = new BitmapImage(new Uri(baseUri, @"/img/colora.png"));
+            manager.ShowAboutBox(img);
         }
 
         private void menDeleteLatest_Click(object sender, RoutedEventArgs e) => lastColors.Clear();
@@ -161,11 +172,6 @@ namespace Colora
             imgScreen.Source = msc.CaptureBitmapImage;
             CurrentColor.SetColor(msc.PointerPixelColor);
             lblScreenCoord.Content = String.Format("X: {0} | Y: {1}", msc.MouseScreenPosition.X, msc.MouseScreenPosition.Y);
-        }
-
-        private void butTopmost_Click(object sender, RoutedEventArgs e)
-        {
-            this.Topmost = (bool)butTopmost.IsChecked;
         }
         
         private void inputColor_GotFocus(object sender, RoutedEventArgs e)
@@ -229,6 +235,7 @@ namespace Colora
             msc.RealCaptureSize = 100 / (int)sldZoom.Value;
         }
 
+#region Advanced Color Options
         private void rgbSlider_ValueChanged(object sender, RoutedEventArgs e)
         {
             if (((UIElement)e.Source).IsFocused)
@@ -271,7 +278,9 @@ namespace Colora
         {
             Clipboard.SetText(String.Format("{0}, {1}, {2}, {3}", txtCyan.Text, txtMagenta.Text, txtYellow.Text, txtKey.Text));
         }
+#endregion
 
+#region Palette Editor
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Palette palette = new Palette();
@@ -312,6 +321,7 @@ namespace Colora
         {
             CurrentColor.SetColor(e.NewColor);
         }
+#endregion
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

@@ -241,7 +241,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pin _Topmost.
+        ///   Looks up a localized string similar to Pin on _Top.
         /// </summary>
         public static string MainWindow_menTopmost {
             get {

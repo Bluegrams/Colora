@@ -1,9 +1,10 @@
-## Colora
+## Colora - Color Picker and Converter
 
 [![On SourceForge](https://img.shields.io/badge/sourceforge-download-orange.svg)](https://colora.sourceforge.io)
 
 Colora is a small but powerful color converter and screen color picker for Windows (requires .NET Framework v.4.6 or higher).
-The main features include:
+
+#### Features
 
 * precisely pick colors from screen using the included screen picker with zoom
 	(_Options -> Pick from Screen_)
@@ -19,9 +20,18 @@ The main features include:
 * automatic history of last ten colors picked from screen
 
 * pin to top and minimal size mode for handier usage
-	(_View -> Minimal Size_ and _View -> Pin Topmost_)
+	(_View -> Minimal Size_ and _View -> Pin on Top_)
 
-This software is published as open source by Bluegrams, 2018.
+#### Feedback and Support
 
-For more information about features, source code, issues and for help please
-visit the project's homepage at https://colora.sourceforge.io.
+Please leave a feedback at https://sourceforge.net/p/colora/reviews.
+
+Found a bug? An important feature is missing? Need help?
+Please open a ticket at https://github.com/bluegrams/Colora/issues.
+
+This software is published under BSD-3-Clause license by Bluegrams, 2018.
+
+For more information about features, updates and issues
+please visit the project's homepage at https://colora.sourceforge.io.
+
+To view the source code and contribute please visit https://github.com/bluegrams/Colora.

@@ -24,7 +24,7 @@ namespace Colora.Properties {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsProviderAttribute(typeof(Bluegrams.Application.SettingsProviders.VariableSettingsProvider))]
+        [global::System.Configuration.SettingsProviderAttribute(typeof(Bluegrams.Application.VariableSettingsProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public global::Colora.FixedColorCollection LatestColors {
