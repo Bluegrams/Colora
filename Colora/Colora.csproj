@@ -53,11 +53,11 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MiniAppManager.Shared, Version=0.4.0.18188, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.4.0-beta\lib\net45\MiniAppManager.Shared.dll</HintPath>
+    <Reference Include="MiniAppManager.Shared, Version=0.4.0.18231, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.0.1\lib\net45\MiniAppManager.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="MiniAppManager.WPF, Version=0.4.0.18188, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.4.0-beta\lib\net45\MiniAppManager.WPF.dll</HintPath>
+    <Reference Include="MiniAppManager.WPF, Version=0.4.0.18231, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.0.1\lib\net45\MiniAppManager.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -134,7 +134,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
