@@ -5,10 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Input;
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
 using Bluegrams.Application.WPF;
 using Colora.Palettes;
+using Colora.Capturing;
 using System.Windows.Navigation;
 using System.Windows.Media.Imaging;
 
@@ -20,8 +19,11 @@ namespace Colora
         private MouseScreenCapture msc;
         private FixedColorCollection lastColors;
         private PaletteWindow palWindow;
+        private HotKey pickColorHotKey;
 
+        public Settings Settings { get; set; }
         public NotifyColor CurrentColor { get; set; }
+
         private bool isMinimal;
         public bool IsMinimal
         {
@@ -29,59 +31,53 @@ namespace Colora
             set { if (isMinimal != value) { isMinimal = value; isMinimalToggle(); } }
         }
 
-        [DllImport("User32.dll")]
-        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
-        [DllImport("User32.dll")]
-        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
         public MainWindow()
         {
+            Settings = new Settings();
 #if PORTABLE
             manager = new MiniAppManager(this, true);
 #else
             manager = new MiniAppManager(this, false);
 #endif
-            manager.AddManagedProperty(nameof(IsMinimal));
+            manager.AddManagedProperty(nameof(Topmost));
+            manager.AddManagedProperty(nameof(IsMinimal),
+                System.Configuration.SettingsSerializeAs.String, roamed: true);
+            manager.AddManagedProperty(nameof(Settings),
+                System.Configuration.SettingsSerializeAs.Xml, roamed: true);
             if (!(bool)manager.Settings["Updated"])
                 Properties.Settings.Default.Upgrade();
             manager.Initialize();
             InitializeComponent();
-            CurrentColor = new NotifyColor(Color.FromRgb(255, 255, 255));
-            this.DataContext = CurrentColor;
             msc = new MouseScreenCapture();
             msc.CaptureTick += new EventHandler(capture_Tick);
-            lastColors = new FixedColorCollection();
             ((INotifyCollectionChanged)lstboxLast.Items).CollectionChanged += LastColors_CollectionChanged;
-            if (Properties.Settings.Default.LatestColors != null)
-                lastColors = Properties.Settings.Default.LatestColors;
-            lstboxLast.ItemsSource = lastColors;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            IntPtr handle = new WindowInteropHelper(this).Handle;
-            HwndSource src = HwndSource.FromHwnd(handle);
-            src.AddHook(new HwndSourceHook(WndProc));
-            MainWindow.RegisterHotKey(handle, this.GetHashCode(), 0x0003, (int)'C');
             // Check for updates
 #if PORTABLE
             manager.CheckForUpdates("https://colora.sourceforge.io/update_portable.xml");
 #else
             manager.CheckForUpdates("https://colora.sourceforge.io/update.xml");
 #endif
+            setNewHotKey(Settings.PickColorShortcut);
+            // Load color history
+            lastColors = new FixedColorCollection(Settings.ColorHistoryLength);
+            if (Properties.Settings.Default.LatestColors != null)
+                lastColors = Properties.Settings.Default.LatestColors;
+            lstboxLast.ItemsSource = lastColors;
+            // Set current color
+            CurrentColor = new NotifyColor(Properties.Settings.Default.CurrentColor);
+            this.DataContext = this;
         }
 
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        private void onHotKeyPressed(HotKey hotKey)
         {
-            // WM_HOTKEY = 0x0312
-            if (msg == 0x0312)
-            {
-                if ((bool)butPick.IsChecked)
-                    lastColors.Insert(0, CurrentColor.WpfColor);
-                else
-                    butPick.IsChecked = true;
-            }
-            return IntPtr.Zero;
+            if ((bool)butPick.IsChecked)
+                lastColors.Insert(0, CurrentColor.WpfColor);
+            else
+                butPick.IsChecked = true;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -132,6 +128,29 @@ namespace Colora
             this.Topmost = !this.Topmost;
         }
 
+        private void menDeleteLatest_Click(object sender, RoutedEventArgs e) => lastColors.Clear();
+
+        private void menConfigureShortcut_Click(object sender, RoutedEventArgs e)
+        {
+            HotKeyInputWindow hotKeyInput = new HotKeyInputWindow(pickColorHotKey.KeyCombination);
+            hotKeyInput.Owner = this;
+            if (hotKeyInput.ShowDialog() == true)
+            {
+                setNewHotKey(hotKeyInput.HotKey);
+            }
+        }
+
+        private void setNewHotKey(KeyCombination keys)
+        {
+            pickColorHotKey?.Unregister();
+            Settings.PickColorShortcut = keys;
+            pickColorHotKey = new HotKey(keys, onHotKeyPressed, false);
+            if (!pickColorHotKey.Register())
+            {
+                MessageBox.Show(String.Format(Properties.Resources.MainWindow_strHotKeyFailed, keys),
+                    "Colora - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void HelpCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -139,8 +158,6 @@ namespace Colora
             BitmapSource img = new BitmapImage(new Uri(baseUri, @"/img/colora.png"));
             manager.ShowAboutBox(img);
         }
-
-        private void menDeleteLatest_Click(object sender, RoutedEventArgs e) => lastColors.Clear();
 
         private void LastColors_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -155,7 +172,8 @@ namespace Colora
         {
             grpScreenPicker.IsEnabled = true;
             msc.StartCapturing();
-            statInfo.Content = Properties.Resources.MainWindow_strShortcut;
+            statInfo.Content = String.Format(Properties.Resources.MainWindow_strShortcut,
+                pickColorHotKey.KeyCombination);
             System.Diagnostics.Debug.WriteLine("Start: " + msc.MouseScreenPosition);       
         }
 
@@ -232,7 +250,7 @@ namespace Colora
         private void sldZoom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (msc == null) return;
-            msc.RealCaptureSize = 100 / (int)sldZoom.Value;
+            msc.CaptureSize = 100 / (int)sldZoom.Value;
         }
 
 #region Advanced Color Options
@@ -325,7 +343,9 @@ namespace Colora
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            pickColorHotKey?.Dispose();
             Properties.Settings.Default.LatestColors = lastColors;
+            Properties.Settings.Default.CurrentColor = CurrentColor.WpfColor;
             Properties.Settings.Default.Save();
         }
     }

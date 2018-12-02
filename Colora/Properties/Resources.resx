@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColorEdit_butCancel" xml:space="preserve">
+  <data name="Global_strCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="ColorEdit_lblColor" xml:space="preserve">
@@ -187,7 +187,7 @@ Error code:</value>
     <value>Open _Color Dialog</value>
   </data>
   <data name="MainWindow_menMinimalSize" xml:space="preserve">
-    <value>_Minimal Size</value>
+    <value>_Minimal Width</value>
   </data>
   <data name="MainWindow_menNewPalette" xml:space="preserve">
     <value>_New Palette of Latest</value>
@@ -211,7 +211,7 @@ Error code:</value>
     <value>Copy</value>
   </data>
   <data name="MainWindow_strShortcut" xml:space="preserve">
-    <value>Use Ctrl+Alt+C to pick colors globally.</value>
+    <value>{0} to pick colors from screen.</value>
   </data>
   <data name="MainWindow_strClipboard" xml:space="preserve">
     <value>To Clipboard</value>
@@ -227,5 +227,30 @@ Error code:</value>
   </data>
   <data name="Global_keyCtrl" xml:space="preserve">
     <value>Ctrl</value>
+  </data>
+  <data name="MainWindow_menColors" xml:space="preserve">
+    <value>C_olors</value>
+  </data>
+  <data name="HotKeyInputWindow_grpHeader" xml:space="preserve">
+    <value>Select A New Keyboard Shortcut</value>
+  </data>
+  <data name="MainWindow_menConfigureShortcut" xml:space="preserve">
+    <value>Configure _Keyboard Shortcut...</value>
+  </data>
+  <data name="HotKeyInputWindow_Title" xml:space="preserve">
+    <value>Color Picking Shortcut</value>
+  </data>
+  <data name="MainWindow_strHotKeyFailed" xml:space="preserve">
+    <value>Registering shortcut '{0}' failed.
+This could be caused by another app using the same shortcut.</value>
+  </data>
+  <data name="HotKeyInputWindow_strModifierRequired" xml:space="preserve">
+    <value>Please specify at least one modifier key (Control, Alt or Shift).</value>
+  </data>
+  <data name="MainWindow_menIconBar" xml:space="preserve">
+    <value>Show _Icon Bar</value>
+  </data>
+  <data name="MainWindow_menColorHistory" xml:space="preserve">
+    <value>Show _Latest Colors</value>
   </data>
 </root>

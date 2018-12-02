@@ -61,15 +61,6 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
-        /// </summary>
-        public static string ColorEdit_butCancel {
-            get {
-                return ResourceManager.GetString("ColorEdit_butCancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Color Value.
         /// </summary>
         public static string ColorEdit_lblColor {
@@ -111,6 +102,42 @@ namespace Colora.Properties {
         public static string Global_keyCtrl {
             get {
                 return ResourceManager.GetString("Global_keyCtrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Global_strCancel {
+            get {
+                return ResourceManager.GetString("Global_strCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select A New Keyboard Shortcut.
+        /// </summary>
+        public static string HotKeyInputWindow_grpHeader {
+            get {
+                return ResourceManager.GetString("HotKeyInputWindow_grpHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify at least one modifier key (Control, Alt or Shift)..
+        /// </summary>
+        public static string HotKeyInputWindow_strModifierRequired {
+            get {
+                return ResourceManager.GetString("HotKeyInputWindow_strModifierRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color Picking Shortcut.
+        /// </summary>
+        public static string HotKeyInputWindow_Title {
+            get {
+                return ResourceManager.GetString("HotKeyInputWindow_Title", resourceCulture);
             }
         }
         
@@ -178,6 +205,33 @@ namespace Colora.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show _Latest Colors.
+        /// </summary>
+        public static string MainWindow_menColorHistory {
+            get {
+                return ResourceManager.GetString("MainWindow_menColorHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C_olors.
+        /// </summary>
+        public static string MainWindow_menColors {
+            get {
+                return ResourceManager.GetString("MainWindow_menColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure _Keyboard Shortcut....
+        /// </summary>
+        public static string MainWindow_menConfigureShortcut {
+            get {
+                return ResourceManager.GetString("MainWindow_menConfigureShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Delete Latest Colors.
         /// </summary>
         public static string MainWindow_menDeleteLatest {
@@ -196,7 +250,16 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Minimal Size.
+        ///   Looks up a localized string similar to Show _Icon Bar.
+        /// </summary>
+        public static string MainWindow_menIconBar {
+            get {
+                return ResourceManager.GetString("MainWindow_menIconBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Minimal Width.
         /// </summary>
         public static string MainWindow_menMinimalSize {
             get {
@@ -286,7 +349,17 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use Ctrl+Alt+C to pick colors globally..
+        ///   Looks up a localized string similar to Registering shortcut &apos;{0}&apos; failed.
+        ///This could be caused by another app using the same shortcut..
+        /// </summary>
+        public static string MainWindow_strHotKeyFailed {
+            get {
+                return ResourceManager.GetString("MainWindow_strHotKeyFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} to pick colors from screen..
         /// </summary>
         public static string MainWindow_strShortcut {
             get {

@@ -5,14 +5,17 @@ using System.Windows.Media;
 
 namespace Colora
 {
+    /// <summary>
+    /// An observable collection of fixed size that holds the last colors.
+    /// </summary>
     [SettingsSerializeAs(SettingsSerializeAs.Xml)]
     public class FixedColorCollection : ObservableCollection<Color>
     {
         public int MaxLength { get; private set; }
 
-        public FixedColorCollection() : base()
+        public FixedColorCollection(int maxLength)
         {
-            MaxLength = 10;
+            MaxLength = maxLength;
         }
 
         public new void Add(Color item)

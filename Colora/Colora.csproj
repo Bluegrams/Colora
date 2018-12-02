@@ -53,11 +53,11 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MiniAppManager.Shared, Version=0.4.0.18231, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.4.0.1\lib\net45\MiniAppManager.Shared.dll</HintPath>
+    <Reference Include="MiniAppManager.Shared, Version=0.4.1.18283, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.1\lib\net45\MiniAppManager.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="MiniAppManager.WPF, Version=0.4.0.18231, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.4.0.1\lib\net45\MiniAppManager.WPF.dll</HintPath>
+    <Reference Include="MiniAppManager.WPF, Version=0.4.1.18283, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.1\lib\net45\MiniAppManager.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -80,6 +80,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Capturing\HotKeyInputWindow.xaml.cs">
+      <DependentUpon>HotKeyInputWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Capturing\KeyCombination.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Capturing\WinHotKey.cs" />
+    <Page Include="Capturing\HotKeyInputWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,7 +115,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MouseScreenCapture.cs" />
+    <Compile Include="Capturing\MouseScreenCapture.cs" />
     <Compile Include="NotifyColor.cs" />
     <Compile Include="Palettes\ColorEdit.xaml.cs">
       <DependentUpon>ColorEdit.xaml</DependentUpon>
@@ -134,9 +144,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,7 +153,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\1color.png" />

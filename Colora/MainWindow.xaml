@@ -16,6 +16,9 @@
             <Setter Property="Margin" Value="5,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="topMenuItem" TargetType="MenuItem">
+            <Setter Property="Padding" Value="6,2"/>
+        </Style>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="local:CustomCommands.ColorDialog" Executed="SelectCommand_Executed"/>
@@ -27,7 +30,7 @@
     </Window.CommandBindings>
     <DockPanel KeyboardNavigation.TabNavigation="Local">
         <Menu DockPanel.Dock="Top" Background="#dddddd">
-            <MenuItem Header="{x:Static p:Resources.MainWindow_menOptions}">
+            <MenuItem Header="{x:Static p:Resources.MainWindow_menColors}" Style="{StaticResource topMenuItem}">
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}" Command="local:CustomCommands.ColorDialog" 
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+D}"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}" Click="MenuPickScreen_Click" 
@@ -36,10 +39,17 @@
                 <MenuItem x:Name="menNewPalette" Header="{x:Static p:Resources.MainWindow_menNewPalette}" Command="New" />
                 <MenuItem x:Name="menDeleteLatest" Header="{x:Static p:Resources.MainWindow_menDeleteLatest}" Click="menDeleteLatest_Click"/>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MainWindow_menView}">
+            <MenuItem Header="{x:Static p:Resources.MainWindow_menOptions}" Style="{StaticResource topMenuItem}">
+                <MenuItem x:Name="menConfigureShortcut" Header="{x:Static p:Resources.MainWindow_menConfigureShortcut}" Click="menConfigureShortcut_Click"/>
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MainWindow_menView}" Style="{StaticResource topMenuItem}">
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}" Command="local:CustomCommands.MinimalSize" 
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+M}" 
                           IsChecked="{Binding ElementName=grpScreenPicker, Path=IsVisible, Mode=OneWay, Converter={StaticResource boolInverter}}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menIconBar}" IsChecked="{Binding Path=Settings.IconBarVisible}"
+                          IsCheckable="True"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorHistory}" IsChecked="{Binding Path=Settings.ColorHistoryVisible}"
+                          IsCheckable="True"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menPaletteEditor}" Command="local:CustomCommands.PaletteEditor"
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+P}"/>
                 <Separator/>
@@ -47,11 +57,12 @@
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+T}" 
                           IsChecked="{Binding ElementName=mainWindow, Path=Topmost}"/>
             </MenuItem>
-            <MenuItem Header="   _?   ">
+            <MenuItem Header="   _?   " Style="{StaticResource topMenuItem}">
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menAbout}" Command="Help"/>
             </MenuItem>
         </Menu>
-        <DockPanel Style="{StaticResource toolBar}" DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="Local">
+        <DockPanel Style="{StaticResource toolBar}" DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="Local"
+                   Visibility="{Binding Path=Settings.IconBarVisible, Converter={StaticResource boolToVis}}">
             <Button x:Name="butDialog" Command="local:CustomCommands.ColorDialog" TabIndex="0"
                     ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}">
                 <Image Source="img/1color.png" Stretch="None"/>
@@ -95,7 +106,7 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="{x:Static p:Resources.MainWindow_grpColorData}" Width="242" KeyboardNavigation.TabNavigation="Local">
-                    <Grid>
+                    <Grid DataContext="{Binding CurrentColor}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
                             <RowDefinition/>
@@ -146,7 +157,8 @@
                     </Grid>
                 </GroupBox>
             </DockPanel>
-            <Expander x:Name="expData" Grid.Row="3" Header="{x:Static p:Resources.MainWindow_strColorSettings}" MaxWidth="346">
+            <Expander x:Name="expData" Grid.Row="3" Header="{x:Static p:Resources.MainWindow_strColorSettings}" MaxWidth="346"
+                      DataContext="{Binding CurrentColor}">
                 <Expander.Resources>
                     <Style TargetType="{x:Type Slider}">
                         <Setter Property="IsSnapToTickEnabled" Value="True"/>
@@ -286,7 +298,8 @@
                     </TabItem>
                 </TabControl>
             </Expander>
-            <GroupBox x:Name="grpLatest" Header="{x:Static p:Resources.MainWindow_grpLatest}" MaxWidth="346">
+            <GroupBox x:Name="grpLatest" Header="{x:Static p:Resources.MainWindow_grpLatest}" MaxWidth="346"
+                      Visibility="{Binding Settings.ColorHistoryVisible, Converter={StaticResource boolToVis}}">
                 <StackPanel>
                     <ListBox x:Name="lstboxLast" Height="75" SelectionChanged="lstboxLast_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                         <ListBox.ItemsPanel>

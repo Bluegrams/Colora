@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Colora"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVis"/>
         <local:BoolInverter x:Key="boolInverter"/>
         <local:ResTextConverter x:Key="UScoreConverter"/>
         <Style TargetType="Image">

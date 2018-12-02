@@ -7,7 +7,7 @@ namespace Colora
     public class NotifyColor : INotifyPropertyChanged
     {
         private Color color;
-        private double[] exHsb, exHsl, exRGB;
+        private double[] exHsb, exHsl, exRGB, exCMYK;
 
         // get properties:
         public byte Red { get { return color.R; } }
@@ -20,10 +20,10 @@ namespace Colora
         public int Light { get { return (int)Math.Round(exHsl[2] * 100); } }
         public int SatHSB { get { return (int)Math.Round(exHsb[1] * 100); } }
         public int SatHSL { get { return (int)Math.Round(exHsl[1] * 100); } }
-        public double Cyan { get { return ColorConversion.RGBToCMYK(exRGB[0], exRGB[1], exRGB[2])[0]; } }
-        public double Magenta { get { return ColorConversion.RGBToCMYK(exRGB[0], exRGB[1], exRGB[2])[1]; } }
-        public double Yellow { get { return ColorConversion.RGBToCMYK(exRGB[0], exRGB[1], exRGB[2])[2]; } }
-        public double Key { get { return ColorConversion.RGBToCMYK(exRGB[0], exRGB[1], exRGB[2])[3]; } }
+        public int Cyan { get { return (int)Math.Round(exCMYK[0] * 100); } }
+        public int Magenta { get { return (int)Math.Round(exCMYK[1] * 100); } }
+        public int Yellow { get { return (int)Math.Round(exCMYK[2] * 100); } }
+        public int Key { get { return (int)Math.Round(exCMYK[3] * 100); } }
         public Color WpfColor { get { return color; } }
         public SolidColorBrush Brush { get { return new SolidColorBrush(color); } }   
 
@@ -67,6 +67,7 @@ namespace Colora
             exRGB = new double[] { r / 255.0, g / 255.0, b / 255.0 };
             exHsb = ColorConversion.RGBToHSB(exRGB[0], exRGB[1], exRGB[2]);
             exHsl = ColorConversion.RGBToHSL(exRGB[0], exRGB[1], exRGB[2]);
+            exCMYK = ColorConversion.RGBToCMYK(exRGB[0], exRGB[1], exRGB[2]);
             setNewColor(Color.FromRgb(r, g, b));
         }
 
@@ -76,6 +77,7 @@ namespace Colora
             exHsl = new double[] { h, s, l };
             exRGB = ColorConversion.HSLToRGB(h, s, l);
             exHsb = ColorConversion.RGBToHSB(exRGB[0], exRGB[1], exRGB[2]);
+            exCMYK = ColorConversion.RGBToCMYK(exRGB[0], exRGB[1], exRGB[2]);
             setNewColor(Color.FromRgb((byte)Math.Round(exRGB[0] * 255), (byte)Math.Round(exRGB[1] * 255), (byte)Math.Round(exRGB[2] * 255)));
         }
 
@@ -85,6 +87,7 @@ namespace Colora
             exHsb = new double[] { h, s, b };
             exRGB = ColorConversion.HSBToRGB(h, s, b);
             exHsl = ColorConversion.RGBToHSL(exRGB[0], exRGB[1], exRGB[2]);
+            exCMYK = ColorConversion.RGBToCMYK(exRGB[0], exRGB[1], exRGB[2]);
             setNewColor(Color.FromRgb((byte)Math.Round(exRGB[0] * 255), (byte)Math.Round(exRGB[1] * 255), (byte)Math.Round(exRGB[2] * 255)));
         }
 

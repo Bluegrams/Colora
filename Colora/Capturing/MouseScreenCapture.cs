@@ -5,24 +5,42 @@ using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 using Point = System.Windows.Point;
 using Color = System.Windows.Media.Color;
-using System.Drawing.Drawing2D;
 
-namespace Colora
+namespace Colora.Capturing
 {
     class MouseScreenCapture
     {
         private DispatcherTimer timer;
+        private Bitmap screenBmp;
+        private int captureSize;
 
         public event EventHandler CaptureTick;
+
         /// <summary>
         /// The real pixel size captured which will be zoomed to 100px.
         /// </summary>
-        public int RealCaptureSize { get; set; }
+        public int CaptureSize
+        {
+            get => captureSize;
+            set
+            {
+                captureSize = value;
+                screenBmp?.Dispose();
+                screenBmp = null;
+            }
+        }
+
         public Point MouseScreenPosition { get { return new Point(Control.MousePosition.X, Control.MousePosition.Y); } }
+
+        /// <summary>
+        /// The captured area from screen.
+        /// </summary>
         public Bitmap CaptureBitmap { get; private set; }
+
         public BitmapImage CaptureBitmapImage
         {
             get
@@ -40,6 +58,7 @@ namespace Colora
                 return bmpImage;
             }
         }
+
         public Color PointerPixelColor { get; private set; }
 
         public MouseScreenCapture()
@@ -47,7 +66,8 @@ namespace Colora
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             timer.Tick += new EventHandler(timer_Tick);
-            RealCaptureSize = 33;
+            CaptureSize = 33;
+            CaptureBitmap = new Bitmap(100, 100);
         }
 
         public void StartCapturing()
@@ -60,26 +80,32 @@ namespace Colora
             timer.Stop();
         }
 
+        private void updateScreenBmp()
+        {
+            if (screenBmp == null)
+            {
+                screenBmp = new Bitmap(CaptureSize, CaptureSize);
+            }
+            int shalf = (int)Math.Floor(CaptureSize / (double)2);
+            using (Graphics g = Graphics.FromImage(screenBmp))
+            {
+                g.CopyFromScreen(Control.MousePosition.X - shalf, Control.MousePosition.Y - shalf,
+                    0, 0, new Size(CaptureSize, CaptureSize));
+            }
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
-            int sz = RealCaptureSize;
-            int shalf = (int)Math.Floor(RealCaptureSize / (double)2);
-            Bitmap screen = new Bitmap(sz, sz);
-            using (Graphics g = Graphics.FromImage(screen))
-            {
-                g.CopyFromScreen(Control.MousePosition.X - shalf, Control.MousePosition.Y - shalf, 0, 0, new System.Drawing.Size(sz, sz));
-            }
-            Bitmap map = new Bitmap(100, 100);
-            using (Graphics g = Graphics.FromImage(map))
+            updateScreenBmp();
+            using (Graphics g = Graphics.FromImage(CaptureBitmap))
             {
                 g.PixelOffsetMode = PixelOffsetMode.Half;
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                g.DrawImage(screen, new Rectangle(0, 0, 100, 100), new Rectangle(0, 0, sz, sz), GraphicsUnit.Pixel);
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.DrawImage(screenBmp, new Rectangle(0, 0, 100, 100),
+                    new Rectangle(0, 0, screenBmp.Width, screenBmp.Height), GraphicsUnit.Pixel);
             }
-            CaptureBitmap = map;
-            System.Drawing.Color drawing_Col = screen.GetPixel(sz / 2, sz / 2);
+            System.Drawing.Color drawing_Col = screenBmp.GetPixel(CaptureSize / 2, CaptureSize / 2);
             PointerPixelColor = Color.FromRgb(drawing_Col.R, drawing_Col.G, drawing_Col.B);
-            screen.Dispose();
             if (CaptureTick != null)
                 CaptureTick(this, new EventArgs());
         }

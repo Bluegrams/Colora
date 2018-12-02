@@ -26,7 +26,7 @@ namespace Colora.Tests
             Assert.AreEqual(53, nfcol.Light);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void SetFromHexTest()
         {
             NotifyColor nfcol = new NotifyColor(0, 0, 0);
@@ -36,7 +36,7 @@ namespace Colora.Tests
             Assert.AreEqual(187, nfcol.Blue);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void SetFromHSLTest()
         {
             NotifyColor nfcol = new NotifyColor(0, 0, 0);
@@ -46,7 +46,7 @@ namespace Colora.Tests
             Assert.AreEqual(5, nfcol.Blue);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void SetFromHSBTest()
         {
             NotifyColor nfcol = new NotifyColor(0, 0, 0);

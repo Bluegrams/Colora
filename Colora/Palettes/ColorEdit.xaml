@@ -33,7 +33,7 @@
         <Label Grid.Row="1" ContentStringFormat="{}{0}: " Content="{Binding Source={x:Static p:Resources.ColorEdit_lblComment}}"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtComment" Text="{Binding Path=Name}"/>
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2" LastChildFill="False">
-            <Button x:Name="butCancel" DockPanel.Dock="Right" IsCancel="True" Content="{Binding Source={x:Static p:Resources.ColorEdit_butCancel}}"/>
+            <Button x:Name="butCancel" DockPanel.Dock="Right" IsCancel="True" Content="{Binding Source={x:Static p:Resources.Global_strCancel}}"/>
             <Button x:Name="butOK" DockPanel.Dock="Right" IsDefault="True" Click="butOK_Click">OK</Button>
         </DockPanel>
     </Grid>

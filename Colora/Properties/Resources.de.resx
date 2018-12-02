@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColorEdit_butCancel" xml:space="preserve">
+  <data name="Global_strCancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
   <data name="ColorEdit_lblColor" xml:space="preserve">
@@ -166,7 +166,7 @@ Fehlercode: </value>
     <value>Paletteneditor</value>
   </data>
   <data name="MainWindow_strShortcut" xml:space="preserve">
-    <value>Strg+Alt+C zum Auswählen einer Farbe.</value>
+    <value>{0} zum Auswählen einer Farbe.</value>
   </data>
   <data name="MainWindow_menAbout" xml:space="preserve">
     <value>_Über</value>
@@ -175,7 +175,7 @@ Fehlercode: </value>
     <value>_Farbdialog öffnen</value>
   </data>
   <data name="MainWindow_menMinimalSize" xml:space="preserve">
-    <value>_Minimale Größe</value>
+    <value>_Minimale Breite</value>
   </data>
   <data name="MainWindow_menNewPalette" xml:space="preserve">
     <value>_Neue Palette aus Verlauf</value>
@@ -227,5 +227,30 @@ Fehlercode: </value>
   </data>
   <data name="Global_keyCtrl" xml:space="preserve">
     <value>Strg</value>
+  </data>
+  <data name="MainWindow_menColors" xml:space="preserve">
+    <value>_Farben</value>
+  </data>
+  <data name="HotKeyInputWindow_grpHeader" xml:space="preserve">
+    <value>Tastenkombination auswählen</value>
+  </data>
+  <data name="MainWindow_menConfigureShortcut" xml:space="preserve">
+    <value>Tastaturkürzel einstellen...</value>
+  </data>
+  <data name="HotKeyInputWindow_strModifierRequired" xml:space="preserve">
+    <value>Bitte wählen Sie mindestens eine Modifizierer-Taste (Strg, Alt oder Umschalt).</value>
+  </data>
+  <data name="MainWindow_strHotKeyFailed" xml:space="preserve">
+    <value>Registrieren der Tastenkombination '{0}' fehlgeschlagen.
+Dies könnte durch eine andere App mit derselben Tastenkombination verursacht sein.</value>
+  </data>
+  <data name="HotKeyInputWindow_Title" xml:space="preserve">
+    <value>Tastaturkürzel für Bildschirmauswahl</value>
+  </data>
+  <data name="MainWindow_menIconBar" xml:space="preserve">
+    <value>_Iconmenü anzeigen</value>
+  </data>
+  <data name="MainWindow_menColorHistory" xml:space="preserve">
+    <value>_Verlauf anzeigen</value>
   </data>
 </root>
