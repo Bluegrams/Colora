@@ -175,7 +175,7 @@ Fehlercode: </value>
     <value>_Farbdialog öffnen</value>
   </data>
   <data name="MainWindow_menMinimalSize" xml:space="preserve">
-    <value>_Minimale Breite</value>
+    <value>_Bildschirmauswahl</value>
   </data>
   <data name="MainWindow_menNewPalette" xml:space="preserve">
     <value>_Neue Palette aus Verlauf</value>
@@ -248,9 +248,12 @@ Dies könnte durch eine andere App mit derselben Tastenkombination verursacht se
     <value>Tastaturkürzel für Bildschirmauswahl</value>
   </data>
   <data name="MainWindow_menIconBar" xml:space="preserve">
-    <value>_Iconmenü anzeigen</value>
+    <value>_Iconmenü</value>
   </data>
   <data name="MainWindow_menColorHistory" xml:space="preserve">
-    <value>_Verlauf anzeigen</value>
+    <value>_Verlauf</value>
+  </data>
+  <data name="MainWindow_menDeleteHistoryItem" xml:space="preserve">
+    <value>Farbe löschen</value>
   </data>
 </root>

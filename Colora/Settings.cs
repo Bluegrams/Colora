@@ -11,6 +11,9 @@ namespace Colora
     {
         private bool iconBarVisible = true;
         private bool colorHistoryVisible = true;
+        private bool screenPickerVisible = true;
+        private KeyCombination pickColorShortcut 
+            = new KeyCombination(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
 
         /// <summary>
         /// Determines if the main icon bar is visible.
@@ -39,6 +42,19 @@ namespace Colora
         }
 
         /// <summary>
+        /// Determines if the screen picker groupbox is visible.
+        /// </summary>
+        public bool ScreenPickerVisible
+        {
+            get => screenPickerVisible;
+            set
+            {
+                screenPickerVisible = value;
+                propertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Specifies the maximal number of items in the color history list.
         /// </summary>
         public int ColorHistoryLength { get; set; } = 16;
@@ -46,8 +62,15 @@ namespace Colora
         /// <summary>
         /// Specifies the global shortcut keys used for picking colors from screen.
         /// </summary>
-        public KeyCombination PickColorShortcut { get; set; }
-            = new KeyCombination(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
+        public KeyCombination PickColorShortcut
+        {
+            get => pickColorShortcut;
+            set
+            {
+                pickColorShortcut = value;
+                propertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

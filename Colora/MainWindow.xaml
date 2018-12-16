@@ -22,7 +22,7 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="local:CustomCommands.ColorDialog" Executed="SelectCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MinimalSize" Executed="SizeCommand_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MinimalSize" Executed="ScreenPickerVisible_Executed"/>
         <CommandBinding Command="local:CustomCommands.TopMost" Executed="TopMostCommand_Executed"/>
         <CommandBinding Command="New" Executed="NewCommand_Executed"/>
         <CommandBinding Command="local:CustomCommands.PaletteEditor" Executed="PaletteCommand_Executed"/>
@@ -34,7 +34,7 @@
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}" Command="local:CustomCommands.ColorDialog" 
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+D}"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}" Click="MenuPickScreen_Click" 
-                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+Alt+C}"/>
+                          InputGestureText="{Binding Path=Settings.PickColorShortcut, Mode=OneWay}"/>
                 <Separator/>
                 <MenuItem x:Name="menNewPalette" Header="{x:Static p:Resources.MainWindow_menNewPalette}" Command="New" />
                 <MenuItem x:Name="menDeleteLatest" Header="{x:Static p:Resources.MainWindow_menDeleteLatest}" Click="menDeleteLatest_Click"/>
@@ -45,7 +45,7 @@
             <MenuItem Header="{x:Static p:Resources.MainWindow_menView}" Style="{StaticResource topMenuItem}">
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}" Command="local:CustomCommands.MinimalSize" 
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+M}" 
-                          IsChecked="{Binding ElementName=grpScreenPicker, Path=IsVisible, Mode=OneWay, Converter={StaticResource boolInverter}}"/>
+                          IsChecked="{Binding ElementName=grpScreenPicker, Path=IsVisible, Mode=OneWay}"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menIconBar}" IsChecked="{Binding Path=Settings.IconBarVisible}"
                           IsCheckable="True"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menColorHistory}" IsChecked="{Binding Path=Settings.ColorHistoryVisible}"
@@ -301,7 +301,8 @@
             <GroupBox x:Name="grpLatest" Header="{x:Static p:Resources.MainWindow_grpLatest}" MaxWidth="346"
                       Visibility="{Binding Settings.ColorHistoryVisible, Converter={StaticResource boolToVis}}">
                 <StackPanel>
-                    <ListBox x:Name="lstboxLast" Height="75" SelectionChanged="lstboxLast_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                    <ListBox x:Name="lstHistory" Height="75" SelectionChanged="lstHistory_SelectionChanged"
+                             ScrollViewer.HorizontalScrollBarVisibility="Visible">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
@@ -318,10 +319,17 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{x:Static p:Resources.MainWindow_menDeleteHistoryItem}"
+                                          Click="menDeleteHistoryItem_Click"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                     </ListBox>
                     <StackPanel x:Name="panButtonsBottom" Orientation="Horizontal" Margin="0,5,0,0">
                         <Button x:Name="butNewPalette" Padding="5,1" Command="New" Content="{x:Static p:Resources.MainWindow_menNewPalette}"/>
-                        <Button x:Name="butDeleteLatest" Padding="5,1" Click="menDeleteLatest_Click" Content="{x:Static p:Resources.MainWindow_menDeleteLatest}"/>
+                        <Button x:Name="butDeleteLatest" Padding="5,1" Click="menDeleteLatest_Click"
+                                Content="{x:Static p:Resources.MainWindow_menDeleteLatest}"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

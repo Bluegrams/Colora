@@ -142,7 +142,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add to Latest.
+        ///   Looks up a localized string similar to Add to History.
         /// </summary>
         public static string MainWindow_butAddLast {
             get {
@@ -169,7 +169,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Latest Colors.
+        ///   Looks up a localized string similar to Color History.
         /// </summary>
         public static string MainWindow_grpLatest {
             get {
@@ -205,7 +205,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show _Latest Colors.
+        ///   Looks up a localized string similar to Color _History.
         /// </summary>
         public static string MainWindow_menColorHistory {
             get {
@@ -232,7 +232,16 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Delete Latest Colors.
+        ///   Looks up a localized string similar to Delete Color.
+        /// </summary>
+        public static string MainWindow_menDeleteHistoryItem {
+            get {
+                return ResourceManager.GetString("MainWindow_menDeleteHistoryItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear _History.
         /// </summary>
         public static string MainWindow_menDeleteLatest {
             get {
@@ -250,7 +259,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show _Icon Bar.
+        ///   Looks up a localized string similar to _Icon Bar.
         /// </summary>
         public static string MainWindow_menIconBar {
             get {
@@ -259,7 +268,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Minimal Width.
+        ///   Looks up a localized string similar to _Screen Picker.
         /// </summary>
         public static string MainWindow_menMinimalSize {
             get {
@@ -268,7 +277,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _New Palette of Latest.
+        ///   Looks up a localized string similar to _New Palette from History.
         /// </summary>
         public static string MainWindow_menNewPalette {
             get {

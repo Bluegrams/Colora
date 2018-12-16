@@ -17,19 +17,12 @@ namespace Colora
     {
         private MiniAppManager manager;
         private MouseScreenCapture msc;
-        private FixedColorCollection lastColors;
+        private FixedColorCollection colorHistory;
         private PaletteWindow palWindow;
         private HotKey pickColorHotKey;
 
         public Settings Settings { get; set; }
         public NotifyColor CurrentColor { get; set; }
-
-        private bool isMinimal;
-        public bool IsMinimal
-        {
-            get { return isMinimal; }
-            set { if (isMinimal != value) { isMinimal = value; isMinimalToggle(); } }
-        }
 
         public MainWindow()
         {
@@ -40,8 +33,6 @@ namespace Colora
             manager = new MiniAppManager(this, false);
 #endif
             manager.AddManagedProperty(nameof(Topmost));
-            manager.AddManagedProperty(nameof(IsMinimal),
-                System.Configuration.SettingsSerializeAs.String, roamed: true);
             manager.AddManagedProperty(nameof(Settings),
                 System.Configuration.SettingsSerializeAs.Xml, roamed: true);
             if (!(bool)manager.Settings["Updated"])
@@ -50,7 +41,7 @@ namespace Colora
             InitializeComponent();
             msc = new MouseScreenCapture();
             msc.CaptureTick += new EventHandler(capture_Tick);
-            ((INotifyCollectionChanged)lstboxLast.Items).CollectionChanged += LastColors_CollectionChanged;
+            ((INotifyCollectionChanged)lstHistory.Items).CollectionChanged += LastColors_CollectionChanged;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -63,19 +54,20 @@ namespace Colora
 #endif
             setNewHotKey(Settings.PickColorShortcut);
             // Load color history
-            lastColors = new FixedColorCollection(Settings.ColorHistoryLength);
+            colorHistory = new FixedColorCollection(Settings.ColorHistoryLength);
             if (Properties.Settings.Default.LatestColors != null)
-                lastColors = Properties.Settings.Default.LatestColors;
-            lstboxLast.ItemsSource = lastColors;
+                colorHistory = Properties.Settings.Default.LatestColors;
+            lstHistory.ItemsSource = colorHistory;
             // Set current color
             CurrentColor = new NotifyColor(Properties.Settings.Default.CurrentColor);
             this.DataContext = this;
+            Settings.PropertyChanged += Settings_PropertyChanged;
         }
 
         private void onHotKeyPressed(HotKey hotKey)
         {
             if ((bool)butPick.IsChecked)
-                lastColors.Insert(0, CurrentColor.WpfColor);
+                colorHistory.Insert(0, CurrentColor.WpfColor);
             else
                 butPick.IsChecked = true;
         }
@@ -85,31 +77,33 @@ namespace Colora
             if (e.Key == Key.Return)
             {
                 butPick.IsChecked = false;
-                lastColors.Insert(0, CurrentColor.WpfColor);
+                colorHistory.Insert(0, CurrentColor.WpfColor);
             }
         }
 
-        private void SizeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            IsMinimal = !IsMinimal;
+            if (e.PropertyName == nameof(Settings.ScreenPickerVisible))
+            {
+                // Hide the screen picker groupbox and adjust some UI sizes.
+                if (!Settings.ScreenPickerVisible)
+                {
+                    grpScreenPicker.Visibility = Visibility.Collapsed;
+                    grpLatest.MaxWidth = 242;
+                    expData.MaxWidth = 242;
+                }
+                else
+                {
+                    grpScreenPicker.Visibility = Visibility.Visible;
+                    grpLatest.MaxWidth = 346;
+                    expData.MaxWidth = 346;
+                }
+            }
         }
 
-        private void isMinimalToggle()
+        private void ScreenPickerVisible_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (isMinimal)
-            {
-                grpScreenPicker.Visibility = Visibility.Collapsed;
-                grpLatest.MaxWidth = 242;
-                expData.MaxWidth = 242;
-                panButtonsBottom.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                grpScreenPicker.Visibility = Visibility.Visible;
-                grpLatest.MaxWidth = 346;
-                expData.MaxWidth = 346;
-                panButtonsBottom.Visibility = Visibility.Visible;
-            }
+            Settings.ScreenPickerVisible = !Settings.ScreenPickerVisible;
         }
 
         private void SelectCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -119,7 +113,7 @@ namespace Colora
             if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 CurrentColor.SetFromRGB(cd.Color.R, cd.Color.G, cd.Color.B);
-                lastColors.Insert(0, CurrentColor.WpfColor);
+                colorHistory.Insert(0, CurrentColor.WpfColor);
             }
         }
 
@@ -128,7 +122,7 @@ namespace Colora
             this.Topmost = !this.Topmost;
         }
 
-        private void menDeleteLatest_Click(object sender, RoutedEventArgs e) => lastColors.Clear();
+        private void menDeleteLatest_Click(object sender, RoutedEventArgs e) => colorHistory.Clear();
 
         private void menConfigureShortcut_Click(object sender, RoutedEventArgs e)
         {
@@ -163,8 +157,8 @@ namespace Colora
         {
             if (e.NewItems != null)
             {
-                lstboxLast.ScrollIntoView(e.NewItems[0]);
-                lstboxLast.SelectedItem = e.NewItems[0];
+                lstHistory.ScrollIntoView(e.NewItems[0]);
+                lstHistory.SelectedItem = e.NewItems[0];
             }
         }
 
@@ -226,15 +220,15 @@ namespace Colora
             CurrentColor.SetFromHex(txtHEX.Text);
         }
 
-        private void lstboxLast_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lstHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lstboxLast.SelectedIndex != -1)
-                CurrentColor.SetColor(lastColors[lstboxLast.SelectedIndex]);
+            if (lstHistory.SelectedIndex != -1)
+                CurrentColor.SetColor(colorHistory[lstHistory.SelectedIndex]);
         }
 
         private void butAddLast_Click(object sender, RoutedEventArgs e)
         {
-            lastColors.Insert(0, CurrentColor.WpfColor);
+            colorHistory.Insert(0, CurrentColor.WpfColor);
         }
 
         private void butAddPalette_Click(object sender, RoutedEventArgs e)
@@ -253,7 +247,12 @@ namespace Colora
             msc.CaptureSize = 100 / (int)sldZoom.Value;
         }
 
-#region Advanced Color Options
+        private void menDeleteHistoryItem_Click(object sender, RoutedEventArgs e)
+        {
+            colorHistory.RemoveAt(lstHistory.SelectedIndex);
+        }
+
+        #region Advanced Color Options
         private void rgbSlider_ValueChanged(object sender, RoutedEventArgs e)
         {
             if (((UIElement)e.Source).IsFocused)
@@ -302,7 +301,7 @@ namespace Colora
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Palette palette = new Palette();
-            foreach (Color col in lastColors)
+            foreach (Color col in colorHistory)
             {
                 palette.Colors.Add(new PColor(col.R, col.G, col.B));
             }
@@ -344,7 +343,7 @@ namespace Colora
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             pickColorHotKey?.Dispose();
-            Properties.Settings.Default.LatestColors = lastColors;
+            Properties.Settings.Default.LatestColors = colorHistory;
             Properties.Settings.Default.CurrentColor = CurrentColor.WpfColor;
             Properties.Settings.Default.Save();
         }

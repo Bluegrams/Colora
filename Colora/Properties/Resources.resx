@@ -166,7 +166,7 @@ Error code:</value>
     <value>Palette Editor</value>
   </data>
   <data name="MainWindow_butAddLast" xml:space="preserve">
-    <value>Add to Latest</value>
+    <value>Add to History</value>
   </data>
   <data name="MainWindow_butAddPalette" xml:space="preserve">
     <value>Add to Palette</value>
@@ -175,7 +175,7 @@ Error code:</value>
     <value>Color Data</value>
   </data>
   <data name="MainWindow_grpLatest" xml:space="preserve">
-    <value>Latest Colors</value>
+    <value>Color History</value>
   </data>
   <data name="MainWindow_grpScreenPicker" xml:space="preserve">
     <value>Screen Picker</value>
@@ -187,10 +187,10 @@ Error code:</value>
     <value>Open _Color Dialog</value>
   </data>
   <data name="MainWindow_menMinimalSize" xml:space="preserve">
-    <value>_Minimal Width</value>
+    <value>_Screen Picker</value>
   </data>
   <data name="MainWindow_menNewPalette" xml:space="preserve">
-    <value>_New Palette of Latest</value>
+    <value>_New Palette from History</value>
   </data>
   <data name="MainWindow_menOptions" xml:space="preserve">
     <value>_Options</value>
@@ -217,7 +217,7 @@ Error code:</value>
     <value>To Clipboard</value>
   </data>
   <data name="MainWindow_menDeleteLatest" xml:space="preserve">
-    <value>_Delete Latest Colors</value>
+    <value>Clear _History</value>
   </data>
   <data name="MainWindow_menPaletteEditor" xml:space="preserve">
     <value>_Palette Editor</value>
@@ -248,9 +248,12 @@ This could be caused by another app using the same shortcut.</value>
     <value>Please specify at least one modifier key (Control, Alt or Shift).</value>
   </data>
   <data name="MainWindow_menIconBar" xml:space="preserve">
-    <value>Show _Icon Bar</value>
+    <value>_Icon Bar</value>
   </data>
   <data name="MainWindow_menColorHistory" xml:space="preserve">
-    <value>Show _Latest Colors</value>
+    <value>Color _History</value>
+  </data>
+  <data name="MainWindow_menDeleteHistoryItem" xml:space="preserve">
+    <value>Delete Color</value>
   </data>
 </root>

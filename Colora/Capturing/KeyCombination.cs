@@ -48,7 +48,8 @@ namespace Colora.Capturing
 
         public override string ToString()
         {
-            var modifierString = String.Join("+", Modifiers.ToString().Replace(" ", "").Split(',').Reverse());
+            var conv = new ModifierKeysConverter();
+            var modifierString = conv.ConvertToString(Modifiers);
             return modifierString + "+" + Key.ToString();
         }
     }
