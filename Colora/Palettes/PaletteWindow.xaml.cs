@@ -65,10 +65,13 @@ namespace Colora.Palettes
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Palette palette;
-            isSaved = PaletteFile.OpenPalette(out palette);
-            openedFile = isSaved;
-            this.palette = palette;
-            this.DataContext = palette;            
+            openedFile = PaletteFile.OpenPalette(out palette);
+            if (openedFile)
+            {
+                isSaved = true;
+                this.palette = palette;
+                this.DataContext = palette;
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

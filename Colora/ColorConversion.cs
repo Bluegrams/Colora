@@ -71,9 +71,9 @@ namespace Colora
         public static double[] RGBToCMYK(double R, double G, double B)
         {
             double k = 1 - Math.Max(Math.Max(R, G), B);
-            double c = (1 - R - k) / (1 - k);
-            double m = (1 - G - k) / (1 - k);
-            double y = (1 - B - k) / (1 - k);
+            double c = k == 1 ? 0 : (1 - R - k) / (1 - k);
+            double m = k == 1 ? 0 : (1 - G - k) / (1 - k);
+            double y = k == 1 ? 0 : (1 - B - k) / (1 - k);
             return new double[] { c, m, y, k };
         }
 

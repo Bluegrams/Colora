@@ -1,11 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Colora;
 using System;
-using System.Collections.Generic;
 
 namespace Colora.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class NotifyColorTests
     {
         [TestMethod]
@@ -54,6 +53,16 @@ namespace Colora.Tests
             Assert.AreEqual(110, nfcol.Red);
             Assert.AreEqual(36, nfcol.Green);
             Assert.AreEqual(95, nfcol.Blue);
+        }
+
+        [TestMethod]
+        public void SetFromCMYKTest()
+        {
+            NotifyColor nfcol = new NotifyColor(0, 0, 0);
+            nfcol.SetFromCMYK(0.69, 0.26, 0.52, 0.18);
+            Assert.AreEqual(65, nfcol.Red);
+            Assert.AreEqual(155, nfcol.Green);
+            Assert.AreEqual(100, nfcol.Blue);
         }
     }
 }

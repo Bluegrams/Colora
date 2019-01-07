@@ -25,5 +25,8 @@
                 <Style TargetType="Button" BasedOn="{StaticResource {x:Type ButtonBase}}"/>
             </Style.Resources>
         </Style>
+        <Style x:Key="topMenuItem" TargetType="MenuItem">
+            <Setter Property="Padding" Value="6,2"/>
+        </Style>
     </Application.Resources>
 </Application>

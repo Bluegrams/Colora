@@ -16,9 +16,6 @@
             <Setter Property="Margin" Value="5,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
-        <Style x:Key="topMenuItem" TargetType="MenuItem">
-            <Setter Property="Padding" Value="6,2"/>
-        </Style>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="local:CustomCommands.ColorDialog" Executed="SelectCommand_Executed"/>
@@ -118,7 +115,8 @@
                             <Label Width="32">RGB</Label>
                             <Button x:Name="butCopyRGB" DockPanel.Dock="Right" Click="butCopyRGB_Click" Content="{x:Static p:Resources.MainWindow_strCopy}"
                                     ToolTip="{x:Static p:Resources.MainWindow_strClipboard}" TabIndex="3"/>
-                            <Grid TextBox.TextChanged="Grid_TextChanged" TextBox.GotFocus="inputColor_GotFocus" TextBox.LostFocus="inputColor_LostFocus">
+                            <Grid TextBox.TextChanged="Grid_TextChanged" TextBox.GotFocus="inputColor_GotFocus" 
+                                  TextBox.LostFocus="inputColor_LostFocus" TextBox.PreviewTextInput="inputColor_PreviewTextInput">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
@@ -139,8 +137,8 @@
                             <Label Width="32">HEX</Label>
                             <Button x:Name="butCopyHex" DockPanel.Dock="Right" Click="butCopyHex_Click" Content="{x:Static p:Resources.MainWindow_strCopy}"
                                     ToolTip="{x:Static p:Resources.MainWindow_strClipboard}" TabIndex="5"/>
-                            <TextBox x:Name="txtHEX" CharacterCasing="Upper" GotFocus="inputColor_GotFocus" LostFocus="inputColor_LostFocus" TextChanged="txtHEX_TextChanged" 
-                                     Tag="HexString" TabIndex="4">
+                            <TextBox x:Name="txtHEX" CharacterCasing="Upper" GotFocus="inputColor_GotFocus" LostFocus="inputColor_LostFocus"
+                                     TextChanged="txtHEX_TextChanged" Tag="HexString" TabIndex="4">
                                 <Binding Path="HexString" Mode="OneWay"/>
                             </TextBox>
                         </DockPanel>
@@ -194,7 +192,8 @@
                                     <Slider x:Name="sldB" Maximum="255" Value="{Binding Blue, Mode=OneWay}"/>
                                 </DockPanel>
                                 <DockPanel LastChildFill="False">
-                                    <Button Padding="5,1" DockPanel.Dock="Right" Click="butCopyRGB_Click" Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
+                                    <Button Padding="5,1" DockPanel.Dock="Right" Click="butCopyRGB_Click" 
+                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
                                 </DockPanel>
                             </StackPanel>
                         </Grid>
@@ -221,7 +220,8 @@
                                     <Slider x:Name="sldHsbB" Maximum="100" Value="{Binding Bright, Mode=OneWay}"/>
                                 </DockPanel>
                                 <DockPanel LastChildFill="False">
-                                    <Button x:Name="butCopyHSB" Padding="5,1" DockPanel.Dock="Right" Click="butCopyHSB_Click" Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
+                                    <Button x:Name="butCopyHSB" Padding="5,1" DockPanel.Dock="Right" Click="butCopyHSB_Click"
+                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
                                 </DockPanel>
                             </StackPanel>
                         </Grid>
@@ -248,7 +248,8 @@
                                     <Slider x:Name="sldHslL" Maximum="100" Value="{Binding Light, Mode=OneWay}"/>
                                 </DockPanel>
                                 <DockPanel LastChildFill="False">
-                                    <Button x:Name="butCopyHSL" Padding="5,1" DockPanel.Dock="Right" Click="butCopyHSL_Click" Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
+                                    <Button x:Name="butCopyHSL" Padding="5,1" DockPanel.Dock="Right" Click="butCopyHSL_Click" 
+                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
                                 </DockPanel>
                             </StackPanel>
                         </Grid>
@@ -260,10 +261,13 @@
                             </Grid.RowDefinitions>
                             <DockPanel KeyboardNavigation.TabNavigation="Local">
                                 <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-                                    <Button x:Name="butCopyCMYK" Padding="5,1"  DockPanel.Dock="Right" Click="butCopyCMYK_Click" Content="{x:Static p:Resources.MainWindow_strClipboard}"
+                                    <Button x:Name="butCopyCMYK" Padding="5,1"  DockPanel.Dock="Right" Click="butCopyCMYK_Click"
+                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"
                                             TabIndex="4"/>
                                 </DockPanel>
-                                <WrapPanel VerticalAlignment="Center">
+                                <WrapPanel VerticalAlignment="Center" TextBox.TextChanged="CMYK_TextChanged"
+                                           TextBox.PreviewTextInput="inputColor_PreviewTextInput" TextBox.GotFocus="inputColor_GotFocus" 
+                                           TextBox.LostFocus="inputColor_LostFocus">
                                     <WrapPanel.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="Height" Value="25"/>
@@ -273,24 +277,27 @@
                                             <Setter Property="Height" Value="25"/>
                                             <Setter Property="Margin" Value="5,5"/>
                                             <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                            <Setter Property="IsReadOnly" Value="True"/>
                                         </Style>
                                     </WrapPanel.Resources>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>C</Label>
-                                        <TextBox x:Name="txtCyan" Text="{Binding Path=Cyan, Mode=OneWay}" TabIndex="0" IsReadOnly="True"/>
+                                        <TextBox x:Name="txtCyan" Text="{Binding Path=Cyan, Mode=OneWay}" TabIndex="0"
+                                                 Tag="Cyan"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>M</Label>
-                                        <TextBox x:Name="txtMagenta" Text="{Binding Path=Magenta, Mode=OneWay}" TabIndex="1" IsReadOnly="True"/>
+                                        <TextBox x:Name="txtMagenta" Text="{Binding Path=Magenta, Mode=OneWay}" TabIndex="1"
+                                                 Tag="Magenta"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>Y</Label>
-                                        <TextBox x:Name="txtYellow" Text="{Binding Path=Yellow, Mode=OneWay}" TabIndex="2" IsReadOnly="True"/>
+                                        <TextBox x:Name="txtYellow" Text="{Binding Path=Yellow, Mode=OneWay}" TabIndex="2"
+                                                 Tag="Yellow"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>K</Label>
-                                        <TextBox x:Name="txtKey" Text="{Binding Path=Key, Mode=OneWay}" TabIndex="3" IsReadOnly="True"/>
+                                        <TextBox x:Name="txtKey" Text="{Binding Path=Key, Mode=OneWay}" TabIndex="3"
+                                                 Tag="Key"/>
                                     </StackPanel>
                                 </WrapPanel>
                             </DockPanel>

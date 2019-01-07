@@ -16,7 +16,7 @@
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="#dddddd">
-            <MenuItem Header="{x:Static p:Resources.PaletteWindow_menFile}">
+            <MenuItem Header="{x:Static p:Resources.PaletteWindow_menFile}" Style="{StaticResource topMenuItem}">
                 <MenuItem Header="{x:Static p:Resources.PaletteWindow_menOpen}" Command="Open"/>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.PaletteWindow_menSave}" Command="Save"/>

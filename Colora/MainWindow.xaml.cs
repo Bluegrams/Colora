@@ -10,6 +10,7 @@ using Colora.Palettes;
 using Colora.Capturing;
 using System.Windows.Navigation;
 using System.Windows.Media.Imaging;
+using System.Linq;
 
 namespace Colora
 {
@@ -204,6 +205,11 @@ namespace Colora
             tb.SetBinding(TextBox.TextProperty, newbd);
         }
 
+        private void inputColor_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.All(ch => Char.IsDigit(ch) || Char.IsControl(ch));
+        }
+
         private void Grid_TextChanged(object sender, RoutedEventArgs e)
         {
             if (!(e.Source as Control).IsFocused) return;
@@ -269,6 +275,17 @@ namespace Colora
         {
             if (((UIElement)e.Source).IsFocused)
                 CurrentColor.SetFromHSL((int)sldHslH.Value, (double)sldHslS.Value / 100, (double)sldHslL.Value / 100);
+        }
+
+        private void CMYK_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!(e.Source as Control).IsFocused) return;
+            if (int.TryParse(txtCyan.Text, out int c) && int.TryParse(txtMagenta.Text, out int m)
+                && int.TryParse(txtYellow.Text, out int y) && int.TryParse(txtKey.Text, out int k))
+            {
+                CurrentColor.SetFromCMYK(Math.Min(c, 100) / 100.0, Math.Min(m, 100) / 100.0,
+                                         Math.Min(y, 100) / 100.0, Math.Min(k, 100) / 100.0);
+            }
         }
 
         private void butCopyRGB_Click(object sender, RoutedEventArgs e)
