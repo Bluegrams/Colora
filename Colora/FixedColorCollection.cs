@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Windows.Media;
 
 namespace Colora
@@ -8,12 +7,23 @@ namespace Colora
     /// <summary>
     /// An observable collection of fixed size that holds the last colors.
     /// </summary>
-    [SettingsSerializeAs(SettingsSerializeAs.Xml)]
     public class FixedColorCollection : ObservableCollection<Color>
     {
-        public int MaxLength { get; private set; }
+        private ushort maxLength = ushort.MaxValue;
 
-        public FixedColorCollection(int maxLength)
+        public ushort MaxLength
+        {
+            get => maxLength;
+            set
+            {
+                maxLength = value;
+                prune();
+            }
+        }
+
+        public FixedColorCollection() { }
+
+        public FixedColorCollection(ushort maxLength)
         {
             MaxLength = maxLength;
         }
@@ -30,6 +40,12 @@ namespace Colora
             if (this.Count >= MaxLength)
                 this.RemoveAt(this.Count - 1);
             base.Insert(index, item);
+        }
+
+        private void prune()
+        {
+            while (Count > MaxLength)
+                this.RemoveItem(Count - 1);
         }
     }
 }

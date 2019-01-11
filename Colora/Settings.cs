@@ -57,7 +57,7 @@ namespace Colora
         /// <summary>
         /// Specifies the maximal number of items in the color history list.
         /// </summary>
-        public int ColorHistoryLength { get; set; } = 16;
+        public ushort ColorHistoryLength { get; set; } = 16;
 
         /// <summary>
         /// Specifies the global shortcut keys used for picking colors from screen.

@@ -48,16 +48,18 @@ namespace Colora
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Check for updates
-#if PORTABLE
-            manager.CheckForUpdates("https://colora.sourceforge.io/update_portable.xml");
-#else
-            manager.CheckForUpdates("https://colora.sourceforge.io/update.xml");
+#if !PORTABLE
+            manager.UpdateCheckUrl = "https://colora.sourceforge.io/update.xml";
+            manager.CheckForUpdates();
 #endif
             setNewHotKey(Settings.PickColorShortcut);
             // Load color history
-            colorHistory = new FixedColorCollection(Settings.ColorHistoryLength);
             if (Properties.Settings.Default.LatestColors != null)
+            {
                 colorHistory = Properties.Settings.Default.LatestColors;
+                colorHistory.MaxLength = Settings.ColorHistoryLength;
+            }
+            else colorHistory = new FixedColorCollection(Settings.ColorHistoryLength);
             lstHistory.ItemsSource = colorHistory;
             // Set current color
             CurrentColor = new NotifyColor(Properties.Settings.Default.CurrentColor);
