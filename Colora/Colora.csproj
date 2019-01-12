@@ -59,11 +59,11 @@
     <Reference Include="Costura, Version=3.2.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.3.2.2\lib\net40\Costura.dll</HintPath>
     </Reference>
-    <Reference Include="MiniAppManager.Shared, Version=0.4.1.19011, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.4.2-pre\lib\net45\MiniAppManager.Shared.dll</HintPath>
+    <Reference Include="MiniAppManager.Shared, Version=0.4.2.19013, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.2\lib\net45\MiniAppManager.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="MiniAppManager.WPF, Version=0.4.1.19011, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MiniAppManager.WPF.0.4.2-pre\lib\net45\MiniAppManager.WPF.dll</HintPath>
+    <Reference Include="MiniAppManager.WPF, Version=0.4.2.19013, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniAppManager.WPF.0.4.2\lib\net45\MiniAppManager.WPF.dll</HintPath>
     </Reference>
     <Reference Include="PortableSettingsProvider, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PortableSettingsProvider.0.2.1\lib\net45\PortableSettingsProvider.dll</HintPath>

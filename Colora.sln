@@ -16,6 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ColoraSetup", "ColoraSetup\ColoraSetup.vdproj", "{BCEE2A5D-B24F-46B7-AF36-E04094F77817}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{EFFDC75F-7CB3-48A6-B559-412712BEC612}"
+	ProjectSection(SolutionItems) = preProject
+		img\colora_full.PNG = img\colora_full.PNG
+		img\icon.png = img\icon.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +47,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EFFDC75F-7CB3-48A6-B559-412712BEC612} = {B19FEE5B-517A-45C3-855B-F49034D16E4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A07BE15B-2788-4D12-AB8A-FCFCACA56C6A}

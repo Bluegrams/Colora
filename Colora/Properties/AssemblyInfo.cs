@@ -11,12 +11,12 @@ using Bluegrams.Application.Attributes;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bluegrams")]
 [assembly: AssemblyProduct("Colora")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright ©  2019 Bluegrams")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ProductWebsite("https://colora.sourceforge.io")]
-[assembly: ProductLicense("LICENSE.rtf", "BSD-3-Clause")]
+[assembly: ProductLicense("LICENSE.txt", "BSD-3-Clause")]
 [assembly: ProductColor(128, 128, 128)]
 [assembly: SupportedCultures("en", "de")]
 
@@ -55,5 +55,5 @@ using Bluegrams.Application.Attributes;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.0.19012")]
-[assembly: AssemblyFileVersion("0.2.0.19012")]
+[assembly: AssemblyVersion("0.2.0.19013")]
+[assembly: AssemblyFileVersion("0.2.0.19013")]
