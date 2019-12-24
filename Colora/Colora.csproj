@@ -62,6 +62,12 @@
     <Reference Include="Costura, Version=3.2.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.3.2.2\lib\net40\Costura.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Modern.3.0.1\lib\net46\MahApps.Metro.IconPacks.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Modern, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Modern.3.0.1\lib\net46\MahApps.Metro.IconPacks.Modern.dll</HintPath>
+    </Reference>
     <Reference Include="PortableSettingsProvider, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PortableSettingsProvider.0.2.3\lib\net45\PortableSettingsProvider.dll</HintPath>
     </Reference>
@@ -91,8 +97,8 @@
       <DependentUpon>HotKeyInputWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Capturing\KeyCombination.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Capturing\WinHotKey.cs" />
+    <Compile Include="SettingsExtension.cs" />
     <Compile Include="ValueConverters.cs" />
     <Page Include="Capturing\HotKeyInputWindow.xaml">
       <SubType>Designer</SubType>
@@ -146,7 +152,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.de.resx" />
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -166,18 +174,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\1color.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\1detect.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\1tack.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\1list.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\colora.png" />

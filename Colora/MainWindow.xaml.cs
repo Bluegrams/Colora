@@ -12,6 +12,7 @@ using Bluegrams.Application;
 using Bluegrams.Application.WPF;
 using Colora.Palettes;
 using Colora.Capturing;
+using Colora.Properties;
 
 namespace Colora
 {
@@ -24,18 +25,14 @@ namespace Colora
         private PaletteWindow palWindow;
         private HotKey pickColorHotKey;
 
-        public Settings Settings { get; set; }
         public NotifyColor CurrentColor { get; set; }
 
         public MainWindow()
         {
-            Settings = new Settings();
             manager = new WpfWindowManager(this);
             manager.ManageDefault();
             manager.Manage(nameof(Topmost));
-            manager.Manage(nameof(Settings),
-                System.Configuration.SettingsSerializeAs.Xml, roamed: true);
-            manager.ApplyToSettings(Properties.Settings.Default);
+            manager.ApplyToSettings(Settings.Default);
             manager.Initialize();
             InitializeComponent();
             updateChecker = new WpfUpdateChecker(App.UPDATE_URL, this, App.UPDATE_MODE);
@@ -49,19 +46,22 @@ namespace Colora
             // Check for updates
             updateChecker.CheckForUpdates();
             // Set global shortcut
-            setNewHotKey(Settings.PickColorShortcut);
+            if (Settings.Default.PickColorShortcut == null)
+                Settings.Default.PickColorShortcut = new KeyCombination(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
+            setNewHotKey(Settings.Default.PickColorShortcut);
             // Load color history
-            if (Properties.Settings.Default.LatestColors != null)
+            if (Settings.Default.LatestColors != null)
             {
-                colorHistory = Properties.Settings.Default.LatestColors;
-                colorHistory.MaxLength = Settings.ColorHistoryLength;
+                colorHistory = Settings.Default.LatestColors;
+                colorHistory.MaxLength = Settings.Default.ColorHistoryLength;
             }
-            else colorHistory = new FixedColorCollection(Settings.ColorHistoryLength);
+            else colorHistory = new FixedColorCollection(Settings.Default.ColorHistoryLength);
             lstHistory.ItemsSource = colorHistory;
             // Set current color
-            CurrentColor = new NotifyColor(Properties.Settings.Default.CurrentColor);
+            CurrentColor = new NotifyColor(Settings.Default.CurrentColor);
             this.DataContext = this;
-            Settings.PropertyChanged += Settings_PropertyChanged;
+            Settings.Default.PropertyChanged += Settings_PropertyChanged;
+            adjustBoxSizes();
         }
 
         private void onHotKeyPressed(HotKey hotKey)
@@ -81,29 +81,30 @@ namespace Colora
             }
         }
 
+        private void adjustBoxSizes()
+        {
+            // Adjust some UI sizes if screen picker is hidden.
+            if (!Settings.Default.ScreenPickerVisible)
+            {
+                expData.MaxWidth = 242;
+                expHistory.MaxWidth = 242;
+            }
+            else
+            {
+                expData.MaxWidth = 346;
+                expHistory.MaxWidth = 346;
+            }
+        }
+
         private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Settings.ScreenPickerVisible))
-            {
-                // Hide the screen picker groupbox and adjust some UI sizes.
-                if (!Settings.ScreenPickerVisible)
-                {
-                    grpScreenPicker.Visibility = Visibility.Collapsed;
-                    grpLatest.MaxWidth = 242;
-                    expData.MaxWidth = 242;
-                }
-                else
-                {
-                    grpScreenPicker.Visibility = Visibility.Visible;
-                    grpLatest.MaxWidth = 346;
-                    expData.MaxWidth = 346;
-                }
-            }
+            if (e.PropertyName == nameof(Settings.Default.ScreenPickerVisible))
+                adjustBoxSizes();
         }
 
         private void ScreenPickerVisible_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Settings.ScreenPickerVisible = !Settings.ScreenPickerVisible;
+            Settings.Default.ScreenPickerVisible = !Settings.Default.ScreenPickerVisible;
         }
 
         private void SelectCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -137,7 +138,7 @@ namespace Colora
         private void setNewHotKey(KeyCombination keys)
         {
             pickColorHotKey?.Unregister();
-            Settings.PickColorShortcut = keys;
+            Settings.Default.PickColorShortcut = keys;
             pickColorHotKey = new HotKey(keys, onHotKeyPressed, false);
             if (!pickColorHotKey.Register())
             {
@@ -228,11 +229,20 @@ namespace Colora
             CurrentColor.SetFromHex(txtHEX.Text);
         }
 
-        private void lstHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void setColorFromHistory()
         {
             if (lstHistory.SelectedIndex != -1)
-                CurrentColor.SetColor(colorHistory[lstHistory.SelectedIndex]);
+            {
+                if (colorHistory[lstHistory.SelectedIndex] != CurrentColor.WpfColor)
+                    CurrentColor.SetColor(colorHistory[lstHistory.SelectedIndex]);
+            }
         }
+
+        private void lstHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            => setColorFromHistory();
+
+        private void lstHistory_MouseDown(object sender, MouseButtonEventArgs e)
+            => setColorFromHistory();
 
         private void butAddLast_Click(object sender, RoutedEventArgs e)
         {
@@ -362,9 +372,9 @@ namespace Colora
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             pickColorHotKey?.Dispose();
-            Properties.Settings.Default.LatestColors = colorHistory;
-            Properties.Settings.Default.CurrentColor = CurrentColor.WpfColor;
-            Properties.Settings.Default.Save();
+            Settings.Default.LatestColors = colorHistory;
+            Settings.Default.CurrentColor = CurrentColor.WpfColor;
+            Settings.Default.Save();
         }
     }
 }

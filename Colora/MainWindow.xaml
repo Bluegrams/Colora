@@ -1,8 +1,7 @@
 ﻿<Window x:Class="Colora.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:p="clr-namespace:Colora.Properties"
         xmlns:local="clr-namespace:Colora"
         x:Name="mainWindow"
@@ -31,7 +30,7 @@
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}" Command="local:CustomCommands.ColorDialog" 
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+D}"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}" Click="MenuPickScreen_Click" 
-                          InputGestureText="{Binding Path=Settings.PickColorShortcut, Mode=OneWay}"/>
+                          InputGestureText="{local:Settings PickColorShortcut, Mode=OneWay}"/>
                 <Separator/>
                 <MenuItem x:Name="menNewPalette" Header="{x:Static p:Resources.MainWindow_menNewPalette}" Command="New" />
                 <MenuItem x:Name="menDeleteLatest" Header="{x:Static p:Resources.MainWindow_menDeleteLatest}" Click="menDeleteLatest_Click"/>
@@ -40,12 +39,15 @@
                 <MenuItem x:Name="menConfigureShortcut" Header="{x:Static p:Resources.MainWindow_menConfigureShortcut}" Click="menConfigureShortcut_Click"/>
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MainWindow_menView}" Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}" Command="local:CustomCommands.MinimalSize" 
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}"
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+M}" 
-                          IsChecked="{Binding ElementName=grpScreenPicker, Path=IsVisible, Mode=OneWay}"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menIconBar}" IsChecked="{Binding Path=Settings.IconBarVisible}"
+                          IsChecked="{local:Settings ScreenPickerVisible}"
                           IsCheckable="True"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorHistory}" IsChecked="{Binding Path=Settings.ColorHistoryVisible}"
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menIconBar}"
+                          IsChecked="{local:Settings IconBarVisible}"
+                          IsCheckable="True"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorHistory}"
+                          IsChecked="{local:Settings ColorHistoryVisible}"
                           IsCheckable="True"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menPaletteEditor}" Command="local:CustomCommands.PaletteEditor"
                           InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+P}"/>
@@ -59,25 +61,26 @@
             </MenuItem>
         </Menu>
         <DockPanel Style="{StaticResource toolBar}" DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="Local"
-                   Visibility="{Binding Path=Settings.IconBarVisible, Converter={StaticResource boolToVis}}">
-            <Button x:Name="butDialog" Command="local:CustomCommands.ColorDialog" TabIndex="0"
-                    ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}">
-                <Image Source="img/1color.png" Stretch="None"/>
-            </Button>
-            <Separator/>
+                   Visibility="{local:Settings IconBarVisible, Converter={StaticResource boolToVis}}">
+            
             <ToggleButton x:Name="butPick" Checked="butPick_Checked" Unchecked="butPick_Unchecked" TabIndex="1"
                           ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menPickScreen}, Converter={StaticResource UScoreConverter}}">
-                <Image Source="img/1detect.png" Stretch="None"/>
+                <icon:PackIconModern Kind="Crosshair" Width="20" Height="20"/>
             </ToggleButton>
+            <Separator/>
+            <Button x:Name="butDialog" Command="local:CustomCommands.ColorDialog" TabIndex="0"
+                    ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}">
+                <icon:PackIconModern Kind="DrawPixelFillGrid"/>
+            </Button>
             <ToggleButton x:Name="butTopmost" DockPanel.Dock="Right" TabIndex="3"
                           ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menTopmost}, Converter={StaticResource UScoreConverter}}"
                           IsChecked="{Binding ElementName=mainWindow, Path=Topmost}">
-                <Image Source="img/1tack.png" Stretch="None"/>
+                <icon:PackIconModern Kind="Pin"/>
             </ToggleButton>
             <Separator DockPanel.Dock="Right"/>
             <Button DockPanel.Dock="Right" Command="local:CustomCommands.PaletteEditor" 
                     ToolTip="{x:Static p:Resources.PaletteWindow_Title}" TabIndex="2">
-                <Image Source="img/1list.png" Stretch="None"/>
+                <icon:PackIconModern Kind="Paper" Width="20" Height="20"/>
             </Button>
         </DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Height="30" Background="#dddddd">
@@ -85,7 +88,8 @@
         </StatusBar>
         <StackPanel>
             <DockPanel>
-                <GroupBox x:Name="grpScreenPicker" Header="{x:Static p:Resources.MainWindow_grpScreenPicker}" IsEnabled="False">
+                <GroupBox x:Name="grpScreenPicker" Header="{x:Static p:Resources.MainWindow_grpScreenPicker}" IsEnabled="False"
+                          Visibility="{local:Settings ScreenPickerVisible, Converter={StaticResource boolToVis}, Mode=OneWay}">
                     <StackPanel>
                         <Border Height="92" Width="92" BorderThickness="1" BorderBrush="Black">
                             <Canvas Height="90" Width="90">
@@ -156,7 +160,8 @@
                 </GroupBox>
             </DockPanel>
             <Expander x:Name="expData" Grid.Row="3" Header="{x:Static p:Resources.MainWindow_strColorSettings}" MaxWidth="346"
-                      DataContext="{Binding CurrentColor}">
+                      DataContext="{Binding CurrentColor}"
+                      IsExpanded="{local:Settings AdvancedColorsVisible}">
                 <Expander.Resources>
                     <Style TargetType="{x:Type Slider}">
                         <Setter Property="IsSnapToTickEnabled" Value="True"/>
@@ -305,11 +310,12 @@
                     </TabItem>
                 </TabControl>
             </Expander>
-            <GroupBox x:Name="grpLatest" Header="{x:Static p:Resources.MainWindow_grpLatest}" MaxWidth="346"
-                      Visibility="{Binding Settings.ColorHistoryVisible, Converter={StaticResource boolToVis}}">
+            <Expander x:Name="expHistory" Header="{x:Static p:Resources.MainWindow_grpLatest}" MaxWidth="346"
+                      IsExpanded="{local:Settings ColorHistoryVisible}">
                 <StackPanel>
                     <ListBox x:Name="lstHistory" Height="75" SelectionChanged="lstHistory_SelectionChanged"
-                             ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                             ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                             PreviewMouseDown="lstHistory_MouseDown">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
@@ -339,7 +345,7 @@
                                 Content="{x:Static p:Resources.MainWindow_menDeleteLatest}"/>
                     </StackPanel>
                 </StackPanel>
-            </GroupBox>
+            </Expander>
         </StackPanel>
     </DockPanel>
 </Window>

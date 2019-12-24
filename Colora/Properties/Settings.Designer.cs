@@ -47,5 +47,76 @@ namespace Colora.Properties {
                 this["CurrentColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IconBarVisible {
+            get {
+                return ((bool)(this["IconBarVisible"]));
+            }
+            set {
+                this["IconBarVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ColorHistoryVisible {
+            get {
+                return ((bool)(this["ColorHistoryVisible"]));
+            }
+            set {
+                this["ColorHistoryVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ScreenPickerVisible {
+            get {
+                return ((bool)(this["ScreenPickerVisible"]));
+            }
+            set {
+                this["ScreenPickerVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AdvancedColorsVisible {
+            get {
+                return ((bool)(this["AdvancedColorsVisible"]));
+            }
+            set {
+                this["AdvancedColorsVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public ushort ColorHistoryLength {
+            get {
+                return ((ushort)(this["ColorHistoryLength"]));
+            }
+            set {
+                this["ColorHistoryLength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::Colora.Capturing.KeyCombination PickColorShortcut {
+            get {
+                return ((global::Colora.Capturing.KeyCombination)(this["PickColorShortcut"]));
+            }
+            set {
+                this["PickColorShortcut"] = value;
+            }
+        }
     }
 }
