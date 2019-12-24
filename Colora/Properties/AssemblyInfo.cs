@@ -7,7 +7,7 @@ using Bluegrams.Application.Attributes;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Colora - Color Picker and Converter")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Color Picker and Converter for Windows")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bluegrams")]
 [assembly: AssemblyProduct("Colora")]
@@ -17,8 +17,13 @@ using Bluegrams.Application.Attributes;
 
 [assembly: ProductWebsite("https://colora.sourceforge.io")]
 [assembly: ProductLicense("LICENSE.txt", "BSD-3-Clause")]
-[assembly: ProductColor(128, 128, 128)]
 [assembly: SupportedCultures("en", "de")]
+
+#if PORTABLE
+[assembly: AppPortable(true)]
+#else
+[assembly: AppPortable(false)]
+#endif
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -44,16 +49,5 @@ using Bluegrams.Application.Attributes;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.0.19013")]
-[assembly: AssemblyFileVersion("0.2.0.19013")]
+[assembly: AssemblyVersion("0.2.0")]
+[assembly: AssemblyFileVersion("0.2.0")]

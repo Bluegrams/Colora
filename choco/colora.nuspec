@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <!-- == PACKAGE SPECIFIC SECTION == -->
+    <id>colora</id>
+    <version>0.2.0</version>
+    <owners>alxnull</owners>
+    <!-- ============================== -->
+
+    <!-- == SOFTWARE SPECIFIC SECTION == -->
+    <title>Colora</title>
+    <authors>alxnull</authors>
+    <projectUrl>https://colora.sourceforge.io/</projectUrl>
+    <iconUrl>https://gitcdn.xyz/repo/Bluegrams/Colora/master/img/icon.png</iconUrl>
+    <copyright>© 2019 Bluegrams</copyright>
+    <licenseUrl>https://github.com/Bluegrams/Colora/blob/master/LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/Bluegrams/Colora</projectSourceUrl>
+    <bugTrackerUrl>https://github.com/Bluegrams/Colora/issues</bugTrackerUrl>
+    <tags>colora color picker color-converter colors color-palette</tags>
+    <summary>Color converter, screen color picker and color palettes for Windows.</summary>
+    <description>Colora is a useful small color converter and screen color picker tool for Windows.
+    Colora makes it easy to pick colors from screen and save them. The color picker is tested to work with Windows 10 and DPI scaling.
+    Picked colors can be configured and converted between various formats such as RGB, Hex, HSB and HSL.
+    The integrated palette tool then allows you to create color palettes from selected colors or the history of picked colors.</description>
+    <releaseNotes>https://github.com/Bluegrams/Colora/blob/master/Changelog.md</releaseNotes>
+    <!-- =============================== -->      
+
+    <dependencies>
+      <dependency id="dotnetfx" version="4.6.2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

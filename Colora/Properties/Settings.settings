@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Colora.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="LatestColors" Provider="Bluegrams.Application.VariableSettingsProvider" Roaming="true" Type="Colora.FixedColorCollection" Scope="User">
+    <Setting Name="LatestColors" Roaming="true" Type="Colora.FixedColorCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="CurrentColor" Provider="Bluegrams.Application.VariableSettingsProvider" Roaming="true" Type="System.Windows.Media.Color" Scope="User">
+    <Setting Name="CurrentColor" Roaming="true" Type="System.Windows.Media.Color" Scope="User">
       <Value Profile="(Default)">#FFFFFFFF</Value>
     </Setting>
   </Settings>

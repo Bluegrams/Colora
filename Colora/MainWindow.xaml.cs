@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using Bluegrams.Application;
 using Bluegrams.Application.WPF;
 using Colora.Palettes;
 using Colora.Capturing;
-using System.Windows.Navigation;
-using System.Windows.Media.Imaging;
-using System.Linq;
 
 namespace Colora
 {
     public partial class MainWindow : Window
     {
-        private MiniAppManager manager;
+        private WpfWindowManager manager;
+        private WpfUpdateChecker updateChecker;
         private MouseScreenCapture msc;
         private FixedColorCollection colorHistory;
         private PaletteWindow palWindow;
@@ -28,18 +30,15 @@ namespace Colora
         public MainWindow()
         {
             Settings = new Settings();
-#if PORTABLE
-            manager = new MiniAppManager(this, true);
-#else
-            manager = new MiniAppManager(this, false);
-#endif
-            manager.AddManagedProperty(nameof(Topmost));
-            manager.AddManagedProperty(nameof(Settings),
+            manager = new WpfWindowManager(this);
+            manager.ManageDefault();
+            manager.Manage(nameof(Topmost));
+            manager.Manage(nameof(Settings),
                 System.Configuration.SettingsSerializeAs.Xml, roamed: true);
-            if (!(bool)manager.Settings["Updated"])
-                Properties.Settings.Default.Upgrade();
+            manager.ApplyToSettings(Properties.Settings.Default);
             manager.Initialize();
             InitializeComponent();
+            updateChecker = new WpfUpdateChecker(App.UPDATE_URL, this, App.UPDATE_MODE);
             msc = new MouseScreenCapture();
             msc.CaptureTick += new EventHandler(capture_Tick);
             ((INotifyCollectionChanged)lstHistory.Items).CollectionChanged += LastColors_CollectionChanged;
@@ -48,10 +47,8 @@ namespace Colora
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Check for updates
-#if !PORTABLE
-            manager.UpdateCheckUrl = "https://colora.sourceforge.io/update.xml";
-            manager.CheckForUpdates();
-#endif
+            updateChecker.CheckForUpdates();
+            // Set global shortcut
             setNewHotKey(Settings.PickColorShortcut);
             // Load color history
             if (Properties.Settings.Default.LatestColors != null)
@@ -153,7 +150,10 @@ namespace Colora
         {
             var baseUri = BaseUriHelper.GetBaseUri(this);
             BitmapSource img = new BitmapImage(new Uri(baseUri, @"/img/colora.png"));
-            manager.ShowAboutBox(img);
+            AboutBox aboutBox = new AboutBox(img);
+            aboutBox.Owner = this;
+            aboutBox.UpdateChecker = updateChecker;
+            aboutBox.Show();
         }
 
         private void LastColors_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -316,7 +316,7 @@ namespace Colora
         }
 #endregion
 
-#region Palette Editor
+        #region Palette Editor
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Palette palette = new Palette();
@@ -357,7 +357,7 @@ namespace Colora
         {
             CurrentColor.SetColor(e.NewColor);
         }
-#endregion
+        #endregion
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
