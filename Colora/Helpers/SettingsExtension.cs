@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace Colora
+namespace Colora.Helpers
 {
     public class SettingsExtension : Binding
     {

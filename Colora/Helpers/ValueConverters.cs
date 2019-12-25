@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Colora
+namespace Colora.Helpers
 {
     public class BoolInverter : IValueConverter
     {

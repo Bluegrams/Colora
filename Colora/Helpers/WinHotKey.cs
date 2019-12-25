@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace Colora.Capturing
+namespace Colora.Helpers
 {
     /// <summary>
     /// Wraps a global Windows hotkey.
@@ -31,6 +31,8 @@ namespace Colora.Capturing
         public Action<HotKey> Action { get; private set; }
         public int Id { get; set; }
 
+        public bool IsRegistered => hotKeyDict.ContainsKey(Id);
+
         public HotKey(KeyCombination keyCombination, Action<HotKey> action, bool register = true)
         {
             KeyCombination = keyCombination;
@@ -56,7 +58,8 @@ namespace Colora.Capturing
                 ComponentDispatcher.ThreadFilterMessage += new ThreadMessageEventHandler(componentDispatcherThreadFilterMessage);
             }
 
-            hotKeyDict.Add(Id, this);
+            if (result)
+                hotKeyDict.Add(Id, this);
 
             return result;
         }

@@ -10,7 +10,7 @@ using System.Drawing.Drawing2D;
 using Point = System.Windows.Point;
 using Color = System.Windows.Media.Color;
 
-namespace Colora.Capturing
+namespace Colora.Helpers
 {
     class MouseScreenCapture
     {
@@ -18,7 +18,18 @@ namespace Colora.Capturing
         private Bitmap screenBmp;
         private int captureSize;
 
+        public MouseScreenCapture(int ms = 40)
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, ms);
+            timer.Tick += new EventHandler(timer_Tick);
+            CaptureSize = 33;
+            CaptureBitmap = new Bitmap(100, 100);
+        }
+
         public event EventHandler CaptureTick;
+
+        public bool IsCapturing => timer.IsEnabled;
 
         /// <summary>
         /// The real pixel size captured which will be zoomed to 100px.
@@ -60,15 +71,6 @@ namespace Colora.Capturing
         }
 
         public Color PointerPixelColor { get; private set; }
-
-        public MouseScreenCapture()
-        {
-            timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
-            timer.Tick += new EventHandler(timer_Tick);
-            CaptureSize = 33;
-            CaptureBitmap = new Bitmap(100, 100);
-        }
 
         public void StartCapturing()
         {

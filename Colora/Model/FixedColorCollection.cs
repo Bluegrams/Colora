@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 
-namespace Colora
+namespace Colora.Model
 {
     /// <summary>
     /// An observable collection of fixed size that holds the last colors.

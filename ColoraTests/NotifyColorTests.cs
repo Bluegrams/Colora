@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Colora;
+using Colora.Model;
 using System;
 
 namespace Colora.Tests

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using System.Windows.Media;
 using System.Xml;
 
-namespace Colora.Palettes
+namespace Colora.Model
 {
     static class PaletteFile
     {

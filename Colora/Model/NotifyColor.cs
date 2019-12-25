@@ -1,8 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Media;
+using Colora.Helpers;
 
-namespace Colora
+namespace Colora.Model
 {
     public class NotifyColor : INotifyPropertyChanged
     {

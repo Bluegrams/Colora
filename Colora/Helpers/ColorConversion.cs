@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Colora
+namespace Colora.Helpers
 {
     /// <summary>
     /// Methods for converting color values between RGB, HSL, HSB and CMYK.

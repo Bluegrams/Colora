@@ -157,7 +157,7 @@ Error code: </value>
   </data>
   <data name="PaletteWindow_strInvalidFormat" xml:space="preserve">
     <value>Failed to open palette file. File format may be wrong. 
-Error code:</value>
+Error code: </value>
   </data>
   <data name="PaletteWindow_strNotSaved" xml:space="preserve">
     <value>The current color palette is unsaved. Continue?</value>
@@ -205,7 +205,7 @@ Error code:</value>
     <value>_View</value>
   </data>
   <data name="MainWindow_strColorSettings" xml:space="preserve">
-    <value>RGB, HSB and HSL Settings</value>
+    <value>More c_olor models</value>
   </data>
   <data name="MainWindow_strCopy" xml:space="preserve">
     <value>Copy</value>
@@ -225,14 +225,11 @@ Error code:</value>
   <data name="MainWindow_menGetUpdates" xml:space="preserve">
     <value>Get _Updates</value>
   </data>
-  <data name="Global_keyCtrl" xml:space="preserve">
-    <value>Ctrl</value>
-  </data>
   <data name="MainWindow_menColors" xml:space="preserve">
     <value>C_olors</value>
   </data>
   <data name="HotKeyInputWindow_grpHeader" xml:space="preserve">
-    <value>Select A New Keyboard Shortcut</value>
+    <value>Press the desired key combination</value>
   </data>
   <data name="MainWindow_menConfigureShortcut" xml:space="preserve">
     <value>Configure _Keyboard Shortcut...</value>
@@ -244,9 +241,6 @@ Error code:</value>
     <value>Registering shortcut '{0}' failed.
 This could be caused by another app using the same shortcut.</value>
   </data>
-  <data name="HotKeyInputWindow_strModifierRequired" xml:space="preserve">
-    <value>Please specify at least one modifier key (Control, Alt or Shift).</value>
-  </data>
   <data name="MainWindow_menIconBar" xml:space="preserve">
     <value>_Icon Bar</value>
   </data>
@@ -255,5 +249,8 @@ This could be caused by another app using the same shortcut.</value>
   </data>
   <data name="MainWindow_menDeleteHistoryItem" xml:space="preserve">
     <value>Delete Color</value>
+  </data>
+  <data name="MainWindow_strNoShortcut" xml:space="preserve">
+    <value>Error: No shortcut registered.</value>
   </data>
 </root>

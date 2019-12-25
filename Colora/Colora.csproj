@@ -93,14 +93,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Capturing\HotKeyInputWindow.xaml.cs">
+    <Compile Include="Helpers\KeyCombination.cs" />
+    <Compile Include="Helpers\KeyCombinationConverter.cs" />
+    <Compile Include="Model\ScreenPicker.cs" />
+    <Compile Include="View\HotKeyInputWindow.xaml.cs">
       <DependentUpon>HotKeyInputWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Capturing\KeyCombination.cs" />
-    <Compile Include="Capturing\WinHotKey.cs" />
-    <Compile Include="SettingsExtension.cs" />
-    <Compile Include="ValueConverters.cs" />
-    <Page Include="Capturing\HotKeyInputWindow.xaml">
+    <Compile Include="Helpers\WinHotKey.cs" />
+    <Compile Include="Helpers\SettingsExtension.cs" />
+    <Compile Include="Helpers\ValueConverters.cs" />
+    <Page Include="View\HotKeyInputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,31 +114,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ColorConversion.cs" />
+    <Compile Include="Helpers\ColorConversion.cs" />
     <Compile Include="CustomCommands.cs" />
-    <Compile Include="FixedColorCollection.cs" />
+    <Compile Include="Model\FixedColorCollection.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Palettes\ColorEdit.xaml">
+    <Page Include="View\ColorEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Palettes\PaletteWindow.xaml">
+    <Page Include="View\PaletteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Capturing\MouseScreenCapture.cs" />
-    <Compile Include="NotifyColor.cs" />
-    <Compile Include="Palettes\ColorEdit.xaml.cs">
+    <Compile Include="Helpers\MouseScreenCapture.cs" />
+    <Compile Include="Model\NotifyColor.cs" />
+    <Compile Include="View\ColorEdit.xaml.cs">
       <DependentUpon>ColorEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Palettes\Palette.cs" />
-    <Compile Include="Palettes\PaletteFile.cs" />
-    <Compile Include="Palettes\PaletteWindow.xaml.cs">
+    <Compile Include="Model\Palette.cs" />
+    <Compile Include="Model\PaletteFile.cs" />
+    <Compile Include="View\PaletteWindow.xaml.cs">
       <DependentUpon>PaletteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">

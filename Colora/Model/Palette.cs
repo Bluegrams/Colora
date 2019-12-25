@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
-namespace Colora.Palettes
+namespace Colora.Model
 {
     [Serializable]
     public class Palette

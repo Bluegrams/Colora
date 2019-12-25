@@ -97,15 +97,6 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ctrl.
-        /// </summary>
-        public static string Global_keyCtrl {
-            get {
-                return ResourceManager.GetString("Global_keyCtrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Global_strCancel {
@@ -115,20 +106,11 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select A New Keyboard Shortcut.
+        ///   Looks up a localized string similar to Press the desired key combination.
         /// </summary>
         public static string HotKeyInputWindow_grpHeader {
             get {
                 return ResourceManager.GetString("HotKeyInputWindow_grpHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please specify at least one modifier key (Control, Alt or Shift)..
-        /// </summary>
-        public static string HotKeyInputWindow_strModifierRequired {
-            get {
-                return ResourceManager.GetString("HotKeyInputWindow_strModifierRequired", resourceCulture);
             }
         }
         
@@ -340,7 +322,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RGB, HSB and HSL Settings.
+        ///   Looks up a localized string similar to More c_olor models.
         /// </summary>
         public static string MainWindow_strColorSettings {
             get {
@@ -364,6 +346,15 @@ namespace Colora.Properties {
         public static string MainWindow_strHotKeyFailed {
             get {
                 return ResourceManager.GetString("MainWindow_strHotKeyFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: No shortcut registered..
+        /// </summary>
+        public static string MainWindow_strNoShortcut {
+            get {
+                return ResourceManager.GetString("MainWindow_strNoShortcut", resourceCulture);
             }
         }
         
@@ -443,7 +434,7 @@ namespace Colora.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Failed to open palette file. File format may be wrong. 
-        ///Error code:.
+        ///Error code: .
         /// </summary>
         public static string PaletteWindow_strInvalidFormat {
             get {

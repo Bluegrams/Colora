@@ -4,23 +4,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Colora.Model;
 
-namespace Colora.Palettes
+namespace Colora.View
 {
     public partial class PaletteWindow : Window
     {
         private Palette palette;
         private bool isSaved = false, openedFile = false;
-
-        public static RoutedCommand EditColor => editColor;
-        public static RoutedUICommand editColor = new RoutedUICommand();
         
 
         public PaletteWindow(Window owner) : this(owner, new Palette()) {}
 
         public PaletteWindow(Window owner, Palette palette)
         {
-            editColor.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
             InitializeComponent();
             this.Owner = owner;
             Owner_LocationChanged(this, null);

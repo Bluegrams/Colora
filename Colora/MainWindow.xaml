@@ -4,9 +4,11 @@
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:p="clr-namespace:Colora.Properties"
         xmlns:local="clr-namespace:Colora"
+        xmlns:h="clr-namespace:Colora.Helpers"
         x:Name="mainWindow"
-        Title="Colora" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" FontSize="11.5" KeyDown="Window_KeyDown" 
-        Loaded="Window_Loaded" Closing="Window_Closing" Icon="img/colora.png" SnapsToDevicePixels="True">
+        Title="Colora" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="img/colora.png" SnapsToDevicePixels="True"
+        PreviewKeyDown="Window_KeyDown">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Control.Padding" Value="8,0"/>
@@ -17,6 +19,7 @@
         </Style>
     </Window.Resources>
     <Window.CommandBindings>
+        <CommandBinding Command="local:CustomCommands.PickFromScreen" Executed="PickFromScreen_Executed"/>
         <CommandBinding Command="local:CustomCommands.ColorDialog" Executed="SelectCommand_Executed"/>
         <CommandBinding Command="local:CustomCommands.MinimalSize" Executed="ScreenPickerVisible_Executed"/>
         <CommandBinding Command="local:CustomCommands.TopMost" Executed="TopMostCommand_Executed"/>
@@ -27,48 +30,52 @@
     <DockPanel KeyboardNavigation.TabNavigation="Local">
         <Menu DockPanel.Dock="Top" Background="#dddddd">
             <MenuItem Header="{x:Static p:Resources.MainWindow_menColors}" Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}" Command="local:CustomCommands.ColorDialog" 
-                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+D}"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}" Click="MenuPickScreen_Click" 
-                          InputGestureText="{local:Settings PickColorShortcut, Mode=OneWay}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}"
+                          Command="local:CustomCommands.PickFromScreen"
+                          InputGestureText="{Binding ScreenPicker.ShortcutKeys.DisplayString, Mode=OneWay}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}"
+                          Command="local:CustomCommands.ColorDialog"/>
                 <Separator/>
                 <MenuItem x:Name="menNewPalette" Header="{x:Static p:Resources.MainWindow_menNewPalette}" Command="New" />
                 <MenuItem x:Name="menDeleteLatest" Header="{x:Static p:Resources.MainWindow_menDeleteLatest}" Click="menDeleteLatest_Click"/>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MainWindow_menOptions}" Style="{StaticResource topMenuItem}">
-                <MenuItem x:Name="menConfigureShortcut" Header="{x:Static p:Resources.MainWindow_menConfigureShortcut}" Click="menConfigureShortcut_Click"/>
-            </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MainWindow_menView}" Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}"
-                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+M}" 
-                          IsChecked="{local:Settings ScreenPickerVisible}"
-                          IsCheckable="True"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menIconBar}"
-                          IsChecked="{local:Settings IconBarVisible}"
+                          IsChecked="{h:Settings IconBarVisible}"
+                          IsCheckable="True"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}"
+                          Command="local:CustomCommands.MinimalSize"
+                          IsChecked="{h:Settings ScreenPickerVisible}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_strColorSettings}"
+                          IsChecked="{h:Settings AdvancedColorsVisible}"
                           IsCheckable="True"/>
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menColorHistory}"
-                          IsChecked="{local:Settings ColorHistoryVisible}"
+                          IsChecked="{h:Settings ColorHistoryVisible}"
                           IsCheckable="True"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menPaletteEditor}" Command="local:CustomCommands.PaletteEditor"
-                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+P}"/>
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menPaletteEditor}"
+                          Command="local:CustomCommands.PaletteEditor"/>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menTopmost}" Command="local:CustomCommands.TopMost"
-                          InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+T}" 
+                <MenuItem Header="{x:Static p:Resources.MainWindow_menTopmost}"
+                          Command="local:CustomCommands.TopMost"
                           IsChecked="{Binding ElementName=mainWindow, Path=Topmost}"/>
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MainWindow_menOptions}" Style="{StaticResource topMenuItem}">
+                <MenuItem x:Name="menConfigureShortcut" Header="{x:Static p:Resources.MainWindow_menConfigureShortcut}" Click="menConfigureShortcut_Click"/>
             </MenuItem>
             <MenuItem Header="   _?   " Style="{StaticResource topMenuItem}">
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menAbout}" Command="Help"/>
             </MenuItem>
         </Menu>
         <DockPanel Style="{StaticResource toolBar}" DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="Local"
-                   Visibility="{local:Settings IconBarVisible, Converter={StaticResource boolToVis}}">
+                   Visibility="{h:Settings IconBarVisible, Converter={StaticResource boolToVis}}">
             
-            <ToggleButton x:Name="butPick" Checked="butPick_Checked" Unchecked="butPick_Unchecked" TabIndex="1"
+            <ToggleButton Command="local:CustomCommands.PickFromScreen" TabIndex="0"
+                          IsChecked="{Binding ScreenPicker.IsCapturing, Mode=OneWay}"
                           ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menPickScreen}, Converter={StaticResource UScoreConverter}}">
                 <icon:PackIconModern Kind="Crosshair" Width="20" Height="20"/>
             </ToggleButton>
             <Separator/>
-            <Button x:Name="butDialog" Command="local:CustomCommands.ColorDialog" TabIndex="0"
+            <Button x:Name="butDialog" Command="local:CustomCommands.ColorDialog" TabIndex="1"
                     ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}">
                 <icon:PackIconModern Kind="DrawPixelFillGrid"/>
             </Button>
@@ -84,84 +91,90 @@
             </Button>
         </DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Height="30" Background="#dddddd">
-            <Label x:Name="statInfo" Padding="0"/>
+            <Label x:Name="statInfo" Content="{Binding ScreenPicker.InformationString}" Padding="0"/>
         </StatusBar>
         <StackPanel>
-            <DockPanel>
-                <GroupBox x:Name="grpScreenPicker" Header="{x:Static p:Resources.MainWindow_grpScreenPicker}" IsEnabled="False"
-                          Visibility="{local:Settings ScreenPickerVisible, Converter={StaticResource boolToVis}, Mode=OneWay}">
-                    <StackPanel>
-                        <Border Height="92" Width="92" BorderThickness="1" BorderBrush="Black">
-                            <Canvas Height="90" Width="90">
-                                <Image x:Name="imgScreen"  Height="90" Width="90"/>
-                                <Line X1="45" X2="45" Y1="0" Y2="90" Stroke="Red"/>
-                                <Line X1="0" X2="90" Y1="45" Y2="45" Stroke="Red"/>
-                            </Canvas>
-                        </Border>
-                        <Label x:Name="lblScreenCoord">X: 0 | Y: 0</Label>
-                        <DockPanel>
-                            <Label Content="{Binding ElementName=sldZoom, Path=Value}" ContentStringFormat="{}{0}x"/>
-                            <Slider x:Name="sldZoom" Minimum="1" Maximum="5" Value="3" TickPlacement="BottomRight" IsSnapToTickEnabled="True" 
-                                    ValueChanged="sldZoom_ValueChanged"/>
-                        </DockPanel>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="{x:Static p:Resources.MainWindow_grpColorData}" Width="242" KeyboardNavigation.TabNavigation="Local">
-                    <Grid DataContext="{Binding CurrentColor}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Rectangle Grid.Row="0" x:Name="recColor" Fill="{Binding Brush}" Stroke="Black" StrokeThickness="1" Height="50" Width="230"/>
-                        <DockPanel Grid.Row="1" Margin="0,5">
-                            <Label Width="32">RGB</Label>
-                            <Button x:Name="butCopyRGB" DockPanel.Dock="Right" Click="butCopyRGB_Click" Content="{x:Static p:Resources.MainWindow_strCopy}"
+            <Grid>
+                <StackPanel x:Name="upperStack" Orientation="Horizontal"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <GroupBox Header="{x:Static p:Resources.MainWindow_grpScreenPicker}"
+                          DataContext="{Binding ScreenPicker}" IsEnabled="{Binding IsCapturing, Mode=OneWay}"
+                          Visibility="{h:Settings ScreenPickerVisible, Converter={StaticResource boolToVis}, Mode=OneWay}">
+                        <StackPanel>
+                            <Border Height="92" Width="92" BorderThickness="1" BorderBrush="Black">
+                                <Canvas Height="90" Width="90">
+                                    <Image Source="{Binding ScreenCaptureImage, Mode=OneWay}"  Height="90" Width="90"/>
+                                    <Line X1="45" X2="45" Y1="0" Y2="90" Stroke="Red"/>
+                                    <Line X1="0" X2="90" Y1="45" Y2="45" Stroke="Red"/>
+                                </Canvas>
+                            </Border>
+                            <Label Content="{Binding PositionString, Mode=OneWay}"/>
+                            <DockPanel>
+                                <Label Content="{Binding ElementName=sldZoom, Path=Value}" ContentStringFormat="{}{0}x"/>
+                                <Slider x:Name="sldZoom" Minimum="1" Maximum="5"
+                                    Value="{Binding ZoomValue}"
+                                    TickPlacement="BottomRight" IsSnapToTickEnabled="True"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="{x:Static p:Resources.MainWindow_grpColorData}" Width="242" KeyboardNavigation.TabNavigation="Local">
+                        <Grid DataContext="{Binding CurrentColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Grid.Row="0" x:Name="recColor" Fill="{Binding Brush}" Stroke="Black" StrokeThickness="1" Height="50" Width="230"/>
+                            <DockPanel Grid.Row="1" Margin="0,5">
+                                <Label Width="32">RGB</Label>
+                                <Button x:Name="butCopyRGB" DockPanel.Dock="Right" Click="butCopyRGB_Click" Content="{x:Static p:Resources.MainWindow_strCopy}"
                                     ToolTip="{x:Static p:Resources.MainWindow_strClipboard}" TabIndex="3"/>
-                            <Grid TextBox.TextChanged="Grid_TextChanged" TextBox.GotFocus="inputColor_GotFocus" 
+                                <Grid TextBox.TextChanged="Grid_TextChanged" TextBox.GotFocus="inputColor_GotFocus" 
                                   TextBox.LostFocus="inputColor_LostFocus" TextBox.PreviewTextInput="inputColor_PreviewTextInput">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="txtR" Grid.Column="0" Tag="Red" TabIndex="0">
+                                        <Binding Path="Red" Mode="OneWay"/>
+                                    </TextBox>
+                                    <TextBox x:Name="txtG" Grid.Column="1" Tag="Green" TabIndex="1">
+                                        <Binding Path="Green" Mode="OneWay"/>
+                                    </TextBox>
+                                    <TextBox x:Name="txtB" Grid.Column="2" Tag="Blue" TabIndex="2">
+                                        <Binding Path="Blue" Mode="OneWay"/>
+                                    </TextBox>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel Grid.Row="2" Margin="0,5">
+                                <Label Width="32">HEX</Label>
+                                <Button x:Name="butCopyHex" DockPanel.Dock="Right" Click="butCopyHex_Click" Content="{x:Static p:Resources.MainWindow_strCopy}"
+                                    ToolTip="{x:Static p:Resources.MainWindow_strClipboard}" TabIndex="5"/>
+                                <TextBox x:Name="txtHEX" CharacterCasing="Upper" GotFocus="inputColor_GotFocus" LostFocus="inputColor_LostFocus"
+                                     TextChanged="txtHEX_TextChanged" Tag="HexString" TabIndex="4">
+                                    <Binding Path="HexString" Mode="OneWay"/>
+                                </TextBox>
+                            </DockPanel>
+                            <Grid Grid.Row="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtR" Grid.Column="0" Tag="Red" TabIndex="0">
-                                    <Binding Path="Red" Mode="OneWay"/>
-                                </TextBox>
-                                <TextBox x:Name="txtG" Grid.Column="1" Tag="Green" TabIndex="1">
-                                    <Binding Path="Green" Mode="OneWay"/>
-                                </TextBox>
-                                <TextBox x:Name="txtB" Grid.Column="2" Tag="Blue" TabIndex="2">
-                                    <Binding Path="Blue" Mode="OneWay"/>
-                                </TextBox>
-                            </Grid>
-                        </DockPanel>
-                        <DockPanel Grid.Row="2" Margin="0,5">
-                            <Label Width="32">HEX</Label>
-                            <Button x:Name="butCopyHex" DockPanel.Dock="Right" Click="butCopyHex_Click" Content="{x:Static p:Resources.MainWindow_strCopy}"
-                                    ToolTip="{x:Static p:Resources.MainWindow_strClipboard}" TabIndex="5"/>
-                            <TextBox x:Name="txtHEX" CharacterCasing="Upper" GotFocus="inputColor_GotFocus" LostFocus="inputColor_LostFocus"
-                                     TextChanged="txtHEX_TextChanged" Tag="HexString" TabIndex="4">
-                                <Binding Path="HexString" Mode="OneWay"/>
-                            </TextBox>
-                        </DockPanel>
-                        <Grid Grid.Row="3">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="butAddLast" Grid.Column="0" ContentStringFormat="&#9661; {0}" TabIndex="6"
+                                <Button x:Name="butAddLast" Grid.Column="0" ContentStringFormat="&#9661; {0}" TabIndex="6"
                                     Content="{x:Static p:Resources.MainWindow_butAddLast}" Click="butAddLast_Click"/>
-                            <Button x:Name="butAddPalette" Grid.Column="1" ContentStringFormat="{}{0} &#9655;" TabIndex="7"
+                                <Button x:Name="butAddPalette" Grid.Column="1" ContentStringFormat="{}{0} &#9655;" TabIndex="7"
                                     Content="{x:Static p:Resources.MainWindow_butAddPalette}" Click="butAddPalette_Click" IsEnabled="False"/>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </GroupBox>
-            </DockPanel>
-            <Expander x:Name="expData" Grid.Row="3" Header="{x:Static p:Resources.MainWindow_strColorSettings}" MaxWidth="346"
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
+            <Expander Grid.Row="3" Header="{x:Static p:Resources.MainWindow_strColorSettings}"
+                      Width="{Binding ElementName=upperStack, Path=ActualWidth}"
                       DataContext="{Binding CurrentColor}"
-                      IsExpanded="{local:Settings AdvancedColorsVisible}">
+                      IsExpanded="{h:Settings AdvancedColorsVisible}">
                 <Expander.Resources>
                     <Style TargetType="{x:Type Slider}">
                         <Setter Property="IsSnapToTickEnabled" Value="True"/>
@@ -310,8 +323,9 @@
                     </TabItem>
                 </TabControl>
             </Expander>
-            <Expander x:Name="expHistory" Header="{x:Static p:Resources.MainWindow_grpLatest}" MaxWidth="346"
-                      IsExpanded="{local:Settings ColorHistoryVisible}">
+            <Expander Header="{x:Static p:Resources.MainWindow_grpLatest}"
+                      Width="{Binding ElementName=upperStack, Path=ActualWidth}"
+                      IsExpanded="{h:Settings ColorHistoryVisible}">
                 <StackPanel>
                     <ListBox x:Name="lstHistory" Height="75" SelectionChanged="lstHistory_SelectionChanged"
                              ScrollViewer.HorizontalScrollBarVisibility="Visible"
@@ -339,8 +353,9 @@
                             </ContextMenu>
                         </ListBox.ContextMenu>
                     </ListBox>
-                    <StackPanel x:Name="panButtonsBottom" Orientation="Horizontal" Margin="0,5,0,0">
-                        <Button x:Name="butNewPalette" Padding="5,1" Command="New" Content="{x:Static p:Resources.MainWindow_menNewPalette}"/>
+                    <StackPanel Orientation="Horizontal" Margin="4">
+                        <Button x:Name="butNewPalette" Padding="5,1" Command="New"
+                                Content="{x:Static p:Resources.MainWindow_menNewPalette}"/>
                         <Button x:Name="butDeleteLatest" Padding="5,1" Click="menDeleteLatest_Click"
                                 Content="{x:Static p:Resources.MainWindow_menDeleteLatest}"/>
                     </StackPanel>

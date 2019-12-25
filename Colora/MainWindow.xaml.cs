@@ -10,9 +10,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Bluegrams.Application;
 using Bluegrams.Application.WPF;
-using Colora.Palettes;
-using Colora.Capturing;
+using Colora.Model;
 using Colora.Properties;
+using Colora.View;
 
 namespace Colora
 {
@@ -20,12 +20,12 @@ namespace Colora
     {
         private WpfWindowManager manager;
         private WpfUpdateChecker updateChecker;
-        private MouseScreenCapture msc;
         private FixedColorCollection colorHistory;
         private PaletteWindow palWindow;
-        private HotKey pickColorHotKey;
 
         public NotifyColor CurrentColor { get; set; }
+
+        public ScreenPicker ScreenPicker { get; set; }
 
         public MainWindow()
         {
@@ -36,8 +36,6 @@ namespace Colora
             manager.Initialize();
             InitializeComponent();
             updateChecker = new WpfUpdateChecker(App.UPDATE_URL, this, App.UPDATE_MODE);
-            msc = new MouseScreenCapture();
-            msc.CaptureTick += new EventHandler(capture_Tick);
             ((INotifyCollectionChanged)lstHistory.Items).CollectionChanged += LastColors_CollectionChanged;
         }
 
@@ -45,10 +43,6 @@ namespace Colora
         {
             // Check for updates
             updateChecker.CheckForUpdates();
-            // Set global shortcut
-            if (Settings.Default.PickColorShortcut == null)
-                Settings.Default.PickColorShortcut = new KeyCombination(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
-            setNewHotKey(Settings.Default.PickColorShortcut);
             // Load color history
             if (Settings.Default.LatestColors != null)
             {
@@ -59,52 +53,34 @@ namespace Colora
             lstHistory.ItemsSource = colorHistory;
             // Set current color
             CurrentColor = new NotifyColor(Settings.Default.CurrentColor);
+            // Init screen picker
+            ScreenPicker = new ScreenPicker(CurrentColor);
+            ScreenPicker.PositionSelected += ScreenPicker_PositionSelected;
+            // Set data context
             this.DataContext = this;
-            Settings.Default.PropertyChanged += Settings_PropertyChanged;
-            adjustBoxSizes();
         }
 
-        private void onHotKeyPressed(HotKey hotKey)
+        private void ScreenPicker_PositionSelected(object sender, EventArgs e)
         {
-            if ((bool)butPick.IsChecked)
-                colorHistory.Insert(0, CurrentColor.WpfColor);
-            else
-                butPick.IsChecked = true;
+            colorHistory.Insert(0, CurrentColor.WpfColor);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                butPick.IsChecked = false;
-                colorHistory.Insert(0, CurrentColor.WpfColor);
+                if (ScreenPicker.IsCapturing)
+                {
+                    ScreenPicker.Capture();
+                    colorHistory.Insert(0, CurrentColor.WpfColor);
+                }
+                e.Handled = true;
             }
         }
 
-        private void adjustBoxSizes()
+        private void PickFromScreen_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            // Adjust some UI sizes if screen picker is hidden.
-            if (!Settings.Default.ScreenPickerVisible)
-            {
-                expData.MaxWidth = 242;
-                expHistory.MaxWidth = 242;
-            }
-            else
-            {
-                expData.MaxWidth = 346;
-                expHistory.MaxWidth = 346;
-            }
-        }
-
-        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Settings.Default.ScreenPickerVisible))
-                adjustBoxSizes();
-        }
-
-        private void ScreenPickerVisible_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Settings.Default.ScreenPickerVisible = !Settings.Default.ScreenPickerVisible;
+            ScreenPicker.Capture();
         }
 
         private void SelectCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -118,6 +94,11 @@ namespace Colora
             }
         }
 
+        private void ScreenPickerVisible_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Settings.Default.ScreenPickerVisible = !Settings.Default.ScreenPickerVisible;
+        }
+
         private void TopMostCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.Topmost = !this.Topmost;
@@ -127,23 +108,11 @@ namespace Colora
 
         private void menConfigureShortcut_Click(object sender, RoutedEventArgs e)
         {
-            HotKeyInputWindow hotKeyInput = new HotKeyInputWindow(pickColorHotKey.KeyCombination);
+            HotKeyInputWindow hotKeyInput = new HotKeyInputWindow(ScreenPicker.ShortcutKeys);
             hotKeyInput.Owner = this;
             if (hotKeyInput.ShowDialog() == true)
             {
-                setNewHotKey(hotKeyInput.HotKey);
-            }
-        }
-
-        private void setNewHotKey(KeyCombination keys)
-        {
-            pickColorHotKey?.Unregister();
-            Settings.Default.PickColorShortcut = keys;
-            pickColorHotKey = new HotKey(keys, onHotKeyPressed, false);
-            if (!pickColorHotKey.Register())
-            {
-                MessageBox.Show(String.Format(Properties.Resources.MainWindow_strHotKeyFailed, keys),
-                    "Colora - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ScreenPicker.ShortcutKeys = hotKeyInput.SelectedHotKey;
             }
         }
 
@@ -164,30 +133,6 @@ namespace Colora
                 lstHistory.ScrollIntoView(e.NewItems[0]);
                 lstHistory.SelectedItem = e.NewItems[0];
             }
-        }
-
-        private void butPick_Checked(object sender, RoutedEventArgs e)
-        {
-            grpScreenPicker.IsEnabled = true;
-            msc.StartCapturing();
-            statInfo.Content = String.Format(Properties.Resources.MainWindow_strShortcut,
-                pickColorHotKey.KeyCombination);
-            System.Diagnostics.Debug.WriteLine("Start: " + msc.MouseScreenPosition);       
-        }
-
-        private void butPick_Unchecked(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Stop: " + msc.MouseScreenPosition);
-            msc.StopCapturing();
-            grpScreenPicker.IsEnabled = false;
-            statInfo.Content = "";
-        }
-
-        private void capture_Tick(object sender, EventArgs e)
-        {
-            imgScreen.Source = msc.CaptureBitmapImage;
-            CurrentColor.SetColor(msc.PointerPixelColor);
-            lblScreenCoord.Content = String.Format("X: {0} | Y: {1}", msc.MouseScreenPosition.X, msc.MouseScreenPosition.Y);
         }
         
         private void inputColor_GotFocus(object sender, RoutedEventArgs e)
@@ -247,22 +192,14 @@ namespace Colora
         private void butAddLast_Click(object sender, RoutedEventArgs e)
         {
             colorHistory.Insert(0, CurrentColor.WpfColor);
+            Settings.Default.ColorHistoryVisible = true;
+            lstHistory.SelectedIndex = 0;
+            lstHistory.Focus();
         }
 
         private void butAddPalette_Click(object sender, RoutedEventArgs e)
         {
             palWindow?.InsertColor(CurrentColor.WpfColor);
-        }
-
-        private void MenuPickScreen_Click(object sender, RoutedEventArgs e)
-        {
-            butPick.IsChecked = !butPick.IsChecked;
-        }
-
-        private void sldZoom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (msc == null) return;
-            msc.CaptureSize = 100 / (int)sldZoom.Value;
         }
 
         private void menDeleteHistoryItem_Click(object sender, RoutedEventArgs e)
@@ -324,7 +261,7 @@ namespace Colora
         {
             Clipboard.SetText(String.Format("{0}, {1}, {2}, {3}", txtCyan.Text, txtMagenta.Text, txtYellow.Text, txtKey.Text));
         }
-#endregion
+        #endregion
 
         #region Palette Editor
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -371,7 +308,7 @@ namespace Colora
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            pickColorHotKey?.Dispose();
+            ScreenPicker.Dispose();
             Settings.Default.LatestColors = colorHistory;
             Settings.Default.CurrentColor = CurrentColor.WpfColor;
             Settings.Default.Save();

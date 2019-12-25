@@ -1,9 +1,9 @@
-﻿<Window x:Class="Colora.Palettes.PaletteWindow"
+﻿<Window x:Class="Colora.View.PaletteWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Colora.Palettes"
+        xmlns:local="clr-namespace:Colora"
         xmlns:p="clr-namespace:Colora.Properties"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.PaletteWindow_Title}" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize" 
@@ -12,7 +12,7 @@
         <CommandBinding Command="Save" Executed="SaveCommand_Executed"/>
         <CommandBinding Command="Open" Executed="OpenCommand_Executed"/>
         <CommandBinding Command="Delete" Executed="DeleteColor_Executed"/>
-        <CommandBinding Command="local:PaletteWindow.EditColor" Executed="EditColor_Executed"/>
+        <CommandBinding Command="local:CustomCommands.PaletteEditColor" Executed="EditColor_Executed"/>
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="#dddddd">
@@ -39,8 +39,7 @@
                         <Border HorizontalAlignment="Stretch" BorderThickness="1" Height="25" BorderBrush="Black" Margin="0" Background="{Binding Path=Hex}">
                             <Border.ContextMenu>
                                 <ContextMenu HorizontalContentAlignment="Stretch">
-                                    <MenuItem Header="{x:Static p:Resources.PaletteWindow_menEdit}" Command="local:PaletteWindow.EditColor" 
-                                              InputGestureText="{Binding Source={x:Static p:Resources.Global_keyCtrl}, StringFormat={}{0}+E}"/>
+                                    <MenuItem Header="{x:Static p:Resources.PaletteWindow_menEdit}" Command="local:CustomCommands.PaletteEditColor"/>
                                     <MenuItem Command="Delete"/>
                                 </ContextMenu>
                             </Border.ContextMenu>

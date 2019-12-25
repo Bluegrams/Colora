@@ -196,7 +196,7 @@ Fehlercode: </value>
     <value>Bildschirmauswahl</value>
   </data>
   <data name="MainWindow_strColorSettings" xml:space="preserve">
-    <value>RGB, HSB und HSL Einstellungen</value>
+    <value>Weitere Farbm_odelle</value>
   </data>
   <data name="MainWindow_strCopy" xml:space="preserve">
     <value>Kopie</value>
@@ -225,20 +225,14 @@ Fehlercode: </value>
   <data name="MainWindow_menGetUpdates" xml:space="preserve">
     <value>_Updates bekommen</value>
   </data>
-  <data name="Global_keyCtrl" xml:space="preserve">
-    <value>Strg</value>
-  </data>
   <data name="MainWindow_menColors" xml:space="preserve">
     <value>_Farben</value>
   </data>
   <data name="HotKeyInputWindow_grpHeader" xml:space="preserve">
-    <value>Tastenkombination auswählen</value>
+    <value>Gewünschte Tastenkombination eingeben</value>
   </data>
   <data name="MainWindow_menConfigureShortcut" xml:space="preserve">
     <value>Tastaturkürzel einstellen...</value>
-  </data>
-  <data name="HotKeyInputWindow_strModifierRequired" xml:space="preserve">
-    <value>Bitte wählen Sie mindestens eine Modifizierer-Taste (Strg, Alt oder Umschalt).</value>
   </data>
   <data name="MainWindow_strHotKeyFailed" xml:space="preserve">
     <value>Registrieren der Tastenkombination '{0}' fehlgeschlagen.
@@ -255,5 +249,8 @@ Dies könnte durch eine andere App mit derselben Tastenkombination verursacht se
   </data>
   <data name="MainWindow_menDeleteHistoryItem" xml:space="preserve">
     <value>Farbe löschen</value>
+  </data>
+  <data name="MainWindow_strNoShortcut" xml:space="preserve">
+    <value>Fehler: Keine Tastenkombination registriert.</value>
   </data>
 </root>

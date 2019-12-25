@@ -26,9 +26,9 @@ namespace Colora.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public global::Colora.FixedColorCollection LatestColors {
+        public global::Colora.Model.FixedColorCollection LatestColors {
             get {
-                return ((global::Colora.FixedColorCollection)(this["LatestColors"]));
+                return ((global::Colora.Model.FixedColorCollection)(this["LatestColors"]));
             }
             set {
                 this["LatestColors"] = value;
@@ -62,7 +62,7 @@ namespace Colora.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ColorHistoryVisible {
             get {
                 return ((bool)(this["ColorHistoryVisible"]));
@@ -86,7 +86,7 @@ namespace Colora.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AdvancedColorsVisible {
             get {
                 return ((bool)(this["AdvancedColorsVisible"]));
@@ -110,12 +110,13 @@ namespace Colora.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::Colora.Capturing.KeyCombination PickColorShortcut {
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Alt+C")]
+        public global::Colora.Helpers.KeyCombination GlobalShortcut {
             get {
-                return ((global::Colora.Capturing.KeyCombination)(this["PickColorShortcut"]));
+                return ((global::Colora.Helpers.KeyCombination)(this["GlobalShortcut"]));
             }
             set {
-                this["PickColorShortcut"] = value;
+                this["GlobalShortcut"] = value;
             }
         }
     }

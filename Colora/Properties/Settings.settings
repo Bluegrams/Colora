@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Colora.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="LatestColors" Roaming="true" Type="Colora.FixedColorCollection" Scope="User">
+    <Setting Name="LatestColors" Roaming="true" Type="Colora.Model.FixedColorCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CurrentColor" Roaming="true" Type="System.Windows.Media.Color" Scope="User">
@@ -12,19 +12,19 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ColorHistoryVisible" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ScreenPickerVisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="AdvancedColorsVisible" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ColorHistoryLength" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="PickColorShortcut" Type="Colora.Capturing.KeyCombination" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="GlobalShortcut" Type="Colora.Helpers.KeyCombination" Scope="User">
+      <Value Profile="(Default)">Ctrl+Alt+C</Value>
     </Setting>
   </Settings>
 </SettingsFile>

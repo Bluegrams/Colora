@@ -1,12 +1,12 @@
 ﻿<Application x:Class="Colora.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Colora"
+             xmlns:h="clr-namespace:Colora.Helpers"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVis"/>
-        <local:BoolInverter x:Key="boolInverter"/>
-        <local:ResTextConverter x:Key="UScoreConverter"/>
+        <h:BoolInverter x:Key="boolInverter"/>
+        <h:ResTextConverter x:Key="UScoreConverter"/>
         <Style TargetType="Image">
             <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"/>
         </Style>
