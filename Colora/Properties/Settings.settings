@@ -26,5 +26,11 @@
     <Setting Name="GlobalShortcut" Type="Colora.Helpers.KeyCombination" Scope="User">
       <Value Profile="(Default)">Ctrl+Alt+C</Value>
     </Setting>
+    <Setting Name="PaletteWindowSnap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ClipboardAutoCopy" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

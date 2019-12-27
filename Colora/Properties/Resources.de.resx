@@ -162,7 +162,7 @@ Fehlercode: </value>
   <data name="PaletteWindow_strNotSaved" xml:space="preserve">
     <value>Die aktuelle Palette ist nicht gespeichert. Trotzdem fortfahren?</value>
   </data>
-  <data name="PaletteWindow_Title" xml:space="preserve">
+  <data name="Global_PaletteEditor" xml:space="preserve">
     <value>Paletteneditor</value>
   </data>
   <data name="MainWindow_strShortcut" xml:space="preserve">
@@ -192,7 +192,7 @@ Fehlercode: </value>
   <data name="MainWindow_grpColorData" xml:space="preserve">
     <value>Farbdaten</value>
   </data>
-  <data name="MainWindow_grpScreenPicker" xml:space="preserve">
+  <data name="Global_ScreenPicker" xml:space="preserve">
     <value>Bildschirmauswahl</value>
   </data>
   <data name="MainWindow_strColorSettings" xml:space="preserve">
@@ -207,7 +207,7 @@ Fehlercode: </value>
   <data name="MainWindow_butAddPalette" xml:space="preserve">
     <value>Zu Palette</value>
   </data>
-  <data name="MainWindow_grpLatest" xml:space="preserve">
+  <data name="Global_ColorHistory" xml:space="preserve">
     <value>Verlauf</value>
   </data>
   <data name="MainWindow_menTopmost" xml:space="preserve">
@@ -232,7 +232,7 @@ Fehlercode: </value>
     <value>Gewünschte Tastenkombination eingeben</value>
   </data>
   <data name="MainWindow_menConfigureShortcut" xml:space="preserve">
-    <value>Tastaturkürzel einstellen...</value>
+    <value>Tastatur_kürzel ändern</value>
   </data>
   <data name="MainWindow_strHotKeyFailed" xml:space="preserve">
     <value>Registrieren der Tastenkombination '{0}' fehlgeschlagen.
@@ -252,5 +252,29 @@ Dies könnte durch eine andere App mit derselben Tastenkombination verursacht se
   </data>
   <data name="MainWindow_strNoShortcut" xml:space="preserve">
     <value>Fehler: Keine Tastenkombination registriert.</value>
+  </data>
+  <data name="SettingsWindow_Title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Global_strSubmit" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SettingsWindow_General" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="Global_strChange" xml:space="preserve">
+    <value>Ändern</value>
+  </data>
+  <data name="SettingsWindow_strClipboardAutoCopy" xml:space="preserve">
+    <value>Automatisch in Zwischenablage kopieren</value>
+  </data>
+  <data name="SettingsWindow_strPaletteWindowSnap" xml:space="preserve">
+    <value>Paletteneditor an Hauptfenster anheften</value>
+  </data>
+  <data name="SettingsWindow_strGlobalShortcut" xml:space="preserve">
+    <value>Globales Tastaturkürzel:</value>
+  </data>
+  <data name="SettingsWindow_strColorHistoryLength" xml:space="preserve">
+    <value>Max. Elemente:</value>
   </data>
 </root>

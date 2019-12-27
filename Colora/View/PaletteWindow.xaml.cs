@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Colora.Model;
+using Colora.Properties;
 
 namespace Colora.View
 {
@@ -42,8 +43,11 @@ namespace Colora.View
 
         private void Owner_LocationChanged(object sender, EventArgs e)
         {
-            this.Left = Owner.Left + Owner.Width;
-            this.Top = Owner.Top;
+            if (Settings.Default.PaletteWindowSnap)
+            {
+                this.Left = Owner.Left + Owner.Width;
+                this.Top = Owner.Top;
+            }
         }
 
         private void lstPalette_SelectionChanged(object sender, SelectionChangedEventArgs e)

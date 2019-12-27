@@ -101,6 +101,9 @@ namespace Colora.Model
             globalHotKey?.Unregister();
             Settings.Default.GlobalShortcut = keys;
             globalHotKey = new HotKey(keys, onHotKeyPressed, false);
+            // don't register the new hot key if it's equal to None
+            if (keys.Equals(KeyCombination.None))
+                return;
             if (!globalHotKey.Register())
             {
                 MessageBox.Show(String.Format(Resources.MainWindow_strHotKeyFailed, keys),

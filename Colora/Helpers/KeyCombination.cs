@@ -25,7 +25,14 @@ namespace Colora.Helpers
             this.Key = key;
             this.Modifiers = modifiers;
             Keys formsKeys = ToWinFormsKeys(key, modifiers);
-            this.DisplayString = wFormsKeyConv.ConvertToString(formsKeys);
+            this.DisplayString = keysToString(formsKeys);
+        }
+
+        private string keysToString(Keys keys)
+        {
+            string str = wFormsKeyConv.ConvertToString(keys);
+            // use a little hack to get a nicer representation
+            return str.Replace("Oemcomma", ",").Replace("OemPeriod", ".");
         }
 
         public override bool Equals(object obj)

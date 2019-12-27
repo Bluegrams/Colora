@@ -29,6 +29,10 @@ namespace Colora
             typeof(CustomCommands),
             new InputGestureCollection() { CreateGesture(Key.E, ModifierKeys.Control) });
 
+        public static readonly RoutedCommand Settings = new RoutedCommand("Settings",
+            typeof(CustomCommands),
+            new InputGestureCollection() { CreateGesture(Key.OemComma, ModifierKeys.Control) });
+
         internal static KeyGesture CreateGesture(Key key, ModifierKeys modifiers)
         {
             return (KeyGesture)(new KeyCombination(key, modifiers));

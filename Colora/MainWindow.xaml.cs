@@ -60,10 +60,15 @@ namespace Colora
             this.DataContext = this;
         }
 
-        private void ScreenPicker_PositionSelected(object sender, EventArgs e)
+        private void colorCaptured()
         {
             colorHistory.Insert(0, CurrentColor.WpfColor);
+            if (Settings.Default.ClipboardAutoCopy)
+                Clipboard.SetText(CurrentColor.HexString);
         }
+
+        private void ScreenPicker_PositionSelected(object sender, EventArgs e)
+            => colorCaptured();
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -72,7 +77,7 @@ namespace Colora
                 if (ScreenPicker.IsCapturing)
                 {
                     ScreenPicker.Capture();
-                    colorHistory.Insert(0, CurrentColor.WpfColor);
+                    colorCaptured();
                 }
                 e.Handled = true;
             }
@@ -107,12 +112,16 @@ namespace Colora
         private void menDeleteLatest_Click(object sender, RoutedEventArgs e) => colorHistory.Clear();
 
         private void menConfigureShortcut_Click(object sender, RoutedEventArgs e)
+            => App.ConfigureShortcut(this, ScreenPicker);
+
+        private void SettingsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            HotKeyInputWindow hotKeyInput = new HotKeyInputWindow(ScreenPicker.ShortcutKeys);
-            hotKeyInput.Owner = this;
-            if (hotKeyInput.ShowDialog() == true)
+            SettingsWindow settingsWindow = new SettingsWindow(ScreenPicker);
+            settingsWindow.Owner = this;
+            if (settingsWindow.ShowDialog().GetValueOrDefault())
             {
-                ScreenPicker.ShortcutKeys = hotKeyInput.SelectedHotKey;
+                // apply changed settings
+                colorHistory.MaxLength = Settings.Default.ColorHistoryLength;
             }
         }
 
@@ -123,7 +132,7 @@ namespace Colora
             AboutBox aboutBox = new AboutBox(img);
             aboutBox.Owner = this;
             aboutBox.UpdateChecker = updateChecker;
-            aboutBox.Show();
+            aboutBox.ShowDialog();
         }
 
         private void LastColors_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

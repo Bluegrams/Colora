@@ -25,6 +25,7 @@
         <CommandBinding Command="local:CustomCommands.TopMost" Executed="TopMostCommand_Executed"/>
         <CommandBinding Command="New" Executed="NewCommand_Executed"/>
         <CommandBinding Command="local:CustomCommands.PaletteEditor" Executed="PaletteCommand_Executed"/>
+        <CommandBinding Command="local:CustomCommands.Settings" Executed="SettingsCommand_Executed"/>
         <CommandBinding Command="Help" Executed="HelpCommand_Executed"/>
     </Window.CommandBindings>
     <DockPanel KeyboardNavigation.TabNavigation="Local">
@@ -61,6 +62,9 @@
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MainWindow_menOptions}" Style="{StaticResource topMenuItem}">
                 <MenuItem x:Name="menConfigureShortcut" Header="{x:Static p:Resources.MainWindow_menConfigureShortcut}" Click="menConfigureShortcut_Click"/>
+                <Separator/>
+                <MenuItem Header="{x:Static p:Resources.SettingsWindow_Title}"
+                          Command="local:CustomCommands.Settings"/>
             </MenuItem>
             <MenuItem Header="   _?   " Style="{StaticResource topMenuItem}">
                 <MenuItem Header="{x:Static p:Resources.MainWindow_menAbout}" Command="Help"/>
@@ -86,7 +90,7 @@
             </ToggleButton>
             <Separator DockPanel.Dock="Right"/>
             <Button DockPanel.Dock="Right" Command="local:CustomCommands.PaletteEditor" 
-                    ToolTip="{x:Static p:Resources.PaletteWindow_Title}" TabIndex="2">
+                    ToolTip="{x:Static p:Resources.Global_PaletteEditor}" TabIndex="2">
                 <icon:PackIconModern Kind="Paper" Width="20" Height="20"/>
             </Button>
         </DockPanel>
@@ -97,7 +101,7 @@
             <Grid>
                 <StackPanel x:Name="upperStack" Orientation="Horizontal"
                             HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <GroupBox Header="{x:Static p:Resources.MainWindow_grpScreenPicker}"
+                    <GroupBox Header="{x:Static p:Resources.Global_ScreenPicker}"
                           DataContext="{Binding ScreenPicker}" IsEnabled="{Binding IsCapturing, Mode=OneWay}"
                           Visibility="{h:Settings ScreenPickerVisible, Converter={StaticResource boolToVis}, Mode=OneWay}">
                         <StackPanel>
@@ -323,7 +327,7 @@
                     </TabItem>
                 </TabControl>
             </Expander>
-            <Expander Header="{x:Static p:Resources.MainWindow_grpLatest}"
+            <Expander Header="{x:Static p:Resources.Global_ColorHistory}"
                       Width="{Binding ElementName=upperStack, Path=ActualWidth}"
                       IsExpanded="{h:Settings ColorHistoryVisible}">
                 <StackPanel>

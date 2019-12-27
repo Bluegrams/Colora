@@ -1,0 +1,70 @@
+﻿<Window x:Class="Colora.View.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:h="clr-namespace:Colora.Helpers"
+        xmlns:p="clr-namespace:Colora.Properties"
+        Title="{x:Static p:Resources.SettingsWindow_Title}" Height="320" Width="320"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+            <Setter Property="Padding" Value="2,4"/>
+            <Setter Property="Margin" Value="0,6,0,0"/>
+        </Style>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="4"/>
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Margin" Value="4"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <DockPanel Margin="4" DockPanel.Dock="Bottom" LastChildFill="False">
+            <Button Content="{x:Static p:Resources.Global_strCancel}"
+                    DockPanel.Dock="Right" MinWidth="80"
+                    IsCancel="True"/>
+            <Button Content="{x:Static p:Resources.Global_strSubmit}"
+                    DockPanel.Dock="Right" MinWidth="80"
+                    Click="SubmitButton_Click" IsDefault="True"/>
+        </DockPanel>
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="{x:Static p:Resources.SettingsWindow_General}">
+                <StackPanel>
+                    <GroupBox Header="{x:Static p:Resources.Global_ScreenPicker}">
+                        <StackPanel>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Left"
+                                       Content="{x:Static p:Resources.SettingsWindow_strGlobalShortcut}"/>
+                                <Button DockPanel.Dock="Right" Content="{x:Static p:Resources.Global_strChange}"
+                                        Click="ChangeShortcutButton_Click"/>
+                                <Label Content="{h:Settings GlobalShortcut, Mode=OneWay}"/>
+                            </DockPanel>
+                            <CheckBox Content="{x:Static p:Resources.SettingsWindow_strClipboardAutoCopy}"
+                                      IsChecked="{h:Settings ClipboardAutoCopy, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="{x:Static p:Resources.Global_ColorHistory}">
+                        <DockPanel>
+                            <Label DockPanel.Dock="Left" Content="{x:Static p:Resources.SettingsWindow_strColorHistoryLength}"/>
+                            <Label DockPanel.Dock="Right" Width="25"
+                                   HorizontalContentAlignment="Center"
+                                   Content="{Binding ElementName=slideHistory, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Slider x:Name="slideHistory" VerticalAlignment="Center"
+                                    Minimum="2" Maximum="24" TickFrequency="2" IsSnapToTickEnabled="True"
+                                    TickPlacement="BottomRight"
+                                    Value="{h:Settings ColorHistoryLength, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="{x:Static p:Resources.Global_PaletteEditor}">
+                        <CheckBox Content="{x:Static p:Resources.SettingsWindow_strPaletteWindowSnap}"
+                                  IsChecked="{h:Settings PaletteWindowSnap, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

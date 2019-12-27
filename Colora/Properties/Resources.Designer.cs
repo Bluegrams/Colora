@@ -97,11 +97,56 @@ namespace Colora.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color History.
+        /// </summary>
+        public static string Global_ColorHistory {
+            get {
+                return ResourceManager.GetString("Global_ColorHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Palette Editor.
+        /// </summary>
+        public static string Global_PaletteEditor {
+            get {
+                return ResourceManager.GetString("Global_PaletteEditor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen Picker.
+        /// </summary>
+        public static string Global_ScreenPicker {
+            get {
+                return ResourceManager.GetString("Global_ScreenPicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Global_strCancel {
             get {
                 return ResourceManager.GetString("Global_strCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change.
+        /// </summary>
+        public static string Global_strChange {
+            get {
+                return ResourceManager.GetString("Global_strChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string Global_strSubmit {
+            get {
+                return ResourceManager.GetString("Global_strSubmit", resourceCulture);
             }
         }
         
@@ -151,24 +196,6 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Color History.
-        /// </summary>
-        public static string MainWindow_grpLatest {
-            get {
-                return ResourceManager.GetString("MainWindow_grpLatest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Screen Picker.
-        /// </summary>
-        public static string MainWindow_grpScreenPicker {
-            get {
-                return ResourceManager.GetString("MainWindow_grpScreenPicker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A_bout.
         /// </summary>
         public static string MainWindow_menAbout {
@@ -205,7 +232,7 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure _Keyboard Shortcut....
+        ///   Looks up a localized string similar to Change _Keyboard Shortcut.
         /// </summary>
         public static string MainWindow_menConfigureShortcut {
             get {
@@ -452,11 +479,56 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Palette Editor.
+        ///   Looks up a localized string similar to General.
         /// </summary>
-        public static string PaletteWindow_Title {
+        public static string SettingsWindow_General {
             get {
-                return ResourceManager.GetString("PaletteWindow_Title", resourceCulture);
+                return ResourceManager.GetString("SettingsWindow_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically copy to clipboard.
+        /// </summary>
+        public static string SettingsWindow_strClipboardAutoCopy {
+            get {
+                return ResourceManager.GetString("SettingsWindow_strClipboardAutoCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max. items:.
+        /// </summary>
+        public static string SettingsWindow_strColorHistoryLength {
+            get {
+                return ResourceManager.GetString("SettingsWindow_strColorHistoryLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global shortcut:.
+        /// </summary>
+        public static string SettingsWindow_strGlobalShortcut {
+            get {
+                return ResourceManager.GetString("SettingsWindow_strGlobalShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap palette editor to main window.
+        /// </summary>
+        public static string SettingsWindow_strPaletteWindowSnap {
+            get {
+                return ResourceManager.GetString("SettingsWindow_strPaletteWindowSnap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsWindow_Title {
+            get {
+                return ResourceManager.GetString("SettingsWindow_Title", resourceCulture);
             }
         }
     }

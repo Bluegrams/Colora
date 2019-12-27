@@ -119,5 +119,29 @@ namespace Colora.Properties {
                 this["GlobalShortcut"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PaletteWindowSnap {
+            get {
+                return ((bool)(this["PaletteWindowSnap"]));
+            }
+            set {
+                this["PaletteWindowSnap"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClipboardAutoCopy {
+            get {
+                return ((bool)(this["ClipboardAutoCopy"]));
+            }
+            set {
+                this["ClipboardAutoCopy"] = value;
+            }
+        }
     }
 }

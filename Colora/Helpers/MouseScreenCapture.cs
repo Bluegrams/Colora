@@ -18,7 +18,7 @@ namespace Colora.Helpers
         private Bitmap screenBmp;
         private int captureSize;
 
-        public MouseScreenCapture(int ms = 40)
+        public MouseScreenCapture(int ms = 50)
         {
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, ms);
