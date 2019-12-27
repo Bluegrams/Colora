@@ -223,6 +223,12 @@ namespace Colora
                 CurrentColor.SetFromRGB((byte)sldR.Value, (byte)sldG.Value, (byte)sldB.Value);
         }
 
+        private void rgbfSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (((UIElement)e.Source).IsFocused)
+                CurrentColor.SetFromRGB(sldRf.Value, sldGf.Value, sldBf.Value);
+        }
+
         private void hsbSlider_ValueChanged(object sender, RoutedEventArgs e)
         {
             if (((UIElement)e.Source).IsFocused)

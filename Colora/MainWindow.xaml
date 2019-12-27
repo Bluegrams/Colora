@@ -189,7 +189,8 @@
                 <TabControl Grid.IsSharedSizeScope="True">
                     <TabControl.Resources>
                         <Style TargetType="Label">
-                            <Setter Property="Width" Value="30"/>
+                            <Setter Property="Width" Value="32"/>
+                            <Setter Property="Padding" Value="4,5"/>
                         </Style>
                     </TabControl.Resources>
                     <TabItem Header="RGB">
@@ -197,23 +198,55 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*" SharedSizeGroup="f"/>
                             </Grid.RowDefinitions>
-                            <StackPanel Slider.ValueChanged="rgbSlider_ValueChanged">
-                                <DockPanel>
-                                    <Label>R</Label>
-                                    <Label DockPanel.Dock="Right" Content="{Binding ElementName=sldR, Path=Value}"/>
-                                    <Slider x:Name="sldR" Maximum="255" Value="{Binding Red, Mode=OneWay}"/>
-                                </DockPanel>
-                                <DockPanel>
-                                    <Label>G</Label>
-                                    <Label DockPanel.Dock="Right" Content="{Binding ElementName=sldG, Path=Value}"/>
-                                    <Slider x:Name="sldG" Maximum="255" Value="{Binding Green, Mode=OneWay}"/>
-                                </DockPanel>
-                                <DockPanel>
-                                    <Label>B</Label>
-                                    <Label DockPanel.Dock="Right" Content="{Binding ElementName=sldB, Path=Value}"/>
-                                    <Slider x:Name="sldB" Maximum="255" Value="{Binding Blue, Mode=OneWay}"/>
-                                </DockPanel>
+                            <StackPanel>
+                                <!-- RGB 0-255 -->
+                                <StackPanel Slider.ValueChanged="rgbSlider_ValueChanged"
+                                        Visibility="{h:Settings RGBRangeFloat, Mode=OneWay, Converter={StaticResource invBoolToVis}}">
+                                    <DockPanel>
+                                        <Label>R</Label>
+                                        <Label DockPanel.Dock="Right" Content="{Binding ElementName=sldR, Path=Value}"/>
+                                        <Slider x:Name="sldR" Maximum="255" Value="{Binding Red, Mode=OneWay}"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label>G</Label>
+                                        <Label DockPanel.Dock="Right" Content="{Binding ElementName=sldG, Path=Value}"/>
+                                        <Slider x:Name="sldG" Maximum="255" Value="{Binding Green, Mode=OneWay}"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label>B</Label>
+                                        <Label DockPanel.Dock="Right" Content="{Binding ElementName=sldB, Path=Value}"/>
+                                        <Slider x:Name="sldB" Maximum="255" Value="{Binding Blue, Mode=OneWay}"/>
+                                    </DockPanel>
+                                </StackPanel>
+                                <!-- RGB 0-1 -->
+                                <StackPanel Slider.ValueChanged="rgbfSlider_ValueChanged"
+                                            Visibility="{h:Settings RGBRangeFloat, Mode=OneWay, Converter={StaticResource boolToVis}}">
+                                    <DockPanel>
+                                        <Label>R</Label>
+                                        <Label DockPanel.Dock="Right"
+                                               Content="{Binding ElementName=sldRf, Path=Value, Converter={StaticResource dRound}}"/>
+                                        <Slider x:Name="sldRf" Maximum="1" Value="{Binding RedF, Mode=OneWay}"
+                                                TickFrequency="0.01"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label>G</Label>
+                                        <Label DockPanel.Dock="Right"
+                                               Content="{Binding ElementName=sldGf, Path=Value, Converter={StaticResource dRound}}"/>
+                                        <Slider x:Name="sldGf" Maximum="1" Value="{Binding GreenF, Mode=OneWay}"
+                                                TickFrequency="0.01"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label>B</Label>
+                                        <Label DockPanel.Dock="Right"
+                                               Content="{Binding ElementName=sldBf, Path=Value, Converter={StaticResource dRound}}"/>
+                                        <Slider x:Name="sldBf" Maximum="1" Value="{Binding BlueF, Mode=OneWay}"
+                                                TickFrequency="0.01"/>
+                                    </DockPanel>
+                                </StackPanel>
                                 <DockPanel LastChildFill="False">
+                                    <CheckBox Content="{x:Static p:Resources.MainWindow_chkRGBRange}"
+                                              IsChecked="{h:Settings RGBRangeFloat}"
+                                              VerticalAlignment="Center" Margin="4,0"/>
                                     <Button Padding="5,1" DockPanel.Dock="Right" Click="butCopyRGB_Click" 
                                             Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
                                 </DockPanel>

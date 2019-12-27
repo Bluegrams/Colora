@@ -187,6 +187,15 @@ namespace Colora.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Range [0, 1].
+        /// </summary>
+        public static string MainWindow_chkRGBRange {
+            get {
+                return ResourceManager.GetString("MainWindow_chkRGBRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color Data.
         /// </summary>
         public static string MainWindow_grpColorData {

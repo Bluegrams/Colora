@@ -7,6 +7,8 @@
         <BooleanToVisibilityConverter x:Key="boolToVis"/>
         <h:BoolInverter x:Key="boolInverter"/>
         <h:ResTextConverter x:Key="UScoreConverter"/>
+        <h:InverseBoolToVisibilityConverter x:Key="invBoolToVis"/>
+        <h:DoubleRoundingConverter x:Key="dRound"/>
         <Style TargetType="Image">
             <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"/>
         </Style>

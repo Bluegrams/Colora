@@ -143,5 +143,17 @@ namespace Colora.Properties {
                 this["ClipboardAutoCopy"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RGBRangeFloat {
+            get {
+                return ((bool)(this["RGBRangeFloat"]));
+            }
+            set {
+                this["RGBRangeFloat"] = value;
+            }
+        }
     }
 }

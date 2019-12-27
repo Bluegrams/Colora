@@ -277,4 +277,7 @@ This could be caused by another app using the same shortcut.</value>
   <data name="SettingsWindow_strPaletteWindowSnap" xml:space="preserve">
     <value>Snap palette editor to main window</value>
   </data>
+  <data name="MainWindow_chkRGBRange" xml:space="preserve">
+    <value>Range [0, 1]</value>
+  </data>
 </root>

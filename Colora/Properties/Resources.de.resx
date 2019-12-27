@@ -277,4 +277,7 @@ Dies könnte durch eine andere App mit derselben Tastenkombination verursacht se
   <data name="SettingsWindow_strColorHistoryLength" xml:space="preserve">
     <value>Max. Elemente:</value>
   </data>
+  <data name="MainWindow_chkRGBRange" xml:space="preserve">
+    <value>Bereich [0, 1]</value>
+  </data>
 </root>
