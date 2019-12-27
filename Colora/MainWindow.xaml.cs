@@ -54,7 +54,7 @@ namespace Colora
             // Set current color
             CurrentColor = new NotifyColor(Settings.Default.CurrentColor);
             // Init screen picker
-            ScreenPicker = new ScreenPicker(CurrentColor);
+            ScreenPicker = new ScreenPicker(CurrentColor, imgScreen);
             ScreenPicker.PositionSelected += ScreenPicker_PositionSelected;
             // Set data context
             this.DataContext = this;
@@ -128,7 +128,7 @@ namespace Colora
         private void HelpCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var baseUri = BaseUriHelper.GetBaseUri(this);
-            BitmapSource img = new BitmapImage(new Uri(baseUri, @"/img/colora.png"));
+            BitmapSource img = new BitmapImage(new Uri(baseUri, @"/img/icon.png"));
             AboutBox aboutBox = new AboutBox(img);
             aboutBox.Owner = this;
             aboutBox.UpdateChecker = updateChecker;

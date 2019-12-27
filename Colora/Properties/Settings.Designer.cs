@@ -155,5 +155,29 @@ namespace Colora.Properties {
                 this["RGBRangeFloat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public byte ScreenPickerZoom {
+            get {
+                return ((byte)(this["ScreenPickerZoom"]));
+            }
+            set {
+                this["ScreenPickerZoom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Single")]
+        public global::Colora.Model.ColorSamplingMode ColorSamplingMode {
+            get {
+                return ((global::Colora.Model.ColorSamplingMode)(this["ColorSamplingMode"]));
+            }
+            set {
+                this["ColorSamplingMode"] = value;
+            }
+        }
     }
 }

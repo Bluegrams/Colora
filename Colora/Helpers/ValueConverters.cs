@@ -18,6 +18,38 @@ namespace Colora.Helpers
         }
     }
 
+    public class EnumDescriptionConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Enum enumValue)
+                return enumValue.GetDescription();
+            else return String.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class EnumToBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value.GetType().IsEnum && parameter.GetType().IsEnum)
+            {
+                return (int)value == (int)parameter;
+            }
+            else return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return parameter;
+        }
+    }
+
     public class ResTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

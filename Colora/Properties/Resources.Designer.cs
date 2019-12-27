@@ -187,6 +187,24 @@ namespace Colora.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string MainWindow_butDeleteHistory {
+            get {
+                return ResourceManager.GetString("MainWindow_butDeleteHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Palette.
+        /// </summary>
+        public static string MainWindow_butNewPalette {
+            get {
+                return ResourceManager.GetString("MainWindow_butNewPalette", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Range [0, 1].
         /// </summary>
         public static string MainWindow_chkRGBRange {
@@ -232,11 +250,20 @@ namespace Colora.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C_olors.
+        ///   Looks up a localized string similar to _Tools.
         /// </summary>
         public static string MainWindow_menColors {
             get {
                 return ResourceManager.GetString("MainWindow_menColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color _Sampling Area.
+        /// </summary>
+        public static string MainWindow_menColorSampling {
+            get {
+                return ResourceManager.GetString("MainWindow_menColorSampling", resourceCulture);
             }
         }
         
@@ -327,6 +354,42 @@ namespace Colora.Properties {
         public static string MainWindow_menPickScreen {
             get {
                 return ResourceManager.GetString("MainWindow_menPickScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average (3x3 pixels).
+        /// </summary>
+        public static string MainWindow_menSampling3x3 {
+            get {
+                return ResourceManager.GetString("MainWindow_menSampling3x3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average (5x5 pixels).
+        /// </summary>
+        public static string MainWindow_menSampling5x5 {
+            get {
+                return ResourceManager.GetString("MainWindow_menSampling5x5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Precise (1 pixel).
+        /// </summary>
+        public static string MainWindow_menSamplingSingle {
+            get {
+                return ResourceManager.GetString("MainWindow_menSamplingSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_ettings.
+        /// </summary>
+        public static string MainWindow_menSettings {
+            get {
+                return ResourceManager.GetString("MainWindow_menSettings", resourceCulture);
             }
         }
         

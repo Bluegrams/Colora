@@ -6,6 +6,8 @@
     <Application.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVis"/>
         <h:BoolInverter x:Key="boolInverter"/>
+        <h:EnumDescriptionConverter x:Key="enumDescr"/>
+        <h:EnumToBoolConverter x:Key="enumBool"/>
         <h:ResTextConverter x:Key="UScoreConverter"/>
         <h:InverseBoolToVisibilityConverter x:Key="invBoolToVis"/>
         <h:DoubleRoundingConverter x:Key="dRound"/>

@@ -23,7 +23,7 @@ namespace Colora.Helpers
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, ms);
             timer.Tick += new EventHandler(timer_Tick);
-            CaptureSize = 33;
+            CaptureSize = 100;
             CaptureBitmap = new Bitmap(100, 100);
         }
 
@@ -45,7 +45,12 @@ namespace Colora.Helpers
             }
         }
 
-        public Point MouseScreenPosition { get { return new Point(Control.MousePosition.X, Control.MousePosition.Y); } }
+        /// <summary>
+        /// The number of pixels in each direction to include for the sampled color.
+        /// </summary>
+        public byte ColorSampleWindow { get; set; }
+
+        public Point MouseScreenPosition => new Point(Control.MousePosition.X, Control.MousePosition.Y);
 
         /// <summary>
         /// The captured area from screen.
@@ -96,6 +101,25 @@ namespace Colora.Helpers
             }
         }
 
+        // this method is *very* slow for large windows
+        private Color sampleColor()
+        {
+            int r = 0, g = 0, b = 0, t = 0;
+            int center = CaptureSize / 2;
+            for (int x = -ColorSampleWindow; x <= ColorSampleWindow; x++)
+            {
+                for (int y = -ColorSampleWindow; y <= ColorSampleWindow; y++)
+                {
+                    var col = screenBmp.GetPixel(center + x, center + y);
+                    r += col.R;
+                    g += col.G;
+                    b += col.B;
+                    t++;
+                }
+            }
+            return Color.FromRgb((byte)(r / t), (byte)(g / t), (byte)(b / t));
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             updateScreenBmp();
@@ -106,10 +130,8 @@ namespace Colora.Helpers
                 g.DrawImage(screenBmp, new Rectangle(0, 0, 100, 100),
                     new Rectangle(0, 0, screenBmp.Width, screenBmp.Height), GraphicsUnit.Pixel);
             }
-            System.Drawing.Color drawing_Col = screenBmp.GetPixel(CaptureSize / 2, CaptureSize / 2);
-            PointerPixelColor = Color.FromRgb(drawing_Col.R, drawing_Col.G, drawing_Col.B);
-            if (CaptureTick != null)
-                CaptureTick(this, new EventArgs());
+            PointerPixelColor = sampleColor();
+            CaptureTick?.Invoke(this, new EventArgs());
         }
     }
 }

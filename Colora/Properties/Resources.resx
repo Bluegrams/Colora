@@ -226,7 +226,7 @@ Error code: </value>
     <value>Get _Updates</value>
   </data>
   <data name="MainWindow_menColors" xml:space="preserve">
-    <value>C_olors</value>
+    <value>_Tools</value>
   </data>
   <data name="HotKeyInputWindow_grpHeader" xml:space="preserve">
     <value>Press the desired key combination</value>
@@ -279,5 +279,26 @@ This could be caused by another app using the same shortcut.</value>
   </data>
   <data name="MainWindow_chkRGBRange" xml:space="preserve">
     <value>Range [0, 1]</value>
+  </data>
+  <data name="MainWindow_menColorSampling" xml:space="preserve">
+    <value>Color _Sampling Area</value>
+  </data>
+  <data name="MainWindow_menSettings" xml:space="preserve">
+    <value>S_ettings</value>
+  </data>
+  <data name="MainWindow_menSampling5x5" xml:space="preserve">
+    <value>Average (5x5 pixels)</value>
+  </data>
+  <data name="MainWindow_menSamplingSingle" xml:space="preserve">
+    <value>Precise (1 pixel)</value>
+  </data>
+  <data name="MainWindow_menSampling3x3" xml:space="preserve">
+    <value>Average (3x3 pixels)</value>
+  </data>
+  <data name="MainWindow_butNewPalette" xml:space="preserve">
+    <value>New Palette</value>
+  </data>
+  <data name="MainWindow_butDeleteHistory" xml:space="preserve">
+    <value>Delete</value>
   </data>
 </root>

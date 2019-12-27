@@ -35,5 +35,11 @@
     <Setting Name="RGBRangeFloat" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ScreenPickerZoom" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="ColorSamplingMode" Type="Colora.Model.ColorSamplingMode" Scope="User">
+      <Value Profile="(Default)">Single</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

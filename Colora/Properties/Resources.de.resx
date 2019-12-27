@@ -226,7 +226,7 @@ Fehlercode: </value>
     <value>_Updates bekommen</value>
   </data>
   <data name="MainWindow_menColors" xml:space="preserve">
-    <value>_Farben</value>
+    <value>_Tools</value>
   </data>
   <data name="HotKeyInputWindow_grpHeader" xml:space="preserve">
     <value>Gewünschte Tastenkombination eingeben</value>
@@ -279,5 +279,26 @@ Dies könnte durch eine andere App mit derselben Tastenkombination verursacht se
   </data>
   <data name="MainWindow_chkRGBRange" xml:space="preserve">
     <value>Bereich [0, 1]</value>
+  </data>
+  <data name="MainWindow_menColorSampling" xml:space="preserve">
+    <value>Farbau_swahlbereich</value>
+  </data>
+  <data name="MainWindow_menSettings" xml:space="preserve">
+    <value>_Einstellungen</value>
+  </data>
+  <data name="MainWindow_menSamplingSingle" xml:space="preserve">
+    <value>Präzise (1 Pixel)</value>
+  </data>
+  <data name="MainWindow_menSampling3x3" xml:space="preserve">
+    <value>Durchschnitt (3x3 Pixel)</value>
+  </data>
+  <data name="MainWindow_menSampling5x5" xml:space="preserve">
+    <value>Durchschnitt (5x5 Pixel)</value>
+  </data>
+  <data name="MainWindow_butNewPalette" xml:space="preserve">
+    <value>Neue Palette</value>
+  </data>
+  <data name="MainWindow_butDeleteHistory" xml:space="preserve">
+    <value>Löschen</value>
   </data>
 </root>

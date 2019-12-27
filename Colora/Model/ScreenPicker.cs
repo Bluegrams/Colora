@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 using Colora.Helpers;
 using Colora.Properties;
 
@@ -15,17 +15,20 @@ namespace Colora.Model
     {
         MouseScreenCapture msc;
         NotifyColor currentColor;
+        Image image;
         HotKey globalHotKey;
 
-        public ScreenPicker(NotifyColor currentColor)
+        public ScreenPicker(NotifyColor currentColor, Image image)
         {
             this.msc = new MouseScreenCapture();
             this.msc.CaptureTick += Msc_CaptureTick;
             this.currentColor = currentColor;
+            this.image = image;
+            // init values from settings
+            this.ZoomValue = Settings.Default.ScreenPickerZoom;
+            this.ColorSamplingMode = Settings.Default.ColorSamplingMode;
             this.ShortcutKeys = Settings.Default.GlobalShortcut;
         }
-
-        public BitmapImage ScreenCaptureImage { get; private set; }
 
         /// <summary>
         /// Indicates whether capturing is on.
@@ -40,12 +43,27 @@ namespace Colora.Model
         /// <summary>
         /// The screen picker zoom.
         /// </summary>
-        public double ZoomValue
+        public byte ZoomValue
         {
-            get => Math.Floor(100.0 / msc.CaptureSize);
+            get => (byte)Math.Floor(100.0 / msc.CaptureSize);
             set
             {
-                msc.CaptureSize = 100 / (int)value;
+                msc.CaptureSize = 100 / value;
+                Settings.Default.ScreenPickerZoom = value;
+                propertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Specifies how the current color is sampled from screen.
+        /// </summary>
+        public ColorSamplingMode ColorSamplingMode
+        {
+            get => Settings.Default.ColorSamplingMode;
+            set
+            {
+                msc.ColorSampleWindow = (byte)value;
+                Settings.Default.ColorSamplingMode = value;
                 propertyChanged();
             }
         }
@@ -120,7 +138,7 @@ namespace Colora.Model
 
         private void Msc_CaptureTick(object sender, EventArgs e)
         {
-            ScreenCaptureImage = msc.CaptureBitmapImage;
+            image.Source = msc.CaptureBitmapImage;
             currentColor.SetColor(msc.PointerPixelColor);
             // invoke PropertyChanged for all properties
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
