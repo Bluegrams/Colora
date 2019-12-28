@@ -18,7 +18,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ColoraSetup", "ColoraSetup\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{EFFDC75F-7CB3-48A6-B559-412712BEC612}"
 	ProjectSection(SolutionItems) = preProject
-		img\colora_full.PNG = img\colora_full.PNG
+		img\colora_modes_small.png = img\colora_modes_small.png
 		img\icon.png = img\icon.png
 	EndProjectSection
 EndProject

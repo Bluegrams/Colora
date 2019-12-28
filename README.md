@@ -13,7 +13,7 @@ The color picker is tested to work with Windows 10 and DPI scaling. Picked color
 RGB, Hex, HSB and HSL. The integrated palette tool then allows you to create color palettes from selected colors or the history of picked colors.
 
 <p align="center">
-<img src="img/colora_full.PNG" height="350px">
+<img src="img/colora_modes_small.png" height="350px">
 </p>
 
 ## Features

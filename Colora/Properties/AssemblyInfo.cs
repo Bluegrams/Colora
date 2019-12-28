@@ -3,20 +3,18 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using Bluegrams.Application.Attributes;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
 [assembly: AssemblyTitle("Colora - Color Picker and Converter")]
 [assembly: AssemblyDescription("Color Picker and Converter for Windows")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bluegrams")]
 [assembly: AssemblyProduct("Colora")]
-[assembly: AssemblyCopyright("Copyright ©  2019 Bluegrams")]
+[assembly: AssemblyCopyright("Copyright © 2019 Bluegrams")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ProductWebsite("https://colora.sourceforge.io")]
 [assembly: ProductLicense("LICENSE.txt", "BSD-3-Clause")]
+[assembly: CompanyWebsite("http://bluegrams.com", "Bluegrams")]
 [assembly: SupportedCultures("en", "de")]
 
 #if PORTABLE
@@ -49,5 +47,5 @@ using Bluegrams.Application.Attributes;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: AssemblyVersion("0.2.0")]
-[assembly: AssemblyFileVersion("0.2.0")]
+[assembly: AssemblyVersion("0.3.0")]
+[assembly: AssemblyFileVersion("0.3.0")]
