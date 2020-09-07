@@ -118,190 +118,191 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Global_strCancel" xml:space="preserve">
-    <value>Abbrechen</value>
+    <value>Cancelar</value>
   </data>
   <data name="ColorEdit_lblColor" xml:space="preserve">
-    <value>Farbwert</value>
+    <value>Valor del color</value>
   </data>
   <data name="ColorEdit_lblComment" xml:space="preserve">
-    <value>Kommentar</value>
+    <value>Comentario</value>
   </data>
   <data name="ColorEdit_strInvalidColor" xml:space="preserve">
-    <value>Fehler: Der angegebene Farbwert ist ungültig.</value>
+    <value>Error: El color obtenido no es válido.</value>
   </data>
   <data name="ColorEdit_Title" xml:space="preserve">
-    <value>Farbe bearbeiten</value>
+    <value>Editar Color</value>
   </data>
   <data name="PaletteWindow_menEdit" xml:space="preserve">
-    <value>Farbe _editieren</value>
+    <value>_Editar Color</value>
   </data>
   <data name="PaletteWindow_menFile" xml:space="preserve">
-    <value>_Datei</value>
+    <value>_Archivo</value>
   </data>
   <data name="PaletteWindow_menOpen" xml:space="preserve">
-    <value>Palette _öffnen</value>
+    <value>_Abrir Paleta</value>
   </data>
   <data name="PaletteWindow_menSave" xml:space="preserve">
-    <value>Palette _speichern</value>
+    <value>_Guardar Paleta</value>
   </data>
   <data name="PaletteWindow_strDelete" xml:space="preserve">
-    <value>Die ausgewählte Farbe wird entfernt.</value>
+    <value>El color seleccionado se eliminará de la paleta.</value>
   </data>
   <data name="PaletteWindow_strErrorOpen" xml:space="preserve">
-    <value>Fehler beim Lesen der Palette aus Datei.
-Fehlercode: </value>
+    <value>No se pudo leer la paleta desde el archivo especificado.
+Código de error:</value>
   </data>
   <data name="PaletteWindow_strErrorSave" xml:space="preserve">
-    <value>Fehler beim Speichern der angegebenen Palette.
-Fehlercode: </value>
+    <value>No se pudo guardar la paleta en el archivo especificado.
+Código de error:</value>
   </data>
   <data name="PaletteWindow_strInvalidFormat" xml:space="preserve">
-    <value>Fehler beim Öffnen der Farbpalette.
-Fehlercode: </value>
+    <value>No se pudo abrir el archivo de paleta. El formato puede ser incorrecto.
+Código de error: </value>
   </data>
   <data name="PaletteWindow_strNotSaved" xml:space="preserve">
-    <value>Die aktuelle Palette ist nicht gespeichert. Trotzdem fortfahren?</value>
+    <value>La paleta de colores actual no está guardada.
+¿Continuar de todos modos?</value>
   </data>
   <data name="Global_PaletteEditor" xml:space="preserve">
-    <value>Paletteneditor</value>
-  </data>
-  <data name="MainWindow_strShortcut" xml:space="preserve">
-    <value>{0} zum Auswählen einer Farbe.</value>
-  </data>
-  <data name="MainWindow_menAbout" xml:space="preserve">
-    <value>_Über</value>
-  </data>
-  <data name="MainWindow_menColorDialog" xml:space="preserve">
-    <value>_Farbdialog öffnen</value>
-  </data>
-  <data name="MainWindow_menMinimalSize" xml:space="preserve">
-    <value>_Bildschirmauswahl</value>
-  </data>
-  <data name="MainWindow_menNewPalette" xml:space="preserve">
-    <value>_Neue Palette aus Verlauf</value>
-  </data>
-  <data name="MainWindow_menOptions" xml:space="preserve">
-    <value>_Optionen</value>
-  </data>
-  <data name="MainWindow_menPickScreen" xml:space="preserve">
-    <value>Bild_schirmauswahl</value>
-  </data>
-  <data name="MainWindow_menView" xml:space="preserve">
-    <value>_Ansicht</value>
-  </data>
-  <data name="MainWindow_grpColorData" xml:space="preserve">
-    <value>Farbdaten</value>
-  </data>
-  <data name="Global_ScreenPicker" xml:space="preserve">
-    <value>Bildschirmauswahl</value>
-  </data>
-  <data name="MainWindow_strColorSettings" xml:space="preserve">
-    <value>Weitere Farbm_odelle</value>
-  </data>
-  <data name="MainWindow_strCopy" xml:space="preserve">
-    <value>Kopie</value>
+    <value>Editor de paletas</value>
   </data>
   <data name="MainWindow_butAddLast" xml:space="preserve">
-    <value>Zu Verlauf</value>
+    <value>Añadir al historial</value>
   </data>
   <data name="MainWindow_butAddPalette" xml:space="preserve">
-    <value>Zu Palette</value>
+    <value>Añadir a la paleta</value>
+  </data>
+  <data name="MainWindow_grpColorData" xml:space="preserve">
+    <value>Información del color</value>
   </data>
   <data name="Global_ColorHistory" xml:space="preserve">
-    <value>Verlauf</value>
+    <value>Historial de colores</value>
+  </data>
+  <data name="Global_ScreenPicker" xml:space="preserve">
+    <value>Selector en pantalla</value>
+  </data>
+  <data name="MainWindow_menAbout" xml:space="preserve">
+    <value>A_cerca de…</value>
+  </data>
+  <data name="MainWindow_menColorDialog" xml:space="preserve">
+    <value>Abrir diálogo de _color</value>
+  </data>
+  <data name="MainWindow_menMinimalSize" xml:space="preserve">
+    <value>_Selector de pantalla</value>
+  </data>
+  <data name="MainWindow_menNewPalette" xml:space="preserve">
+    <value>_Nueva paleta desde el historial</value>
+  </data>
+  <data name="MainWindow_menOptions" xml:space="preserve">
+    <value>_Opciones</value>
+  </data>
+  <data name="MainWindow_menPickScreen" xml:space="preserve">
+    <value>Obtener desde la _pantalla</value>
   </data>
   <data name="MainWindow_menTopmost" xml:space="preserve">
-    <value>Fenster _anpinnen</value>
+    <value>Mantener en _primer plano</value>
+  </data>
+  <data name="MainWindow_menView" xml:space="preserve">
+    <value>_Ver</value>
+  </data>
+  <data name="MainWindow_strColorSettings" xml:space="preserve">
+    <value>Más modelos de c_olor</value>
+  </data>
+  <data name="MainWindow_strCopy" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="MainWindow_strShortcut" xml:space="preserve">
+    <value>{0} elegir colores de la pantalla.</value>
   </data>
   <data name="MainWindow_strClipboard" xml:space="preserve">
-    <value>In Zwischenablage</value>
+    <value>Copiar al portapapeles</value>
   </data>
   <data name="MainWindow_menDeleteLatest" xml:space="preserve">
-    <value>Verlauf _löschen</value>
+    <value>Limpiar _historial</value>
   </data>
   <data name="MainWindow_menPaletteEditor" xml:space="preserve">
-    <value>_Paletteneditor</value>
+    <value>Editor de _Paletas</value>
   </data>
   <data name="MainWindow_menGetUpdates" xml:space="preserve">
-    <value>_Updates bekommen</value>
+    <value>O_btener actualizaciones</value>
   </data>
   <data name="MainWindow_menColors" xml:space="preserve">
-    <value>_Tools</value>
+    <value>_Herramientas</value>
   </data>
   <data name="HotKeyInputWindow_grpHeader" xml:space="preserve">
-    <value>Gewünschte Tastenkombination eingeben</value>
+    <value>Presione la combinación de teclas deseada</value>
   </data>
   <data name="MainWindow_menConfigureShortcut" xml:space="preserve">
-    <value>Tastatur_kürzel ändern</value>
-  </data>
-  <data name="MainWindow_strHotKeyFailed" xml:space="preserve">
-    <value>Registrieren der Tastenkombination '{0}' fehlgeschlagen.
-Dies könnte durch eine andere App mit derselben Tastenkombination verursacht sein.</value>
+    <value>Cambiar combinación de _teclado</value>
   </data>
   <data name="HotKeyInputWindow_Title" xml:space="preserve">
-    <value>Tastaturkürzel für Bildschirmauswahl</value>
+    <value>Combinación de teclas para selector de color en pantalla</value>
+  </data>
+  <data name="MainWindow_strHotKeyFailed" xml:space="preserve">
+    <value>No se pudo registrar la combinación de teclas '{0}'.
+Esto podría deberse a que otra aplicación utiliza la misma combinación.</value>
   </data>
   <data name="MainWindow_menIconBar" xml:space="preserve">
-    <value>_Iconmenü</value>
+    <value>_Barra de iconos</value>
   </data>
   <data name="MainWindow_menColorHistory" xml:space="preserve">
-    <value>_Verlauf</value>
+    <value>_Historial de color</value>
   </data>
   <data name="MainWindow_menDeleteHistoryItem" xml:space="preserve">
-    <value>Farbe löschen</value>
+    <value>Eliminar color</value>
   </data>
   <data name="MainWindow_strNoShortcut" xml:space="preserve">
-    <value>Fehler: Keine Tastenkombination registriert.</value>
+    <value>Error: combinación de teclas no registrada.</value>
   </data>
   <data name="SettingsWindow_Title" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Opciones</value>
   </data>
   <data name="Global_strSubmit" xml:space="preserve">
-    <value>OK</value>
+    <value>Aceptar</value>
   </data>
   <data name="SettingsWindow_General" xml:space="preserve">
-    <value>Allgemein</value>
-  </data>
-  <data name="Global_strChange" xml:space="preserve">
-    <value>Ändern</value>
+    <value>General</value>
   </data>
   <data name="SettingsWindow_strClipboardAutoCopy" xml:space="preserve">
-    <value>Automatisch in Zwischenablage kopieren</value>
-  </data>
-  <data name="SettingsWindow_strPaletteWindowSnap" xml:space="preserve">
-    <value>Paletteneditor an Hauptfenster anheften</value>
+    <value>Copiar automáticamente al portapapeles</value>
   </data>
   <data name="SettingsWindow_strGlobalShortcut" xml:space="preserve">
-    <value>Globales Tastaturkürzel:</value>
+    <value>Combinación de teclas globales:</value>
+  </data>
+  <data name="Global_strChange" xml:space="preserve">
+    <value>Cambiar</value>
   </data>
   <data name="SettingsWindow_strColorHistoryLength" xml:space="preserve">
-    <value>Max. Elemente:</value>
+    <value>Elementos máx.:</value>
+  </data>
+  <data name="SettingsWindow_strPaletteWindowSnap" xml:space="preserve">
+    <value>Ajustar el editor de paleta a la ventana principal</value>
   </data>
   <data name="MainWindow_chkRGBRange" xml:space="preserve">
-    <value>Bereich [0, 1]</value>
+    <value>Rango [0, 1]</value>
   </data>
   <data name="MainWindow_menColorSampling" xml:space="preserve">
-    <value>Farbau_swahlbereich</value>
+    <value>Área de _muestreo de color</value>
   </data>
   <data name="MainWindow_menSettings" xml:space="preserve">
-    <value>_Einstellungen</value>
-  </data>
-  <data name="MainWindow_menSamplingSingle" xml:space="preserve">
-    <value>Präzise (1 Pixel)</value>
-  </data>
-  <data name="MainWindow_menSampling3x3" xml:space="preserve">
-    <value>Durchschnitt (3x3 Pixel)</value>
+    <value>O_pciones</value>
   </data>
   <data name="MainWindow_menSampling5x5" xml:space="preserve">
-    <value>Durchschnitt (5x5 Pixel)</value>
+    <value>Promedio (5x5 pixeles)</value>
+  </data>
+  <data name="MainWindow_menSamplingSingle" xml:space="preserve">
+    <value>Preciso (1 pixel)</value>
+  </data>
+  <data name="MainWindow_menSampling3x3" xml:space="preserve">
+    <value>Promedio (3x3 pixeles)</value>
   </data>
   <data name="MainWindow_butNewPalette" xml:space="preserve">
-    <value>Neue Palette</value>
+    <value>Nueva paleta</value>
   </data>
   <data name="MainWindow_butDeleteHistory" xml:space="preserve">
-    <value>Löschen</value>
+    <value>Eliminar</value>
   </data>
   <data name="PaletteWindow_strName" xml:space="preserve">
-    <value>Name:</value>
+    <value>Nombre:</value>
   </data>
 </root>

@@ -204,9 +204,9 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="butAddLast" Grid.Column="0" ContentStringFormat="&#9661; {0}" TabIndex="6"
+                                <Button x:Name="butAddLast" Grid.Column="0" TabIndex="6"
                                     Content="{x:Static p:Resources.MainWindow_butAddLast}" Click="butAddLast_Click"/>
-                                <Button x:Name="butAddPalette" Grid.Column="1" ContentStringFormat="{}{0} &#9655;" TabIndex="7"
+                                <Button x:Name="butAddPalette" Grid.Column="1" TabIndex="7"
                                     Content="{x:Static p:Resources.MainWindow_butAddPalette}" Click="butAddPalette_Click" IsEnabled="False"/>
                             </Grid>
                         </Grid>

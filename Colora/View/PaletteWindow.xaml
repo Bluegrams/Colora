@@ -24,7 +24,7 @@
         </Menu>
         <StackPanel>
             <DockPanel>
-                <Label Content="Name:"/>
+                <Label Content="{x:Static p:Resources.PaletteWindow_strName}"/>
                 <TextBox x:Name="txtName" Text="{Binding Path=Name}" Margin="2" VerticalContentAlignment="Center"/>
             </DockPanel>
             <ListBox x:Name="lstPalette" Width="170" Height="320" ItemsSource="{Binding Path=Colors}" ScrollViewer.VerticalScrollBarVisibility="Visible"

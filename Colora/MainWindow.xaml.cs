@@ -150,6 +150,7 @@ namespace Colora
             string s = tb.Text;
             BindingOperations.ClearBinding(tb, TextBox.TextProperty);
             tb.Text = s;
+            tb.SelectAll();
         }
 
         private void inputColor_LostFocus(object sender, RoutedEventArgs e)

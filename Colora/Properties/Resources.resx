@@ -301,4 +301,7 @@ This could be caused by another app using the same shortcut.</value>
   <data name="MainWindow_butDeleteHistory" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="PaletteWindow_strName" xml:space="preserve">
+    <value>Name:</value>
+  </data>
 </root>

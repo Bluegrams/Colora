@@ -15,7 +15,7 @@ using Bluegrams.Application.Attributes;
 [assembly: ProductWebsite("https://colora.sourceforge.io")]
 [assembly: ProductLicense("LICENSE.txt", "BSD-3-Clause")]
 [assembly: CompanyWebsite("http://bluegrams.com", "Bluegrams")]
-[assembly: SupportedCultures("en", "de")]
+[assembly: SupportedCultures("en", "de", "es")]
 
 #if PORTABLE
 [assembly: AppPortable(true)]
