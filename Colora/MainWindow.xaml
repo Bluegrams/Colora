@@ -2,7 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:p="clr-namespace:Colora.Properties"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Colora"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
         xmlns:local="clr-namespace:Colora"
         xmlns:h="clr-namespace:Colora.Helpers"
         xmlns:m="clr-namespace:Colora.Model"
@@ -31,69 +34,69 @@
     </Window.CommandBindings>
     <DockPanel KeyboardNavigation.TabNavigation="Local">
         <Menu DockPanel.Dock="Top" Background="#dddddd">
-            <MenuItem Header="{x:Static p:Resources.MainWindow_menColors}" Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menPickScreen}"
+            <MenuItem Header="{lex:Loc MainWindow_menColors}" Style="{StaticResource topMenuItem}">
+                <MenuItem Header="{lex:Loc MainWindow_menPickScreen}"
                           Icon="{icon:Modern Kind=Crosshair}"
                           Command="local:CustomCommands.PickFromScreen"
                           InputGestureText="{Binding ScreenPicker.ShortcutKeys.DisplayString, Mode=OneWay}"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorDialog}"
+                <MenuItem Header="{lex:Loc MainWindow_menColorDialog}"
                           Icon="{icon:Modern Kind=DrawPixelFillGrid}"
                           Command="local:CustomCommands.ColorDialog"/>
                 <Separator/>
-                <MenuItem x:Name="menNewPalette" Header="{x:Static p:Resources.MainWindow_menNewPalette}"
+                <MenuItem x:Name="menNewPalette" Header="{lex:Loc MainWindow_menNewPalette}"
                           Icon="{icon:Modern Kind=PageNew}" Command="New" />
-                <MenuItem x:Name="menDeleteLatest" Header="{x:Static p:Resources.MainWindow_menDeleteLatest}"
+                <MenuItem x:Name="menDeleteLatest" Header="{lex:Loc MainWindow_menDeleteLatest}"
                           Icon="{icon:Modern Kind=Delete}"
                           Click="menDeleteLatest_Click"/>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MainWindow_menView}" Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menIconBar}"
+            <MenuItem Header="{lex:Loc MainWindow_menView}" Style="{StaticResource topMenuItem}">
+                <MenuItem Header="{lex:Loc MainWindow_menIconBar}"
                           IsChecked="{h:Settings IconBarVisible}"
                           IsCheckable="True"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menMinimalSize}"
+                <MenuItem Header="{lex:Loc MainWindow_menMinimalSize}"
                           Command="local:CustomCommands.MinimalSize"
                           IsChecked="{h:Settings ScreenPickerVisible}"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_strColorSettings}"
+                <MenuItem Header="{lex:Loc MainWindow_strColorSettings}"
                           IsChecked="{h:Settings AdvancedColorsVisible}"
                           IsCheckable="True"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorHistory}"
+                <MenuItem Header="{lex:Loc MainWindow_menColorHistory}"
                           IsChecked="{h:Settings ColorHistoryVisible}"
                           IsCheckable="True"/>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menPaletteEditor}"
+                <MenuItem Header="{lex:Loc MainWindow_menPaletteEditor}"
                           Icon="{icon:Modern Kind=Paper}"
                           Command="local:CustomCommands.PaletteEditor"/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menTopmost}"
+                <MenuItem Header="{lex:Loc MainWindow_menTopmost}"
                           Command="local:CustomCommands.TopMost"
                           IsChecked="{Binding ElementName=mainWindow, Path=Topmost}"/>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MainWindow_menOptions}" Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menColorSampling}">
-                    <MenuItem Header="{x:Static p:Resources.MainWindow_menSamplingSingle}"
+            <MenuItem Header="{lex:Loc MainWindow_menOptions}" Style="{StaticResource topMenuItem}">
+                <MenuItem Header="{lex:Loc MainWindow_menColorSampling}">
+                    <MenuItem Header="{lex:Loc MainWindow_menSamplingSingle}"
                               IsChecked="{Binding ScreenPicker.ColorSamplingMode,
                                             Converter={StaticResource enumBool},
                                             ConverterParameter={x:Static m:ColorSamplingMode.Single}}"
                               IsCheckable="True"/>
-                    <MenuItem Header="{x:Static p:Resources.MainWindow_menSampling3x3}"
+                    <MenuItem Header="{lex:Loc MainWindow_menSampling3x3}"
                               IsChecked="{Binding ScreenPicker.ColorSamplingMode,
                                             Converter={StaticResource enumBool},
                                             ConverterParameter={x:Static m:ColorSamplingMode.Average3x3}}"
                               IsCheckable="True"/>
-                    <MenuItem Header="{x:Static p:Resources.MainWindow_menSampling5x5}"
+                    <MenuItem Header="{lex:Loc MainWindow_menSampling5x5}"
                               IsChecked="{Binding ScreenPicker.ColorSamplingMode,
                                             Converter={StaticResource enumBool},
                                             ConverterParameter={x:Static m:ColorSamplingMode.Average5x5}}"
                               IsCheckable="True"/>
                 </MenuItem>
-                <MenuItem x:Name="menConfigureShortcut" Header="{x:Static p:Resources.MainWindow_menConfigureShortcut}"
+                <MenuItem x:Name="menConfigureShortcut" Header="{lex:Loc MainWindow_menConfigureShortcut}"
                           Click="menConfigureShortcut_Click"/>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menSettings}"
+                <MenuItem Header="{lex:Loc MainWindow_menSettings}"
                           Icon="{icon:Modern Kind=Settings}"
                           Command="local:CustomCommands.Settings"/>
             </MenuItem>
             <MenuItem Header="   _?   " Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.MainWindow_menAbout}" Command="Help"
+                <MenuItem Header="{lex:Loc MainWindow_menAbout}" Command="Help"
                           Icon="{icon:Modern Kind=InformationCircle}"/>
             </MenuItem>
         </Menu>
@@ -102,22 +105,22 @@
             
             <ToggleButton Command="local:CustomCommands.PickFromScreen" TabIndex="0"
                           IsChecked="{Binding ScreenPicker.IsCapturing, Mode=OneWay}"
-                          ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menPickScreen}, Converter={StaticResource UScoreConverter}}">
+                          ToolTip="{Binding Source={lex:Loc MainWindow_menPickScreen}, Converter={StaticResource UScoreConverter}}">
                 <icon:PackIconModern Kind="Crosshair" Width="20" Height="20"/>
             </ToggleButton>
             <Separator/>
             <Button x:Name="butDialog" Command="local:CustomCommands.ColorDialog" TabIndex="1"
-                    ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}">
+                    ToolTip="{Binding Source={lex:Loc MainWindow_menColorDialog}, Converter={StaticResource UScoreConverter}}">
                 <icon:PackIconModern Kind="DrawPixelFillGrid"/>
             </Button>
             <ToggleButton x:Name="butTopmost" DockPanel.Dock="Right" TabIndex="3"
-                          ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menTopmost}, Converter={StaticResource UScoreConverter}}"
+                          ToolTip="{Binding Source={lex:Loc MainWindow_menTopmost}, Converter={StaticResource UScoreConverter}}"
                           IsChecked="{Binding ElementName=mainWindow, Path=Topmost}">
                 <icon:PackIconModern Kind="Pin"/>
             </ToggleButton>
             <Separator DockPanel.Dock="Right"/>
             <Button DockPanel.Dock="Right" Command="local:CustomCommands.PaletteEditor" 
-                    ToolTip="{x:Static p:Resources.Global_PaletteEditor}" TabIndex="2">
+                    ToolTip="{lex:Loc Global_PaletteEditor}" TabIndex="2">
                 <icon:PackIconModern Kind="Paper" Width="20" Height="20"/>
             </Button>
         </DockPanel>
@@ -128,7 +131,7 @@
             <Grid>
                 <StackPanel x:Name="upperStack" Orientation="Horizontal"
                             HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <GroupBox Header="{x:Static p:Resources.Global_ScreenPicker}"
+                    <GroupBox Header="{lex:Loc Global_ScreenPicker}" Width="123"
                           DataContext="{Binding ScreenPicker}" IsEnabled="{Binding IsCapturing, Mode=OneWay}"
                           Visibility="{h:Settings ScreenPickerVisible, Converter={StaticResource boolToVis}, Mode=OneWay}">
                         <StackPanel>
@@ -149,7 +152,7 @@
                             </DockPanel>
                         </StackPanel>
                     </GroupBox>
-                    <GroupBox Header="{x:Static p:Resources.MainWindow_grpColorData}" Width="242" KeyboardNavigation.TabNavigation="Local">
+                    <GroupBox Header="{lex:Loc MainWindow_grpColorData}" Width="242" KeyboardNavigation.TabNavigation="Local">
                         <Grid DataContext="{Binding CurrentColor}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"/>
@@ -167,7 +170,7 @@
                             <DockPanel Grid.Row="1" Margin="0,5">
                                 <Label Width="32">RGB</Label>
                                 <Button x:Name="butCopyRGB" DockPanel.Dock="Right" Click="butCopyRGB_Click"
-                                        ToolTip="{x:Static p:Resources.MainWindow_strClipboard}" TabIndex="3">
+                                        ToolTip="{lex:Loc MainWindow_strClipboard}" TabIndex="3">
                                     <icon:PackIconModern Kind="PageCopy" Margin="5,0"/>
                                 </Button>
                                 <Grid TextBox.TextChanged="Grid_TextChanged" TextBox.GotFocus="inputColor_GotFocus" 
@@ -191,7 +194,7 @@
                             <DockPanel Grid.Row="2" Margin="0,5">
                                 <Label Width="32">HEX</Label>
                                 <Button x:Name="butCopyHex" DockPanel.Dock="Right" Click="butCopyHex_Click"
-                                        ToolTip="{x:Static p:Resources.MainWindow_strClipboard}" TabIndex="5">
+                                        ToolTip="{lex:Loc MainWindow_strClipboard}" TabIndex="5">
                                     <icon:PackIconModern Kind="PageCopy" Margin="5,0"/>
                                 </Button>
                                 <TextBox x:Name="txtHEX" CharacterCasing="Upper" GotFocus="inputColor_GotFocus" LostFocus="inputColor_LostFocus"
@@ -205,15 +208,15 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Button x:Name="butAddLast" Grid.Column="0" TabIndex="6"
-                                    Content="{x:Static p:Resources.MainWindow_butAddLast}" Click="butAddLast_Click"/>
+                                    Content="{lex:Loc MainWindow_butAddLast}" Click="butAddLast_Click"/>
                                 <Button x:Name="butAddPalette" Grid.Column="1" TabIndex="7"
-                                    Content="{x:Static p:Resources.MainWindow_butAddPalette}" Click="butAddPalette_Click" IsEnabled="False"/>
+                                    Content="{lex:Loc MainWindow_butAddPalette}" Click="butAddPalette_Click" IsEnabled="False"/>
                             </Grid>
                         </Grid>
                     </GroupBox>
                 </StackPanel>
             </Grid>
-            <Expander Grid.Row="3" Header="{x:Static p:Resources.MainWindow_strColorSettings}"
+            <Expander Grid.Row="3" Header="{lex:Loc MainWindow_strColorSettings}"
                       Width="{Binding ElementName=upperStack, Path=ActualWidth}"
                       DataContext="{Binding CurrentColor}"
                       IsExpanded="{h:Settings AdvancedColorsVisible}">
@@ -282,11 +285,11 @@
                                     </DockPanel>
                                 </StackPanel>
                                 <DockPanel LastChildFill="False">
-                                    <CheckBox Content="{x:Static p:Resources.MainWindow_chkRGBRange}"
+                                    <CheckBox Content="{lex:Loc MainWindow_chkRGBRange}"
                                               IsChecked="{h:Settings RGBRangeFloat}"
                                               VerticalAlignment="Center" Margin="4,0"/>
                                     <Button Padding="5,1" DockPanel.Dock="Right" Click="butCopyRGB_Click" 
-                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
+                                            Content="{lex:Loc MainWindow_strClipboard}"/>
                                 </DockPanel>
                             </StackPanel>
                         </Grid>
@@ -314,7 +317,7 @@
                                 </DockPanel>
                                 <DockPanel LastChildFill="False">
                                     <Button x:Name="butCopyHSB" Padding="5,1" DockPanel.Dock="Right" Click="butCopyHSB_Click"
-                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
+                                            Content="{lex:Loc MainWindow_strClipboard}"/>
                                 </DockPanel>
                             </StackPanel>
                         </Grid>
@@ -342,7 +345,7 @@
                                 </DockPanel>
                                 <DockPanel LastChildFill="False">
                                     <Button x:Name="butCopyHSL" Padding="5,1" DockPanel.Dock="Right" Click="butCopyHSL_Click" 
-                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"/>
+                                            Content="{lex:Loc MainWindow_strClipboard}"/>
                                 </DockPanel>
                             </StackPanel>
                         </Grid>
@@ -355,7 +358,7 @@
                             <DockPanel KeyboardNavigation.TabNavigation="Local">
                                 <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
                                     <Button x:Name="butCopyCMYK" Padding="5,1"  DockPanel.Dock="Right" Click="butCopyCMYK_Click"
-                                            Content="{x:Static p:Resources.MainWindow_strClipboard}"
+                                            Content="{lex:Loc MainWindow_strClipboard}"
                                             TabIndex="4"/>
                                 </DockPanel>
                                 <WrapPanel VerticalAlignment="Center" TextBox.TextChanged="CMYK_TextChanged"
@@ -398,24 +401,24 @@
                     </TabItem>
                 </TabControl>
             </Expander>
-            <Expander Header="{x:Static p:Resources.Global_ColorHistory}"
+            <Expander Header="{lex:Loc Global_ColorHistory}"
                       Width="{Binding ElementName=upperStack, Path=ActualWidth}"
                       IsExpanded="{h:Settings ColorHistoryVisible}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="4,2,4,0">
                         <Button x:Name="butNewPalette" Padding="4,0" Command="New"
-                                ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menNewPalette}, Converter={StaticResource UScoreConverter}}">
+                                ToolTip="{Binding Source={lex:Loc MainWindow_menNewPalette}, Converter={StaticResource UScoreConverter}}">
                             <StackPanel Orientation="Horizontal">
                                 <icon:PackIconModern Kind="PageNew" Margin="0,4,2,2"/>
-                                <TextBlock Text="{x:Static p:Resources.MainWindow_butNewPalette}"
+                                <TextBlock Text="{lex:Loc MainWindow_butNewPalette}"
                                            VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
                         <Button x:Name="butDeleteLatest" Padding="4,0" Click="menDeleteLatest_Click"
-                                ToolTip="{Binding Source={x:Static p:Resources.MainWindow_menDeleteLatest}, Converter={StaticResource UScoreConverter}}">
+                                ToolTip="{Binding Source={lex:Loc MainWindow_menDeleteLatest}, Converter={StaticResource UScoreConverter}}">
                             <StackPanel Orientation="Horizontal">
                                 <icon:PackIconModern Kind="Delete" Margin="0,4,2,2"/>
-                                <TextBlock Text="{x:Static p:Resources.MainWindow_butDeleteHistory}"
+                                <TextBlock Text="{lex:Loc MainWindow_butDeleteHistory}"
                                            VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
@@ -441,7 +444,7 @@
                         </ListBox.ItemTemplate>
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="{x:Static p:Resources.MainWindow_menDeleteHistoryItem}"
+                                <MenuItem Header="{lex:Loc MainWindow_menDeleteHistoryItem}"
                                           Click="menDeleteHistoryItem_Click"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>

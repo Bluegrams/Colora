@@ -2,8 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:h="clr-namespace:Colora.Helpers"
-        xmlns:p="clr-namespace:Colora.Properties"
-        Title="{x:Static p:Resources.SettingsWindow_Title}" Height="320" Width="320"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Colora"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+        Title="{lex:Loc SettingsWindow_Title}" Height="320" Width="320"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
@@ -24,32 +27,32 @@
     </Window.Resources>
     <DockPanel>
         <DockPanel Margin="4" DockPanel.Dock="Bottom" LastChildFill="False">
-            <Button Content="{x:Static p:Resources.Global_strCancel}"
+            <Button Content="{lex:Loc Global_strCancel}"
                     DockPanel.Dock="Right" MinWidth="80"
                     IsCancel="True"/>
-            <Button Content="{x:Static p:Resources.Global_strSubmit}"
+            <Button Content="{lex:Loc Global_strSubmit}"
                     DockPanel.Dock="Right" MinWidth="80"
                     Click="SubmitButton_Click" IsDefault="True"/>
         </DockPanel>
         <TabControl SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Header="{x:Static p:Resources.SettingsWindow_General}">
+            <TabItem Header="{lex:Loc SettingsWindow_General}">
                 <StackPanel>
-                    <GroupBox Header="{x:Static p:Resources.Global_ScreenPicker}">
+                    <GroupBox Header="{lex:Loc Global_ScreenPicker}">
                         <StackPanel>
                             <DockPanel>
                                 <Label DockPanel.Dock="Left"
-                                       Content="{x:Static p:Resources.SettingsWindow_strGlobalShortcut}"/>
-                                <Button DockPanel.Dock="Right" Content="{x:Static p:Resources.Global_strChange}"
+                                       Content="{lex:Loc SettingsWindow_strGlobalShortcut}"/>
+                                <Button DockPanel.Dock="Right" Content="{lex:Loc Global_strChange}"
                                         Click="ChangeShortcutButton_Click"/>
                                 <Label Content="{h:Settings GlobalShortcut, Mode=OneWay}"/>
                             </DockPanel>
-                            <CheckBox Content="{x:Static p:Resources.SettingsWindow_strClipboardAutoCopy}"
+                            <CheckBox Content="{lex:Loc SettingsWindow_strClipboardAutoCopy}"
                                       IsChecked="{h:Settings ClipboardAutoCopy, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
                         </StackPanel>
                     </GroupBox>
-                    <GroupBox Header="{x:Static p:Resources.Global_ColorHistory}">
+                    <GroupBox Header="{lex:Loc Global_ColorHistory}">
                         <DockPanel>
-                            <Label DockPanel.Dock="Left" Content="{x:Static p:Resources.SettingsWindow_strColorHistoryLength}"/>
+                            <Label DockPanel.Dock="Left" Content="{lex:Loc SettingsWindow_strColorHistoryLength}"/>
                             <Label DockPanel.Dock="Right" Width="25"
                                    HorizontalContentAlignment="Center"
                                    Content="{Binding ElementName=slideHistory, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
@@ -59,8 +62,8 @@
                                     Value="{h:Settings ColorHistoryLength, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
                         </DockPanel>
                     </GroupBox>
-                    <GroupBox Header="{x:Static p:Resources.Global_PaletteEditor}">
-                        <CheckBox Content="{x:Static p:Resources.SettingsWindow_strPaletteWindowSnap}"
+                    <GroupBox Header="{lex:Loc Global_PaletteEditor}">
+                        <CheckBox Content="{lex:Loc SettingsWindow_strPaletteWindowSnap}"
                                   IsChecked="{h:Settings PaletteWindowSnap, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
                     </GroupBox>
                 </StackPanel>

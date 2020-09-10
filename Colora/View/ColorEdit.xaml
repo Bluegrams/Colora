@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:p="clr-namespace:Colora.Properties"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Colora"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.ColorEdit_Title}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
+        Title="{lex:Loc ColorEdit_Title}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="3"/>
@@ -27,12 +30,12 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" ContentStringFormat="{}{0}: " Content="{Binding Source={x:Static p:Resources.ColorEdit_lblColor}}"/>
+        <Label Grid.Column="0" ContentStringFormat="{}{0}: " Content="{Binding Source={lex:Loc ColorEdit_lblColor}}"/>
         <TextBox Grid.Column="1" x:Name="txtColor" Text="{Binding Path=Hex}"/>
-        <Label Grid.Row="1" ContentStringFormat="{}{0}: " Content="{Binding Source={x:Static p:Resources.ColorEdit_lblComment}}"/>
+        <Label Grid.Row="1" ContentStringFormat="{}{0}: " Content="{Binding Source={lex:Loc ColorEdit_lblComment}}"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtComment" Text="{Binding Path=Name}"/>
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2" LastChildFill="False">
-            <Button x:Name="butCancel" DockPanel.Dock="Right" IsCancel="True" Content="{Binding Source={x:Static p:Resources.Global_strCancel}}"/>
+            <Button x:Name="butCancel" DockPanel.Dock="Right" IsCancel="True" Content="{Binding Source={lex:Loc Global_strCancel}}"/>
             <Button x:Name="butOK" DockPanel.Dock="Right" IsDefault="True" Click="butOK_Click">OK</Button>
         </DockPanel>
     </Grid>

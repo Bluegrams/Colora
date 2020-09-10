@@ -1,12 +1,12 @@
 ﻿<Window x:Class="Colora.View.PaletteWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:local="clr-namespace:Colora"
-        xmlns:p="clr-namespace:Colora.Properties"
-        mc:Ignorable="d"
-        Title="{x:Static p:Resources.Global_PaletteEditor}" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize" 
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Colora"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+        Title="{lex:Loc Global_PaletteEditor}" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize" 
         Closing="Window_Closing" Icon="../img/icon.png">
     <Window.CommandBindings>
         <CommandBinding Command="Save" Executed="SaveCommand_Executed"/>
@@ -16,15 +16,15 @@
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="#dddddd">
-            <MenuItem Header="{x:Static p:Resources.PaletteWindow_menFile}" Style="{StaticResource topMenuItem}">
-                <MenuItem Header="{x:Static p:Resources.PaletteWindow_menOpen}" Command="Open"/>
+            <MenuItem Header="{lex:Loc PaletteWindow_menFile}" Style="{StaticResource topMenuItem}">
+                <MenuItem Header="{lex:Loc PaletteWindow_menOpen}" Command="Open"/>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.PaletteWindow_menSave}" Command="Save"/>
+                <MenuItem Header="{lex:Loc PaletteWindow_menSave}" Command="Save"/>
             </MenuItem>
         </Menu>
         <StackPanel>
             <DockPanel>
-                <Label Content="{x:Static p:Resources.PaletteWindow_strName}"/>
+                <Label Content="{lex:Loc PaletteWindow_strName}"/>
                 <TextBox x:Name="txtName" Text="{Binding Path=Name}" Margin="2" VerticalContentAlignment="Center"/>
             </DockPanel>
             <ListBox x:Name="lstPalette" Width="170" Height="320" ItemsSource="{Binding Path=Colors}" ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -39,7 +39,7 @@
                         <Border HorizontalAlignment="Stretch" BorderThickness="1" Height="25" BorderBrush="Black" Margin="0" Background="{Binding Path=Hex}">
                             <Border.ContextMenu>
                                 <ContextMenu HorizontalContentAlignment="Stretch">
-                                    <MenuItem Header="{x:Static p:Resources.PaletteWindow_menEdit}" Command="local:CustomCommands.PaletteEditColor"/>
+                                    <MenuItem Header="{lex:Loc PaletteWindow_menEdit}" Command="local:CustomCommands.PaletteEditColor"/>
                                     <MenuItem Command="Delete"/>
                                 </ContextMenu>
                             </Border.ContextMenu>

@@ -1,5 +1,9 @@
 # Colora Changelog
 
+### v.0.3.1 (2020-09)
+- **New:** Spanish translation.
+- **Improved:** Change language without restarting.
+
 ### v.0.3 (2020-01)
 - **New:** Modernized UI icons and improved UI.
 - **New:** Pick average color of 3x3 or 5x5 pixels from screen.

@@ -1,8 +1,11 @@
 ﻿<Window x:Class="Colora.View.HotKeyInputWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:p="clr-namespace:Colora.Properties"
-        Title="{x:Static p:Resources.HotKeyInputWindow_Title}" Width="300" SizeToContent="Height"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Colora"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+        Title="{lex:Loc HotKeyInputWindow_Title}" Width="300" SizeToContent="Height"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Activated="Window_Activated">
     <Window.Resources>
@@ -14,11 +17,11 @@
     </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-            <Button DockPanel.Dock="Right" Content="{x:Static p:Resources.Global_strCancel}" IsCancel="True"/>
+            <Button DockPanel.Dock="Right" Content="{lex:Loc Global_strCancel}" IsCancel="True"/>
             <Button DockPanel.Dock="Right" Content="OK" IsDefault="True" Click="SubmitButton_Click"/>
         </DockPanel>
         <GroupBox x:Name="grpKeyGesture"
-                  Header="{x:Static p:Resources.HotKeyInputWindow_grpHeader}" Padding="0,6">
+                  Header="{lex:Loc HotKeyInputWindow_grpHeader}" Padding="0,6">
             <TextBox x:Name="txtKeyGesture" FontSize="14"
                      PreviewKeyDown="TxtKeyGesture_PreviewKeyDown"/>
         </GroupBox>

@@ -13,6 +13,7 @@ using Bluegrams.Application.WPF;
 using Colora.Model;
 using Colora.Properties;
 using Colora.View;
+using WPFLocalizeExtension.Engine;
 
 namespace Colora
 {
@@ -37,12 +38,13 @@ namespace Colora
             InitializeComponent();
             updateChecker = new WpfUpdateChecker(App.UPDATE_URL, this, App.UPDATE_MODE);
             ((INotifyCollectionChanged)lstHistory.Items).CollectionChanged += LastColors_CollectionChanged;
+            LocalizeDictionary.Instance.Culture = System.Globalization.CultureInfo.CurrentUICulture;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Check for updates
-            updateChecker.CheckForUpdates();
+            updateChecker.CheckForUpdates(UpdateNotifyMode.Auto);
             // Load color history
             if (Settings.Default.LatestColors != null)
             {
@@ -132,6 +134,14 @@ namespace Colora
             AboutBox aboutBox = new AboutBox(img);
             aboutBox.Owner = this;
             aboutBox.UpdateChecker = updateChecker;
+            aboutBox.CultureChanging += (o, args) =>
+            {
+                LocalizeDictionary.Instance.Culture = args.NewCulture;
+                args.SuppressDefault = true;
+                aboutBox.Close();
+                Bluegrams.Application.Properties.Settings.Default.Culture = args.NewCulture.Name;
+                Bluegrams.Application.Properties.Settings.Default.Save();
+            };
             aboutBox.ShowDialog();
         }
 

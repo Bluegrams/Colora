@@ -36,6 +36,17 @@ RGB, Hex, HSB and HSL. The integrated palette tool then allows you to create col
 
 Colora requires Windows 7 or newer and .NET Framework v.4.6 or higher.
 
+#### Installation
+
+- Download the [latest release from SourceForge](https://sourceforge.net/projects/colora/files/)
+
+or
+
+- Install from [Chocolatey](https://chocolatey.org):
+```
+choco install colora
+```
+
 ## Version History
 
 Read [the changelog](https://github.com/bluegrams/colora/blob/master/Changelog.md) to see changes in each version.
